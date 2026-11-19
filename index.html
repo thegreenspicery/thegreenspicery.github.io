@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Green Spicery — Order & Payment Tracker</title>
+  <title>The Green Spicery — Order &amp; Payment Tracker</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,25 +32,27 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-  <!-- TOP EXECUTIVE DARK HEADER -->
+  <!-- ========================================================= -->
+  <!-- DARK NAVY EXECUTIVE HEADER                                -->
+  <!-- ========================================================= -->
   <header class="bg-[#0f172a] text-white border-b border-slate-800 sticky top-0 z-30">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 space-y-3.5">
-      <!-- Brand Row -->
-      <div class="flex flex-wrap items-center justify-between gap-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+      <!-- Top Row: Brand Title & Auto-Save Badge -->
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-3.5">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center font-extrabold text-lg tracking-tight shadow-sm">
+          <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center font-extrabold text-white text-base tracking-tight shadow-sm">
             GS
           </div>
           <div>
             <div class="flex flex-wrap items-center gap-2">
-              <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-white">
+              <h1 class="text-base sm:text-lg font-bold tracking-tight text-white">
                 The Green Spicery — Order &amp; Payment Tracker
               </h1>
-              <span id="headerCounterPill" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-800 text-blue-300 border border-slate-700">
+              <span id="headerCounterPill" class="px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 text-xs font-medium border border-slate-700">
                 0 Orders • 0 Customers
               </span>
-              <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/90 text-emerald-400 border border-emerald-700/60 flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-950/90 text-emerald-400 text-xs font-medium border border-emerald-800/70">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 Auto-Save Active
               </span>
             </div>
@@ -76,43 +78,48 @@
             <span id="earningsTabBadge" class="px-1.5 py-0.2 rounded bg-emerald-900/80 text-emerald-300 text-[11px]">$0</span>
           </button>
           <button onclick="switchTab('customers')" id="tab-customers" class="tab-btn-inactive px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-1.5">
-            <span>Returning Customers</span>
+            <span>Returning Customers &amp; Dishes</span>
             <span id="custTabBadge" class="px-1.5 py-0.2 rounded bg-slate-700 text-slate-200 text-[11px]">0</span>
           </button>
         </div>
 
-        <div class="flex flex-wrap items-center gap-2">
-          <button onclick="openBulkModal()" class="px-3.5 py-2 rounded-xl bg-[#1e293b] hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs sm:text-sm font-semibold transition flex items-center gap-1.5">
-            <span>📋 Paste / Bulk Add</span>
+        <div class="flex items-center gap-2">
+          <button onclick="openBulkModal()" class="px-3 py-1.5 rounded-xl bg-[#1e293b] hover:bg-slate-700 text-slate-200 text-xs sm:text-sm font-medium border border-slate-700 transition flex items-center gap-1.5">
+            <span>📋</span>
+            <span>Paste / Bulk Add</span>
           </button>
-          <button onclick="exportCSV()" class="px-3.5 py-2 rounded-xl bg-[#1e293b] hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs sm:text-sm font-semibold transition flex items-center gap-1.5">
-            <span>↓ Export CSV</span>
+          <button onclick="exportCSV()" class="px-3 py-1.5 rounded-xl bg-[#1e293b] hover:bg-slate-700 text-slate-200 text-xs sm:text-sm font-medium border border-slate-700 transition flex items-center gap-1.5">
+            <span>↓</span>
+            <span>Export CSV</span>
           </button>
-          <button onclick="openAddModal()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold shadow-sm transition flex items-center gap-1.5">
-            <span>+ Add Order</span>
+          <button onclick="openAddModal()" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold shadow-sm transition flex items-center gap-1">
+            <span>+</span>
+            <span>Add Order</span>
           </button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- MAIN CONTENT CONTAINER -->
-  <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 flex-1 space-y-6">
+  <!-- Toast Notification Banner -->
+  <div id="toastBanner" class="hidden fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg border border-slate-700 text-sm font-medium flex items-center gap-2.5">
+    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+    <span id="toastMessage">Saved</span>
+  </div>
 
-    <!-- NOTIFICATION TOAST -->
-    <div id="toastBanner" class="hidden fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg border border-slate-700 text-sm font-medium flex items-center gap-2.5">
-      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-      <span id="toastMessage">Saved!</span>
-    </div>
+  <!-- ========================================================= -->
+  <!-- MAIN CONTENT CONTAINER                                    -->
+  <!-- ========================================================= -->
+  <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 flex-1">
 
     <!-- ========================================================= -->
     <!-- VIEW 1: EXECUTIVE OVERVIEW                                -->
     <!-- ========================================================= -->
     <section id="view-overview" class="space-y-6">
 
-      <!-- TOP 3 ALERT / ACTION CARDS -->
+      <!-- TOP 3 ALERT KPI CARDS -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <!-- Card 1: Unpaid Overdue (Red Border) -->
+        <!-- Card 1: Payment Risk (Red Border) -->
         <div onclick="filterAndJump('overdue')" class="cursor-pointer bg-white rounded-2xl p-5 card-shadow border border-slate-200/80 border-l-4 border-l-rose-500 hover:border-rose-300 transition flex items-center justify-between">
           <div>
             <div class="flex items-center gap-2 mb-2">
@@ -120,20 +127,20 @@
               <span class="text-xs text-slate-500 font-medium">Unpaid Past Delivery</span>
             </div>
             <h2 class="text-base font-bold text-slate-900">Unpaid Overdue Orders</h2>
-            <p class="text-xs text-slate-500 mt-1">Delivered without full e-Transfer →</p>
+            <p class="text-xs text-slate-500 mt-1">Delivered without full payment (Cash / e-Transfer / Card) →</p>
           </div>
           <div id="kpiOverdueCount" class="text-3xl sm:text-4xl font-extrabold text-rose-600">0</div>
         </div>
 
-        <!-- Card 2: Pending Pre-Payment (Amber Border) -->
+        <!-- Card 2: Pre-Payment Gate (Amber Border) -->
         <div onclick="filterAndJump('pending')" class="cursor-pointer bg-white rounded-2xl p-5 card-shadow border border-slate-200/80 border-l-4 border-l-amber-400 hover:border-amber-300 transition flex items-center justify-between">
           <div>
             <div class="flex items-center gap-2 mb-2">
               <span class="px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 text-[11px] font-bold uppercase tracking-wider">Pre-Payment Gate</span>
               <span class="text-xs text-slate-500 font-medium">Hold Kitchen Prep</span>
             </div>
-            <h2 class="text-base font-bold text-slate-900">Pending Pre-Payment</h2>
-            <p class="text-xs text-slate-500 mt-1">Awaiting e-Transfer before cooking →</p>
+            <h2 class="text-base font-bold text-slate-900">Pending Payment</h2>
+            <p class="text-xs text-slate-500 mt-1">Awaiting Cash, e-Transfer, or Card payment →</p>
           </div>
           <div id="kpiPendingCount" class="text-3xl sm:text-4xl font-extrabold text-amber-600">0</div>
         </div>
@@ -152,34 +159,35 @@
         </div>
       </div>
 
-      <!-- EXECUTIVE KITCHEN & REVENUE LIFECYCLE CARD -->
-      <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-200/80 space-y-6">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <div class="lg:w-1/3">
-            <p class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-1">Executive Kitchen Summary</p>
+      <!-- EXECUTIVE KITCHEN SUMMARY BANNER + 5 METRIC BOXES -->
+      <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-200/80">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <!-- Left Executive Description -->
+          <div class="lg:col-span-4 space-y-2">
+            <p class="text-xs font-bold uppercase tracking-wider text-blue-600">Executive Kitchen Summary</p>
             <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">The Green Spicery Lifecycle</h2>
-            <p class="text-xs sm:text-sm text-slate-500 mt-1.5 leading-relaxed">
-              Real-time pre-payment gate, cash collected, and progress toward your <strong class="text-slate-700">$5,000 CAD</strong> monthly target. Click <button onclick="openAddModal()" class="text-emerald-600 font-semibold hover:underline">+ Add Order</button> to log your customers.
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Real-time pre-payment gate across Cash, Interac e-Transfer &amp; Card, multi-item orders, dishes served, and progress toward your <span class="font-bold text-slate-900">$5,000 CAD</span> monthly target. Click <button onclick="openAddModal()" class="text-emerald-700 font-semibold hover:underline">+ Add Order</button> to log customers.
             </p>
           </div>
 
-          <!-- 5 Summary KPI Boxes -->
-          <div class="lg:w-2/3 grid grid-cols-2 sm:grid-cols-5 gap-3">
-            <!-- Box 1: Total Tracked -->
-            <div onclick="filterAndJump('all')" class="cursor-pointer rounded-xl bg-[#0f172a] text-white p-4 flex flex-col justify-between hover:opacity-95 transition">
+          <!-- Right 5 Metric Boxes -->
+          <div class="lg:col-span-8 grid grid-cols-2 sm:grid-cols-5 gap-3">
+            <!-- Box 1: Total Orders (Dark Navy) -->
+            <div class="rounded-xl bg-[#0f172a] text-white p-4 flex flex-col justify-between">
               <span class="text-xs font-medium text-slate-300">Total Orders</span>
               <div id="boxTotalOrders" class="text-2xl sm:text-3xl font-extrabold mt-2">0</div>
               <span id="boxTotalBilledSub" class="text-[11px] text-slate-400 mt-1">$0.00 billed</span>
             </div>
 
-            <!-- Box 2: Pending e-Transfer -->
+            <!-- Box 2: Pending Payment -->
             <div onclick="filterAndJump('pending')" class="cursor-pointer rounded-xl bg-amber-50/70 border border-amber-200/80 p-4 flex flex-col justify-between hover:bg-amber-50 transition">
-              <span class="text-xs font-semibold text-amber-900">Pending e-Transfer</span>
+              <span class="text-xs font-semibold text-amber-900">Pending Payment</span>
               <div id="boxPendingOrders" class="text-2xl sm:text-3xl font-extrabold text-amber-700 mt-2">0</div>
               <span id="boxPendingAmountSub" class="text-[11px] text-amber-700/80 mt-1">$0.00 awaiting</span>
             </div>
 
-            <!-- Box 3: Paid / Ready to Cook -->
+            <!-- Box 3: Paid / Ready -->
             <div onclick="filterAndJump('paid')" class="cursor-pointer rounded-xl bg-emerald-50/70 border border-emerald-200/80 p-4 flex flex-col justify-between hover:bg-emerald-50 transition">
               <span class="text-xs font-semibold text-emerald-900">Paid / Ready</span>
               <div id="boxPaidOrders" class="text-2xl sm:text-3xl font-extrabold text-emerald-700 mt-2">0</div>
@@ -193,7 +201,7 @@
               <span id="boxFutureSub" class="text-[11px] text-orange-700/80 mt-1">3-day prep priority</span>
             </div>
 
-            <!-- Box 5: Monthly Goal Progress -->
+            <!-- Box 5: Monthly Goal ($5,000) -->
             <div onclick="switchTab('earnings')" class="cursor-pointer col-span-2 sm:col-span-1 rounded-xl bg-indigo-50/70 border border-indigo-200/80 p-4 flex flex-col justify-between hover:bg-indigo-50 transition">
               <span class="text-xs font-semibold text-indigo-900">Goal ($5,000)</span>
               <div id="boxGoalPercent" class="text-2xl sm:text-3xl font-extrabold text-indigo-700 mt-2">0%</div>
@@ -201,56 +209,59 @@
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Category Progress Breakdown -->
-        <div class="border-t border-slate-200/80 pt-6">
-          <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-            <div>
-              <div class="flex items-center gap-2.5">
-                <h3 class="text-lg font-extrabold text-slate-900">Menu Line Payment &amp; Prep Readiness</h3>
-                <span id="returningRatePill" class="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 text-xs font-bold">
-                  0 Returning Customers (0%)
-                </span>
-              </div>
-              <p class="text-xs text-slate-500 mt-0.5">
-                Pre-payment completion rate, overdue balances, and upcoming kitchen prep across your 5 menu categories.
-              </p>
+      <!-- MENU LINE PAYMENT & PREP READINESS -->
+      <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-200/80 space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <div class="flex flex-wrap items-center gap-2.5">
+              <h3 class="text-lg font-extrabold text-slate-900">Menu Line Payment &amp; Prep Readiness</h3>
+              <span id="returningRatePill" class="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 text-xs font-bold border border-indigo-200/80">
+                0 Returning Customers (0%)
+              </span>
             </div>
-            <!-- Status Filter Pills -->
-            <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
-              <span id="pillOverdue" class="px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200">Overdue (0)</span>
-              <span id="pillPending" class="px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">Pending e-Transfer (0)</span>
-              <span id="pillUpcoming" class="px-3 py-1 rounded-full bg-orange-50 text-orange-700 border border-orange-200">&lt; 72h Window (0)</span>
-            </div>
+            <p class="text-xs text-slate-500 mt-1">
+              Pre-payment completion rate, overdue balances, and upcoming kitchen prep across all 5 menu categories (including multi-item orders).
+            </p>
           </div>
 
-          <div id="categoryCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
-            <!-- Populated by JS -->
+          <!-- Status Filter Pills -->
+          <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
+            <span id="pillOverdue" class="px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200">Overdue (0)</span>
+            <span id="pillPending" class="px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">Pending Payment (0)</span>
+            <span id="pillUpcoming" class="px-3 py-1 rounded-full bg-orange-50 text-orange-700 border border-orange-200">&lt; 72h Window (0)</span>
           </div>
+        </div>
+
+        <!-- 5 Menu Category Cards -->
+        <div id="categoryCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <!-- Populated dynamically by JS -->
         </div>
       </div>
 
-      <!-- Empty State Helper Banner (Visible when 0 orders) -->
-      <div id="emptyStateHero" class="bg-white rounded-2xl p-6 card-shadow border border-dashed border-slate-300 text-center">
-        <div class="max-w-xl mx-auto">
-          <h3 class="text-base font-bold text-slate-900">Your Tracker Is Clean &amp; Ready for Real Customer Names</h3>
-          <p class="text-xs sm:text-sm text-slate-600 mt-1">
-            No sample data is pre-loaded. Click <strong>+ Add Order</strong> to log your first customer, or click <strong>Paste / Bulk Add</strong> to paste a list of names, dates, and amounts at once.
-          </p>
-          <div class="mt-4 flex flex-wrap justify-center gap-2.5">
-            <button onclick="openAddModal()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold transition">
-              + Enter First Order
-            </button>
-            <button onclick="openBulkModal()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs sm:text-sm font-semibold transition">
-              Paste List of Customers
-            </button>
-          </div>
+      <!-- EMPTY STATE CALLOUT (Shown only when 0 orders exist) -->
+      <div id="emptyStateHero" class="bg-white rounded-2xl p-8 card-shadow border border-dashed border-slate-300 text-center space-y-3">
+        <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 mx-auto flex items-center justify-center text-xl font-bold">
+          🥗
+        </div>
+        <h3 class="text-base font-bold text-slate-900">Your Tracker Is Clean &amp; Ready for Real Entries</h3>
+        <p class="text-xs sm:text-sm text-slate-500 max-w-lg mx-auto">
+          Log multi-item orders (e.g., 2 Meal Boxes + 3 Mango/Rose Shakes), record the exact dishes served, track Cash vs. Interac e-Transfer, and save household spice preferences.
+        </p>
+        <div class="pt-1 flex flex-wrap justify-center gap-2.5">
+          <button onclick="openAddModal()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold transition">
+            + Add First Order
+          </button>
+          <button onclick="openBulkModal()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs sm:text-sm font-semibold transition">
+            📋 Paste Multiple Orders
+          </button>
         </div>
       </div>
     </section>
 
     <!-- ========================================================= -->
-    <!-- VIEW 2: ORDER LOG & INLINE QUICK ENTRY                    -->
+    <!-- VIEW 2: ORDER LOG & QUICK ENTRY                           -->
     <!-- ========================================================= -->
     <section id="view-orders" class="hidden space-y-5">
 
@@ -258,81 +269,98 @@
       <div class="bg-white rounded-2xl p-5 card-shadow border border-slate-200/80">
         <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
           <h3 class="text-sm font-extrabold text-slate-900 uppercase tracking-wider">Fast Order Entry</h3>
-          <span id="inlinePrefHint" class="text-xs text-slate-500">Auto-detects New vs. Returning customers &amp; saved Taste preference</span>
+          <span id="inlinePrefHint" class="text-xs text-slate-500">Auto-detects Returning customers, household spice profiles &amp; payment methods</span>
         </div>
-        <form id="inlineOrderForm" onsubmit="handleInlineSubmit(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-2.5 items-end">
-          <div class="lg:col-span-3">
-            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Customer Name *</label>
-            <input type="text" id="inName" required list="customerNameSuggestions" oninput="applySavedPreference('in')" onchange="applySavedPreference('in')" placeholder="e.g., Susan Pickleball" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
-            <datalist id="customerNameSuggestions"></datalist>
-          </div>
-          <div class="lg:col-span-2">
-            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Order Date *</label>
-            <input type="date" id="inOrderDate" required class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
-          </div>
-          <div class="lg:col-span-2">
-            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Delivery Date *</label>
-            <input type="date" id="inDeliveryDate" required class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
-          </div>
-          <div class="lg:col-span-2">
-            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Delivery Time</label>
-            <input type="time" id="inDeliveryTime" value="18:00" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
-          </div>
-          <div class="lg:col-span-3">
-            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Menu Line</label>
-            <select id="inCategory" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white focus:outline-none focus:border-emerald-600">
-              <option value="Meal Box">Meal Box</option>
-              <option value="Samosas & Snacks">Samosas &amp; Snacks</option>
-              <option value="Paranthas & Mains">Paranthas &amp; Mains</option>
-              <option value="Shakes & Lassis">Shakes &amp; Lassis</option>
-              <option value="Catering & Party Trays">Catering &amp; Party Trays</option>
-            </select>
-          </div>
-
-          <div class="lg:col-span-3">
-            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Items Ordered</label>
-            <input type="text" id="inItems" placeholder="e.g., 4 Samosas + Mains" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
-          </div>
-          <div class="lg:col-span-3 grid grid-cols-2 gap-1.5">
-            <div>
-              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Taste / Spice</label>
-              <select id="inSpice" class="w-full px-2.5 py-2 rounded-xl border border-slate-300 text-sm bg-white focus:outline-none focus:border-emerald-600">
-                <option value="Medium">Medium</option>
-                <option value="Mild">Mild</option>
-                <option value="Spicy">Spicy</option>
-                <option value="Extra Spicy">Extra Spicy</option>
+        <form id="inlineOrderForm" onsubmit="handleInlineSubmit(event)" class="space-y-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-2.5 items-end">
+            <div class="lg:col-span-3">
+              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Customer Name *</label>
+              <input type="text" id="inName" required list="customerNameSuggestions" oninput="applySavedPreference('in')" onchange="applySavedPreference('in')" placeholder="e.g., Perry Pickleball" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
+              <datalist id="customerNameSuggestions"></datalist>
+            </div>
+            <div class="lg:col-span-2">
+              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Order Date *</label>
+              <input type="date" id="inOrderDate" required class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
+            </div>
+            <div class="lg:col-span-2">
+              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Delivery Date *</label>
+              <input type="date" id="inDeliveryDate" required class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
+            </div>
+            <div class="lg:col-span-2">
+              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Delivery Time</label>
+              <input type="time" id="inDeliveryTime" value="18:00" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
+            </div>
+            <div class="lg:col-span-3">
+              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Payment Method</label>
+              <select id="inPaymentMethod" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white focus:outline-none focus:border-emerald-600">
+                <option value="Interac e-Transfer">Interac e-Transfer</option>
+                <option value="Cash">Cash</option>
+                <option value="Cash on Delivery (COD)">Cash on Delivery (COD)</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Debit Card">Debit Card</option>
+                <option value="Other">Other</option>
               </select>
             </div>
-            <div>
-              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Taste Note</label>
-              <input type="text" id="inTasteNote" placeholder="e.g., No cilantro" class="w-full px-2.5 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
+          </div>
+
+          <!-- Multi-Item Order Builder inside Fast Entry -->
+          <div class="bg-slate-50/90 p-3 rounded-xl border border-slate-200/90 space-y-2">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="text-[11px] font-extrabold uppercase tracking-wider text-slate-700">Menu Categories, Quantities &amp; Flavors Ordered</span>
+              <button type="button" onclick="addInlineItemRow()" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold transition">
+                + Add Menu Item
+              </button>
+            </div>
+            <div id="inItemRowsContainer" class="space-y-2">
+              <!-- Populated by JS -->
             </div>
           </div>
-          <div class="lg:col-span-4 grid grid-cols-4 gap-1.5 items-end">
+
+          <!-- Dishes Served & Household Taste Profile -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-2.5 items-start">
+            <div class="lg:col-span-5">
+              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Dishes Served / Prepared for Customer</label>
+              <input type="text" id="inDishesServed" placeholder="e.g., Dal Makhani, Paneer Bhurji, Jeera Rice, 2 Roti, Mango Shake" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
+            </div>
+            <div class="lg:col-span-7 bg-orange-50/60 p-2.5 rounded-xl border border-orange-200/80">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="text-[11px] font-bold text-orange-900">Household Taste / Spice Profile</span>
+                <button type="button" onclick="addTasteMemberRow('in')" class="px-2 py-0.5 rounded-md bg-orange-600 hover:bg-orange-500 text-white text-[11px] font-bold transition">
+                  + Add Member
+                </button>
+              </div>
+              <div id="inTasteMembersContainer" class="space-y-1.5">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Financials & Submit -->
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 items-end pt-1">
             <div>
-              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Food ($)</label>
-              <input type="number" step="0.01" min="0" id="inFood" oninput="syncInlineTotals()" required placeholder="38.00" class="w-full px-2 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
+              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Food Subtotal ($)</label>
+              <input type="number" step="0.01" min="0" id="inFood" oninput="syncInlineTotals()" required placeholder="38.00" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
             </div>
             <div>
-              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Deliv ($)</label>
-              <input type="number" step="0.01" min="0" id="inDelFee" oninput="syncInlineTotals()" value="0" placeholder="4.00" class="w-full px-2 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
+              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Delivery Fee ($)</label>
+              <input type="number" step="0.01" min="0" id="inDelFee" oninput="syncInlineTotals()" value="0" placeholder="4.00" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
             </div>
             <div>
-              <label class="block text-[11px] font-semibold text-emerald-700 mb-1">Total</label>
-              <div id="inTotalDisplay" class="px-2 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-sm font-extrabold text-emerald-800 text-center">$0.00</div>
+              <label class="block text-[11px] font-semibold text-emerald-700 mb-1">Total Billed</label>
+              <div id="inTotalDisplay" class="px-3 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-sm font-extrabold text-emerald-800 text-center">$0.00</div>
             </div>
             <div>
               <div class="flex items-center justify-between mb-1">
-                <label class="text-[11px] font-semibold text-slate-600">Paid ($)</label>
-                <button type="button" onclick="fillInlineFullPaid()" class="text-[10px] font-bold text-emerald-700 hover:underline">100%</button>
+                <label class="text-[11px] font-semibold text-slate-600">Amount Paid ($)</label>
+                <button type="button" onclick="fillInlineFullPaid()" class="text-[10px] font-bold text-emerald-700 hover:underline">100% Paid</button>
               </div>
-              <input type="number" step="0.01" min="0" id="inPaid" placeholder="0.00" class="w-full px-2 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
+              <input type="number" step="0.01" min="0" id="inPaid" placeholder="0.00" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-emerald-600" />
             </div>
-          </div>
-          <div class="lg:col-span-2">
-            <button type="submit" class="w-full px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold transition shadow-xs">
-              Save Order
-            </button>
+            <div class="col-span-2 sm:col-span-1">
+              <button type="submit" class="w-full px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold transition shadow-xs">
+                Save Order
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -344,13 +372,14 @@
             <button onclick="setOrderFilter('all')" id="flt-all" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white">All Orders</button>
             <button onclick="setOrderFilter('mealbox')" id="flt-mealbox" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Meal Box</button>
             <button onclick="setOrderFilter('paid')" id="flt-paid" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Paid (Ready to Cook)</button>
-            <button onclick="setOrderFilter('pending')" id="flt-pending" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Pending e-Transfer</button>
+            <button onclick="setOrderFilter('pending')" id="flt-pending" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Pending Payment</button>
+            <button onclick="setOrderFilter('cash')" id="flt-cash" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Cash / COD</button>
             <button onclick="setOrderFilter('overdue')" id="flt-overdue" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Unpaid Overdue</button>
             <button onclick="setOrderFilter('upcoming')" id="flt-upcoming" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Due &lt; 72h</button>
             <button onclick="setOrderFilter('future')" id="flt-future" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">All Future Orders</button>
           </div>
           <div class="flex items-center gap-2">
-            <input type="text" id="searchOrdersInput" oninput="renderAll()" placeholder="Search customer, item, or taste..." class="px-3 py-1.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-500" />
+            <input type="text" id="searchOrdersInput" oninput="renderAll()" placeholder="Search customer, dish, flavor, or payment..." class="px-3 py-1.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-500" />
             <button onclick="confirmClearAll()" class="px-3 py-1.5 rounded-xl border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-semibold transition">
               Reset All
             </button>
@@ -363,11 +392,10 @@
             <thead>
               <tr class="border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-500">
                 <th class="py-3 px-3">Order ID</th>
-                <th class="py-3 px-3">Order Date</th>
-                <th class="py-3 px-3">Delivery Date &amp; Time</th>
-                <th class="py-3 px-3">Customer &amp; Taste</th>
-                <th class="py-3 px-3">Type</th>
-                <th class="py-3 px-3">Menu Line &amp; Items</th>
+                <th class="py-3 px-3">Delivery Schedule</th>
+                <th class="py-3 px-3">Customer &amp; Household Taste</th>
+                <th class="py-3 px-3">Menu Categories, Qty &amp; Dishes Served</th>
+                <th class="py-3 px-3">Payment Method</th>
                 <th class="py-3 px-3 text-right">Total ($)</th>
                 <th class="py-3 px-3 text-right">Paid ($)</th>
                 <th class="py-3 px-3 text-right">Balance</th>
@@ -393,7 +421,7 @@
             <p class="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-1">Financial Performance</p>
             <h3 class="text-xl font-extrabold text-slate-900">Monthly Earnings &amp; $5,000 CAD Goal Tracker</h3>
             <p class="text-xs text-slate-500 mt-1">
-              Tracks total billed revenue, verified Interac e-Transfer cash collected, pending balances, and monthly goal attainment by delivery month.
+              Tracks total billed revenue, verified cash &amp; e-Transfer collected, pending balances, payment method breakdown, and monthly goal progress.
             </p>
           </div>
           <div class="flex items-center gap-2">
@@ -405,7 +433,12 @@
         </div>
 
         <!-- Monthly Summary KPI Cards -->
-        <div id="earningsSummaryCards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div id="earningsSummaryCards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Payment Method Breakdown Pills -->
+        <div id="paymentMethodBreakdown" class="flex flex-wrap items-center gap-2.5 p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 mb-6">
           <!-- Populated by JS -->
         </div>
 
@@ -417,7 +450,7 @@
                 <th class="py-3 px-3">Month</th>
                 <th class="py-3 px-3 text-center">Orders</th>
                 <th class="py-3 px-3 text-right">Total Billed ($)</th>
-                <th class="py-3 px-3 text-right">Cash Collected ($)</th>
+                <th class="py-3 px-3 text-right">Cash &amp; e-Transfer Collected ($)</th>
                 <th class="py-3 px-3 text-right">Pending / Unpaid ($)</th>
                 <th class="py-3 px-3 text-right">Avg Order ($)</th>
                 <th class="py-3 px-3 w-56">Progress to $5,000 CAD Goal</th>
@@ -432,15 +465,15 @@
     </section>
 
     <!-- ========================================================= -->
-    <!-- VIEW 4: RETURNING CUSTOMERS & TASTE PROFILES              -->
+    <!-- VIEW 4: RETURNING CUSTOMERS, TASTE PROFILES & DISH HISTORY-->
     <!-- ========================================================= -->
     <section id="view-customers" class="hidden space-y-5">
       <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-200/80">
         <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
           <div>
-            <h3 class="text-lg font-extrabold text-slate-900">Customer Directory, Loyalty &amp; Saved Taste Preferences</h3>
+            <h3 class="text-lg font-extrabold text-slate-900">Customer Directory, Household Taste Profiles &amp; Dish History</h3>
             <p class="text-xs text-slate-500 mt-0.5">
-              Automatically remembers each customer's preferred <span class="font-semibold text-orange-700">Spice Level &amp; Taste Notes</span> so you never have to ask twice when they re-order.
+              Tracks every household member's <span class="font-semibold text-orange-700">Spice Level</span> and the <span class="font-semibold text-emerald-700">Dishes Served</span> across past orders so you rotate menus effortlessly.
             </p>
           </div>
         </div>
@@ -450,12 +483,12 @@
               <tr class="border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-500">
                 <th class="py-3 px-3">Customer Name</th>
                 <th class="py-3 px-3">Loyalty Tier</th>
-                <th class="py-3 px-3">Saved Taste / Spice Preference</th>
-                <th class="py-3 px-3 text-center">Total Orders</th>
-                <th class="py-3 px-3">Latest Order</th>
-                <th class="py-3 px-3 text-right">Total Billed ($)</th>
+                <th class="py-3 px-3">Saved Household Taste / Spice Profiles</th>
+                <th class="py-3 px-3">Dishes Served History</th>
+                <th class="py-3 px-3 text-center">Orders</th>
                 <th class="py-3 px-3 text-right">Total Paid ($)</th>
-                <th class="py-3 px-3 text-right">Unpaid Balance ($)</th>
+                <th class="py-3 px-3 text-right">Balance ($)</th>
+                <th class="py-3 px-3 text-right">Quick Re-Order</th>
               </tr>
             </thead>
             <tbody id="customersTableBody" class="divide-y divide-slate-100 text-sm">
@@ -472,7 +505,7 @@
   <!-- MODAL 1: DETAILED + ADD / EDIT ORDER                      -->
   <!-- ========================================================= -->
   <div id="orderModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 my-auto">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-slate-200 my-auto max-h-[94vh] overflow-y-auto">
       <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
         <h3 id="modalTitle" class="text-lg font-extrabold text-slate-900">Add New Customer Order</h3>
         <button onclick="closeAddModal()" class="text-slate-400 hover:text-slate-700 text-xl font-bold">&times;</button>
@@ -486,10 +519,11 @@
             <p id="mSavedPrefBanner" class="hidden text-[11px] font-semibold text-emerald-700 mt-1">✓ Auto-filled saved taste preference!</p>
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Phone / e-Transfer Note</label>
-            <input type="text" id="mContact" placeholder="e.g., 226-xxx-xxxx or Interac note" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm" />
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Phone / Payment Note</label>
+            <input type="text" id="mContact" placeholder="e.g., 226-xxx-xxxx or Cash at pickup" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm" />
           </div>
         </div>
+
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
             <label class="block text-xs font-semibold text-slate-700 mb-1">Order Placed Date *</label>
@@ -504,6 +538,7 @@
             <input type="time" id="mDeliveryTime" value="18:00" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm" />
           </div>
         </div>
+
         <!-- Quick Time Presets -->
         <div class="flex flex-wrap items-center gap-1.5 -mt-1">
           <span class="text-[11px] font-medium text-slate-500 mr-1">Quick Time:</span>
@@ -514,48 +549,78 @@
           <button type="button" onclick="setModalTime('19:00')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 text-[11px] font-semibold text-slate-700">7:00 PM</button>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Menu Category</label>
-            <select id="mCategory" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white">
-              <option value="Meal Box">Meal Box</option>
-              <option value="Samosas & Snacks">Samosas &amp; Snacks</option>
-              <option value="Paranthas & Mains">Paranthas &amp; Mains</option>
-              <option value="Shakes & Lassis">Shakes &amp; Lassis</option>
-              <option value="Catering & Party Trays">Catering &amp; Party Trays</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Items Ordered *</label>
-            <input type="text" id="mItems" required placeholder="e.g., 2 Boxes + 4 Samosas" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm" />
-          </div>
-        </div>
-
-        <!-- Customer Taste / Spice Profile -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-orange-50/50 p-3 rounded-xl border border-orange-200/70">
-          <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Taste / Spice Preference</label>
-            <select id="mSpice" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white">
-              <option value="Medium">Medium (Standard)</option>
-              <option value="Mild">Mild (Less Spicy)</option>
-              <option value="Spicy">Spicy</option>
-              <option value="Extra Spicy">Extra Spicy</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Custom Taste Note (Saved)</label>
-            <input type="text" id="mTasteNote" placeholder="e.g., Extra green chutney, no onion" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white" />
-          </div>
-        </div>
-
-        <!-- Smart Payment Calculation Box -->
+        <!-- MULTI-ITEM MENU BUILDER (+ Add Menu Item) -->
         <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200/90 space-y-2.5">
           <div class="flex flex-wrap items-center justify-between gap-2">
-            <span class="text-xs font-bold text-slate-700">Payment Mode:</span>
-            <div class="inline-flex rounded-lg bg-slate-200/80 p-0.5 text-[11px] font-semibold">
-              <button type="button" id="payModePending" onclick="setModalPayMode('pending')" class="px-2.5 py-1 rounded-md bg-white text-amber-800 shadow-2xs">Pending ($0)</button>
-              <button type="button" id="payModeFull" onclick="setModalPayMode('full')" class="px-2.5 py-1 rounded-md text-slate-600">Paid in Full (100%)</button>
-              <button type="button" id="payModePartial" onclick="setModalPayMode('partial')" class="px-2.5 py-1 rounded-md text-slate-600">Partial</button>
+            <div>
+              <label class="block text-xs font-extrabold text-slate-800">Menu Categories, Quantities &amp; Flavors *</label>
+              <p class="text-[11px] text-slate-500">Add multiple categories in one order (e.g., 2 Meal Boxes + 3 Shakes with Mango &amp; Rose flavors).</p>
+            </div>
+            <button type="button" onclick="addModalItemRow()" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition shadow-2xs">
+              + Add Menu Item
+            </button>
+          </div>
+          <div id="mItemRowsContainer" class="space-y-2">
+            <!-- Populated dynamically by JS -->
+          </div>
+        </div>
+
+        <!-- DISHES SERVED / KITCHEN PREP LOG -->
+        <div class="bg-emerald-50/40 p-3 rounded-xl border border-emerald-200/80 space-y-1.5">
+          <div class="flex items-center justify-between">
+            <label class="block text-xs font-bold text-emerald-950">Dishes Served / Menu Items Prepared</label>
+            <span class="text-[11px] text-emerald-700">Saved to customer's dish history</span>
+          </div>
+          <input type="text" id="mDishesServed" placeholder="e.g., Dal Makhani, Shahi Paneer, Jeera Rice, 4 Roti, 2 Mango Shakes, 1 Rose Lassi" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white" />
+          <div class="flex flex-wrap items-center gap-1 pt-0.5">
+            <span class="text-[10px] font-semibold text-slate-500 mr-1">Quick Add Dish:</span>
+            <button type="button" onclick="appendModalDish('Dal Makhani')" class="px-2 py-0.5 rounded bg-white border border-slate-200 hover:border-emerald-400 text-[10px] font-medium text-slate-700">+ Dal Makhani</button>
+            <button type="button" onclick="appendModalDish('Shahi Paneer')" class="px-2 py-0.5 rounded bg-white border border-slate-200 hover:border-emerald-400 text-[10px] font-medium text-slate-700">+ Shahi Paneer</button>
+            <button type="button" onclick="appendModalDish('Aloo Gobhi')" class="px-2 py-0.5 rounded bg-white border border-slate-200 hover:border-emerald-400 text-[10px] font-medium text-slate-700">+ Aloo Gobhi</button>
+            <button type="button" onclick="appendModalDish('Jeera Rice')" class="px-2 py-0.5 rounded bg-white border border-slate-200 hover:border-emerald-400 text-[10px] font-medium text-slate-700">+ Jeera Rice</button>
+            <button type="button" onclick="appendModalDish('Tawa Roti')" class="px-2 py-0.5 rounded bg-white border border-slate-200 hover:border-emerald-400 text-[10px] font-medium text-slate-700">+ Tawa Roti</button>
+            <button type="button" onclick="appendModalDish('Punjabi Samosa')" class="px-2 py-0.5 rounded bg-white border border-slate-200 hover:border-emerald-400 text-[10px] font-medium text-slate-700">+ Punjabi Samosa</button>
+            <button type="button" onclick="appendModalDish('Mango Shake')" class="px-2 py-0.5 rounded bg-white border border-slate-200 hover:border-emerald-400 text-[10px] font-medium text-slate-700">+ Mango Shake</button>
+          </div>
+        </div>
+
+        <!-- Multi-Member Household Taste / Spice Profile -->
+        <div class="bg-orange-50/60 p-3 rounded-xl border border-orange-200/80 space-y-2">
+          <div class="flex items-center justify-between">
+            <div>
+              <label class="block text-xs font-bold text-slate-800">Household Taste / Spice Preferences</label>
+              <p class="text-[11px] text-slate-500">Add separate spice preferences for each family member (e.g., Perry vs. Gillian).</p>
+            </div>
+            <button type="button" onclick="addTasteMemberRow('m')" class="px-2.5 py-1 rounded-lg bg-orange-600 hover:bg-orange-500 text-white text-xs font-bold transition shadow-2xs">
+              + Add Member
+            </button>
+          </div>
+          <div id="mTasteMembersContainer" class="space-y-2">
+            <!-- Populated dynamically by JS -->
+          </div>
+        </div>
+
+        <!-- Payment Method & Smart Payment Calculation Box -->
+        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200/90 space-y-2.5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 items-center">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 mb-1">Payment Type / Method</label>
+              <select id="mPaymentMethod" class="w-full px-3 py-1.5 rounded-xl border border-slate-300 text-xs sm:text-sm font-semibold bg-white">
+                <option value="Interac e-Transfer">📲 Interac e-Transfer</option>
+                <option value="Cash">💵 Cash</option>
+                <option value="Cash on Delivery (COD)">🚪 Cash on Delivery (COD)</option>
+                <option value="Credit Card">💳 Credit Card</option>
+                <option value="Debit Card">🏦 Debit Card</option>
+                <option value="Other">🧾 Other</option>
+              </select>
+            </div>
+            <div>
+              <span class="block text-[11px] font-bold text-slate-700 mb-1">Payment Status Mode:</span>
+              <div class="inline-flex w-full rounded-lg bg-slate-200/80 p-0.5 text-[11px] font-semibold">
+                <button type="button" id="payModePending" onclick="setModalPayMode('pending')" class="flex-1 px-2 py-1 rounded-md bg-white text-amber-800 shadow-2xs">Pending ($0)</button>
+                <button type="button" id="payModeFull" onclick="setModalPayMode('full')" class="flex-1 px-2 py-1 rounded-md text-slate-600">Paid 100%</button>
+                <button type="button" id="payModePartial" onclick="setModalPayMode('partial')" class="flex-1 px-2 py-1 rounded-md text-slate-600">Partial</button>
+              </div>
             </div>
           </div>
 
@@ -592,31 +657,31 @@
   </div>
 
   <!-- ========================================================= -->
-  <!-- MODAL 2: BULK PASTE ORDERS                                -->
+  <!-- MODAL 2: PASTE / BULK ADD ORDERS                          -->
   <!-- ========================================================= -->
   <div id="bulkModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl border border-slate-200">
-      <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
         <h3 class="text-lg font-extrabold text-slate-900">Paste / Bulk Add Customer Orders</h3>
         <button onclick="closeBulkModal()" class="text-slate-400 hover:text-slate-700 text-xl font-bold">&times;</button>
       </div>
-      <p class="text-xs text-slate-600 mb-2">
-        Paste one order per line using: <code class="bg-slate-100 px-1.5 py-0.5 rounded font-mono text-slate-800">Customer Name, Items, Total ($), Paid ($), Delivery Date, Time</code>
+      <p class="text-xs text-slate-600 mb-2 leading-relaxed">
+        Paste one order per line using: <code class="bg-slate-100 px-1.5 py-0.5 rounded font-mono text-slate-800">Customer Name, Items &amp; Flavors, Total $, Paid $, Delivery YYYY-MM-DD, Payment Method, Dishes Served</code>
       </p>
       <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-[11px] font-mono text-slate-600 mb-3">
-        Susan Pickleball, 2 Meal Boxes + 4 Samosas, 42, 42, 2026-11-19, 18:00<br/>
-        Perry Pickleball, 2 Meal Boxes, 37, 0, 2026-11-22, 18:30
+        Perry Pickleball, 2 Meal Boxes + 3 Shakes (Mango &amp; Rose), 68.00, 68.00, 2026-11-22, Cash, Dal Makhani &amp; Jeera Rice<br/>
+        Susan, 1 Meal Box + 4 Samosas, 26.00, 0, 2026-11-20, Interac e-Transfer, Shahi Paneer &amp; Roti
       </div>
-      <textarea id="bulkTextArea" rows="6" placeholder="Paste your customer lines here..." class="w-full p-3 rounded-xl border border-slate-300 text-xs sm:text-sm font-mono focus:outline-none focus:border-emerald-600"></textarea>
+      <textarea id="bulkTextArea" rows="6" placeholder="Paste your order lines here..." class="w-full p-3 rounded-xl border border-slate-300 text-xs sm:text-sm font-mono focus:outline-none focus:border-emerald-600"></textarea>
       <div class="flex items-center justify-end gap-2 mt-4">
-        <button type="button" onclick="closeBulkModal()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold">Cancel</button>
-        <button type="button" onclick="processBulkPaste()" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold">Import Orders</button>
+        <button onclick="closeBulkModal()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold">Cancel</button>
+        <button onclick="processBulkPaste()" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold">Import Orders</button>
       </div>
     </div>
   </div>
 
   <!-- ========================================================= -->
-  <!-- JAVASCRIPT LOGIC (CLEAN EMPTY START + LIVE AUTO-SYNC)     -->
+  <!-- JAVASCRIPT LOGIC & AUTO-SAVE ENGINE                       -->
   <!-- ========================================================= -->
   <script>
     const STORAGE_KEY = 'green_spicery_orders_v1';
@@ -630,12 +695,30 @@
       { name: 'Catering & Party Trays', badgeBg: 'bg-purple-600' }
     ];
 
+    const SPICE_OPTIONS = [
+      { value: 'Extra Mild', label: 'Extra Mild' },
+      { value: 'Mild', label: 'Mild (Less Spicy)' },
+      { value: 'Medium', label: 'Medium (Standard)' },
+      { value: 'Spicy', label: 'Spicy' },
+      { value: 'Extra Spicy', label: 'Extra Spicy' }
+    ];
+
+    const PAYMENT_METHODS = [
+      'Interac e-Transfer',
+      'Cash',
+      'Cash on Delivery (COD)',
+      'Credit Card',
+      'Debit Card',
+      'Other'
+    ];
+
     let orders = [];
     let customerPrefs = {};
     let currentTab = 'overview';
     let currentFilter = 'all';
     let modalPayMode = 'pending';
 
+    // Initialize clean empty state or restore user's saved entries & customer taste profiles
     function init() {
       try {
         const saved = localStorage.getItem(STORAGE_KEY);
@@ -650,18 +733,57 @@
         orders = [];
         customerPrefs = {};
       }
+
+      // Normalize legacy single-item / single-taste orders into modern multi-item & multi-member structures
+      orders = orders.map(o => normalizeOrderRecord(o));
+
+      // Backfill customerPrefs from existing orders
       orders.forEach(o => {
-        if (o.customerName && (o.spiceLevel || o.tasteNote)) {
-          saveCustomerPref(o.customerName, o.spiceLevel || 'Medium', o.tasteNote || '');
+        if (o.customerName && o.tasteMembers && o.tasteMembers.length > 0) {
+          saveCustomerPref(o.customerName, o.tasteMembers);
         }
       });
 
       const todayStr = getLocalTodayStr();
-      const inOrderDateEl = document.getElementById('inOrderDate');
-      const inDelDateEl = document.getElementById('inDeliveryDate');
-      if (inOrderDateEl) inOrderDateEl.value = todayStr;
-      if (inDelDateEl) inDelDateEl.value = todayStr;
+      document.getElementById('inOrderDate').value = todayStr;
+      document.getElementById('inDeliveryDate').value = todayStr;
+      renderInlineItemRows([{ category: 'Meal Box', qty: 1, flavor: '' }]);
+      renderTasteMemberRows('in', [{ member: '', spiceLevel: 'Medium', note: '' }]);
       renderAll();
+    }
+
+    function normalizeOrderRecord(o) {
+      let lineItems = Array.isArray(o.lineItems) && o.lineItems.length > 0
+        ? o.lineItems.map(li => ({
+            category: li.category || o.category || 'Meal Box',
+            qty: Math.max(1, parseInt(li.qty, 10) || 1),
+            flavor: String(li.flavor || '').trim()
+          }))
+        : [{
+            category: o.category || 'Meal Box',
+            qty: 1,
+            flavor: String(o.items || '').trim()
+          }];
+
+      let tasteMembers = Array.isArray(o.tasteMembers) && o.tasteMembers.length > 0
+        ? o.tasteMembers.map(m => ({
+            member: String(m.member || '').trim(),
+            spiceLevel: m.spiceLevel || 'Medium',
+            note: String(m.note || '').trim()
+          }))
+        : [{
+            member: '',
+            spiceLevel: o.spiceLevel || 'Medium',
+            note: String(o.tasteNote || '').trim()
+          }];
+
+      return {
+        ...o,
+        paymentMethod: o.paymentMethod || 'Interac e-Transfer',
+        lineItems,
+        dishesServed: String(o.dishesServed || '').trim(),
+        tasteMembers
+      };
     }
 
     function getLocalTodayStr() {
@@ -672,17 +794,240 @@
       return `${y}-${m}-${d}`;
     }
 
-    function saveCustomerPref(name, spiceLevel, tasteNote) {
+    function formatLineItemsSummary(lineItems) {
+      if (!Array.isArray(lineItems) || lineItems.length === 0) return 'Standard Order';
+      return lineItems.map(li => {
+        const qty = li.qty || 1;
+        const cat = li.category || 'Meal Box';
+        const flv = li.flavor ? ` (${li.flavor})` : '';
+        return `${qty}x ${cat}${flv}`;
+      }).join(' + ');
+    }
+
+    // =========================================================
+    // MULTI-ITEM ORDER LINE BUILDER (+ Add Menu Item)
+    // =========================================================
+    function buildCategoryOptionsHtml(selectedVal) {
+      return CATEGORIES.map(c =>
+        `<option value="${escapeHtml(c.name)}" ${c.name === selectedVal ? 'selected' : ''}>${escapeHtml(c.name)}</option>`
+      ).join('');
+    }
+
+    function renderInlineItemRows(rows) {
+      const container = document.getElementById('inItemRowsContainer');
+      if (!container) return;
+      const list = Array.isArray(rows) && rows.length > 0 ? rows : [{ category: 'Meal Box', qty: 1, flavor: '' }];
+      container.innerHTML = list.map((r, idx) => `
+        <div class="in-item-row grid grid-cols-12 gap-2 items-center bg-white p-2 rounded-xl border border-slate-200/90">
+          <div class="col-span-5 sm:col-span-4">
+            <select class="in-item-cat w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold bg-white">
+              ${buildCategoryOptionsHtml(r.category || 'Meal Box')}
+            </select>
+          </div>
+          <div class="col-span-3 sm:col-span-2">
+            <input type="number" min="1" step="1" value="${r.qty || 1}" placeholder="Qty" class="in-item-qty w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs font-bold text-center" />
+          </div>
+          <div class="${list.length > 1 ? 'col-span-3 sm:col-span-5' : 'col-span-4 sm:col-span-6'}">
+            <input type="text" value="${escapeHtml(r.flavor || '')}" placeholder="Flavor / Variant (e.g., Mango & Rose, Veg Box)" class="in-item-flavor w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs" />
+          </div>
+          ${list.length > 1 ? `
+          <div class="col-span-1 text-right">
+            <button type="button" onclick="removeInlineItemRow(${idx})" title="Remove item" class="w-7 h-7 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-xs inline-flex items-center justify-center">&times;</button>
+          </div>` : ''}
+        </div>
+      `).join('');
+    }
+
+    function readInlineItemRows() {
+      const container = document.getElementById('inItemRowsContainer');
+      if (!container) return [{ category: 'Meal Box', qty: 1, flavor: '' }];
+      const rows = Array.from(container.querySelectorAll('.in-item-row')).map(row => ({
+        category: row.querySelector('.in-item-cat')?.value || 'Meal Box',
+        qty: Math.max(1, parseInt(row.querySelector('.in-item-qty')?.value, 10) || 1),
+        flavor: (row.querySelector('.in-item-flavor')?.value || '').trim()
+      }));
+      return rows.length > 0 ? rows : [{ category: 'Meal Box', qty: 1, flavor: '' }];
+    }
+
+    function addInlineItemRow() {
+      const current = readInlineItemRows();
+      current.push({ category: 'Shakes & Lassis', qty: 1, flavor: '' });
+      renderInlineItemRows(current);
+    }
+
+    function removeInlineItemRow(idx) {
+      const current = readInlineItemRows();
+      current.splice(idx, 1);
+      renderInlineItemRows(current.length > 0 ? current : [{ category: 'Meal Box', qty: 1, flavor: '' }]);
+    }
+
+    function renderModalItemRows(rows) {
+      const container = document.getElementById('mItemRowsContainer');
+      if (!container) return;
+      const list = Array.isArray(rows) && rows.length > 0 ? rows : [{ category: 'Meal Box', qty: 1, flavor: '' }];
+      container.innerHTML = list.map((r, idx) => `
+        <div class="m-item-row grid grid-cols-12 gap-2 items-center bg-white p-2 rounded-xl border border-slate-200">
+          <div class="col-span-5 sm:col-span-4">
+            <label class="block text-[10px] font-semibold text-slate-500 mb-0.5">Category</label>
+            <select class="m-item-cat w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold bg-white">
+              ${buildCategoryOptionsHtml(r.category || 'Meal Box')}
+            </select>
+          </div>
+          <div class="col-span-3 sm:col-span-2">
+            <label class="block text-[10px] font-semibold text-slate-500 mb-0.5">Qty</label>
+            <input type="number" min="1" step="1" value="${r.qty || 1}" class="m-item-qty w-full px-2 py-1.5 rounded-lg border border-slate-300 text-xs font-bold text-center" />
+          </div>
+          <div class="${list.length > 1 ? 'col-span-3 sm:col-span-5' : 'col-span-4 sm:col-span-6'}">
+            <label class="block text-[10px] font-semibold text-slate-500 mb-0.5">Flavors / Box Type</label>
+            <input type="text" value="${escapeHtml(r.flavor || '')}" placeholder="e.g., Mango & Rose, Veg Tiffin" class="m-item-flavor w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs" />
+          </div>
+          ${list.length > 1 ? `
+          <div class="col-span-1 pt-3.5 text-right">
+            <button type="button" onclick="removeModalItemRow(${idx})" title="Remove item" class="w-7 h-7 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-xs inline-flex items-center justify-center">&times;</button>
+          </div>` : ''}
+        </div>
+      `).join('');
+    }
+
+    function readModalItemRows() {
+      const container = document.getElementById('mItemRowsContainer');
+      if (!container) return [{ category: 'Meal Box', qty: 1, flavor: '' }];
+      const rows = Array.from(container.querySelectorAll('.m-item-row')).map(row => ({
+        category: row.querySelector('.m-item-cat')?.value || 'Meal Box',
+        qty: Math.max(1, parseInt(row.querySelector('.m-item-qty')?.value, 10) || 1),
+        flavor: (row.querySelector('.m-item-flavor')?.value || '').trim()
+      }));
+      return rows.length > 0 ? rows : [{ category: 'Meal Box', qty: 1, flavor: '' }];
+    }
+
+    function addModalItemRow() {
+      const current = readModalItemRows();
+      current.push({ category: 'Shakes & Lassis', qty: 1, flavor: '' });
+      renderModalItemRows(current);
+    }
+
+    function removeModalItemRow(idx) {
+      const current = readModalItemRows();
+      current.splice(idx, 1);
+      renderModalItemRows(current.length > 0 ? current : [{ category: 'Meal Box', qty: 1, flavor: '' }]);
+    }
+
+    function appendModalDish(dishName) {
+      const input = document.getElementById('mDishesServed');
+      if (!input) return;
+      const cur = input.value.trim();
+      if (!cur) {
+        input.value = dishName;
+      } else if (!cur.toLowerCase().includes(dishName.toLowerCase())) {
+        input.value = `${cur}, ${dishName}`;
+      }
+    }
+
+    // =========================================================
+    // MULTI-MEMBER HOUSEHOLD TASTE PROFILE HELPERS
+    // =========================================================
+    function buildSpiceOptionsHtml(selectedVal) {
+      return SPICE_OPTIONS.map(opt =>
+        `<option value="${opt.value}" ${opt.value === selectedVal ? 'selected' : ''}>${opt.label}</option>`
+      ).join('');
+    }
+
+    function renderTasteMemberRows(prefix, members) {
+      const container = document.getElementById(prefix === 'm' ? 'mTasteMembersContainer' : 'inTasteMembersContainer');
+      if (!container) return;
+      const list = Array.isArray(members) && members.length > 0
+        ? members
+        : [{ member: '', spiceLevel: 'Medium', note: '' }];
+
+      container.innerHTML = list.map((m, idx) => `
+        <div class="taste-member-row grid grid-cols-12 gap-1.5 items-center bg-white p-2 rounded-xl border border-orange-200/80">
+          <div class="col-span-4">
+            <input type="text" value="${escapeHtml(m.member || '')}" placeholder="${idx === 0 ? 'Member (e.g., Perry)' : 'Member (e.g., Gillian)'}" class="tm-name w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs focus:outline-none focus:border-orange-500" />
+          </div>
+          <div class="col-span-4">
+            <select class="tm-spice w-full px-2 py-1.5 rounded-lg border border-slate-300 text-xs bg-white focus:outline-none focus:border-orange-500">
+              ${buildSpiceOptionsHtml(m.spiceLevel || 'Medium')}
+            </select>
+          </div>
+          <div class="${list.length > 1 ? 'col-span-3' : 'col-span-4'}">
+            <input type="text" value="${escapeHtml(m.note || '')}" placeholder="Note (e.g., Extra chutney)" class="tm-note w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs focus:outline-none focus:border-orange-500" />
+          </div>
+          ${list.length > 1 ? `
+          <div class="col-span-1 text-right">
+            <button type="button" onclick="removeTasteMemberRow('${prefix}', ${idx})" title="Remove member" class="w-6 h-6 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-xs inline-flex items-center justify-center">&times;</button>
+          </div>` : ''}
+        </div>
+      `).join('');
+    }
+
+    function readTasteMemberRows(prefix) {
+      const container = document.getElementById(prefix === 'm' ? 'mTasteMembersContainer' : 'inTasteMembersContainer');
+      if (!container) return [{ member: '', spiceLevel: 'Medium', note: '' }];
+      const rows = Array.from(container.querySelectorAll('.taste-member-row'));
+      const parsed = rows.map(r => ({
+        member: (r.querySelector('.tm-name')?.value || '').trim(),
+        spiceLevel: r.querySelector('.tm-spice')?.value || 'Medium',
+        note: (r.querySelector('.tm-note')?.value || '').trim()
+      }));
+      return parsed.length > 0 ? parsed : [{ member: '', spiceLevel: 'Medium', note: '' }];
+    }
+
+    function addTasteMemberRow(prefix) {
+      const current = readTasteMemberRows(prefix);
+      current.push({ member: '', spiceLevel: 'Extra Mild', note: '' });
+      renderTasteMemberRows(prefix, current);
+    }
+
+    function removeTasteMemberRow(prefix, idx) {
+      const current = readTasteMemberRows(prefix);
+      current.splice(idx, 1);
+      renderTasteMemberRows(prefix, current.length > 0 ? current : [{ member: '', spiceLevel: 'Medium', note: '' }]);
+    }
+
+    function normalizeMembersFromPref(pref) {
+      if (!pref) return null;
+      if (Array.isArray(pref.members) && pref.members.length > 0) {
+        return pref.members.map(m => ({
+          member: m.member || '',
+          spiceLevel: m.spiceLevel || 'Medium',
+          note: m.note || ''
+        }));
+      }
+      return [{
+        member: '',
+        spiceLevel: pref.spiceLevel || 'Medium',
+        note: pref.tasteNote || ''
+      }];
+    }
+
+    function saveCustomerPref(name, members) {
       const key = String(name || '').trim().toLowerCase();
       if (!key) return;
+      const cleanMembers = (Array.isArray(members) && members.length > 0 ? members : [{ member: '', spiceLevel: 'Medium', note: '' }])
+        .map(m => ({
+          member: String(m.member || '').trim(),
+          spiceLevel: m.spiceLevel || 'Medium',
+          note: String(m.note || '').trim()
+        }));
+
       customerPrefs[key] = {
         name: String(name).trim(),
-        spiceLevel: spiceLevel || 'Medium',
-        tasteNote: String(tasteNote || '').trim()
+        members: cleanMembers,
+        spiceLevel: cleanMembers[0].spiceLevel,
+        tasteNote: cleanMembers[0].note
       };
       try {
         localStorage.setItem(PREFS_STORAGE_KEY, JSON.stringify(customerPrefs));
       } catch (e) {}
+    }
+
+    function formatMembersSummaryText(members) {
+      const list = Array.isArray(members) && members.length > 0 ? members : [{ member: '', spiceLevel: 'Medium', note: '' }];
+      return list.map(m => {
+        const who = m.member ? `${m.member}: ` : '';
+        const note = m.note ? ` (${m.note})` : '';
+        return `${who}${m.spiceLevel || 'Medium'}${note}`;
+      }).join(' | ');
     }
 
     function applySavedPreference(prefix) {
@@ -693,20 +1038,19 @@
       const inlineHint = document.getElementById('inlinePrefHint');
 
       if (pref) {
-        const spiceEl = document.getElementById(prefix === 'm' ? 'mSpice' : 'inSpice');
-        const noteEl = document.getElementById(prefix === 'm' ? 'mTasteNote' : 'inTasteNote');
-        if (spiceEl) spiceEl.value = pref.spiceLevel || 'Medium';
-        if (noteEl) noteEl.value = pref.tasteNote || '';
+        const members = normalizeMembersFromPref(pref);
+        renderTasteMemberRows(prefix, members);
+        const summary = formatMembersSummaryText(members);
         if (prefix === 'm' && banner) {
-          banner.textContent = `✓ Auto-filled saved taste: ${pref.spiceLevel}${pref.tasteNote ? ' • ' + pref.tasteNote : ''}`;
+          banner.textContent = `✓ Auto-filled saved taste: ${summary}`;
           banner.classList.remove('hidden');
         } else if (prefix === 'in' && inlineHint) {
-          inlineHint.innerHTML = `<span class="text-emerald-700 font-semibold">✓ Saved Taste Loaded for ${escapeHtml(pref.name)}: ${escapeHtml(pref.spiceLevel)}${pref.tasteNote ? ' (' + escapeHtml(pref.tasteNote) + ')' : ''}</span>`;
+          inlineHint.innerHTML = `<span class="text-emerald-700 font-semibold">✓ Saved Taste Loaded for ${escapeHtml(pref.name)}: ${escapeHtml(summary)}</span>`;
         }
       } else {
         if (prefix === 'm' && banner) banner.classList.add('hidden');
         if (prefix === 'in' && inlineHint) {
-          inlineHint.textContent = 'Auto-detects New vs. Returning customers & saved Taste preference';
+          inlineHint.textContent = 'Auto-detects Returning customers, household spice profiles & payment methods';
         }
       }
     }
@@ -716,15 +1060,12 @@
         localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
       } catch (e) {}
       const now = new Date();
-      const syncEl = document.getElementById('lastSyncedTime');
-      if (syncEl) syncEl.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      document.getElementById('lastSyncedTime').textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
 
     function showToast(msg) {
       const banner = document.getElementById('toastBanner');
-      const msgEl = document.getElementById('toastMessage');
-      if (!banner || !msgEl) return;
-      msgEl.textContent = msg;
+      document.getElementById('toastMessage').textContent = msg;
       banner.classList.remove('hidden');
       setTimeout(() => banner.classList.add('hidden'), 3000);
     }
@@ -739,6 +1080,27 @@
       return `${h}:${mStr} ${ampm}`;
     }
 
+    function getPaymentMethodBadgeHtml(method) {
+      const m = method || 'Interac e-Transfer';
+      if (m === 'Cash') {
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 text-[11px] font-bold">💵 Cash</span>`;
+      }
+      if (m === 'Cash on Delivery (COD)') {
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 border border-amber-200 text-[11px] font-bold">🚪 Cash on Delivery</span>`;
+      }
+      if (m === 'Credit Card') {
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-purple-50 text-purple-800 border border-purple-200 text-[11px] font-bold">💳 Credit Card</span>`;
+      }
+      if (m === 'Debit Card') {
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-sky-50 text-sky-800 border border-sky-200 text-[11px] font-bold">🏦 Debit Card</span>`;
+      }
+      if (m === 'Other') {
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200 text-[11px] font-bold">🧾 Other</span>`;
+      }
+      return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-50 text-blue-800 border border-blue-200 text-[11px] font-bold">📲 e-Transfer</span>`;
+    }
+
+    // Compute lifecycle flags for each order (72-hour upcoming window + future scheduled)
     function enrichOrders() {
       const now = new Date();
       const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -748,7 +1110,8 @@
       const sorted = [...orders].sort((a, b) => a.orderDate.localeCompare(b.orderDate) || a.seq - b.seq);
       const seenNames = new Map();
 
-      return sorted.map((o, idx) => {
+      return sorted.map((raw, idx) => {
+        const o = normalizeOrderRecord(raw);
         const normName = o.customerName.trim().toLowerCase();
         const priorCount = seenNames.get(normName) || 0;
         seenNames.set(normName, priorCount + 1);
@@ -766,10 +1129,14 @@
         const isFuture = delDate && delDate >= today;
 
         const savedPref = customerPrefs[normName];
-        const spiceLevel = o.spiceLevel || (savedPref ? savedPref.spiceLevel : 'Medium');
-        const tasteNote = o.tasteNote !== undefined ? o.tasteNote : (savedPref ? savedPref.tasteNote : '');
+        const tasteMembers = (Array.isArray(o.tasteMembers) && o.tasteMembers.length > 0)
+          ? o.tasteMembers
+          : (normalizeMembersFromPref(savedPref) || [{ member: '', spiceLevel: 'Medium', note: '' }]);
 
-        let statusLabel = 'Pending e-Transfer';
+        const lineItemsSummary = formatLineItemsSummary(o.lineItems);
+        const categoriesInOrder = Array.from(new Set(o.lineItems.map(li => li.category)));
+
+        let statusLabel = `Pending (${o.paymentMethod === 'Interac e-Transfer' ? 'e-Transfer' : o.paymentMethod})`;
         if (isFreeSample) statusLabel = 'Free Tasting Sample';
         else if (isPaid) statusLabel = 'Paid • Ready to Cook';
         else if (isOverdue) statusLabel = 'Unpaid Overdue';
@@ -787,8 +1154,9 @@
           isPending,
           isUpcoming,
           isFuture,
-          spiceLevel,
-          tasteNote,
+          tasteMembers,
+          lineItemsSummary,
+          categoriesInOrder,
           formattedTime: formatTime12h(o.deliveryTime),
           statusLabel
         };
@@ -798,6 +1166,7 @@
     function renderAll() {
       const enriched = enrichOrders();
 
+      // KPIs
       const totalOrders = enriched.length;
       const totalBilled = enriched.reduce((s, o) => s + o.totalBilled, 0);
       const totalCollected = enriched.reduce((s, o) => s + o.amountPaid, 0);
@@ -809,11 +1178,12 @@
       const upcomingCount = enriched.filter(o => o.isUpcoming).length;
       const futureCount = enriched.filter(o => o.isFuture).length;
 
+      // Unique customers, taste profiles & dishes served history
       const custMap = new Map();
       enriched.forEach(o => {
         const key = o.customerName.trim().toLowerCase();
         if (!custMap.has(key)) {
-          const pref = customerPrefs[key] || { spiceLevel: o.spiceLevel || 'Medium', tasteNote: o.tasteNote || '' };
+          const pref = customerPrefs[key];
           custMap.set(key, {
             name: o.customerName.trim(),
             orders: 0,
@@ -822,8 +1192,8 @@
             billed: 0,
             paid: 0,
             balance: 0,
-            spiceLevel: pref.spiceLevel,
-            tasteNote: pref.tasteNote
+            tasteMembers: normalizeMembersFromPref(pref) || o.tasteMembers,
+            dishesHistory: []
           });
         }
         const c = custMap.get(key);
@@ -833,151 +1203,174 @@
         c.billed += o.totalBilled;
         c.paid += o.amountPaid;
         c.balance += o.balance;
-        if (o.spiceLevel) c.spiceLevel = o.spiceLevel;
-        if (o.tasteNote) c.tasteNote = o.tasteNote;
+        if (o.tasteMembers && o.tasteMembers.length > 0) {
+          c.tasteMembers = o.tasteMembers;
+        }
+        if (o.dishesServed) {
+          c.dishesHistory.push({ date: o.deliveryDate || o.orderDate, dishes: o.dishesServed });
+        }
       });
+
       const uniqueCustCount = custMap.size;
       const returningCustCount = Array.from(custMap.values()).filter(c => c.orders >= 2).length;
       const returningPct = uniqueCustCount > 0 ? Math.round((returningCustCount / uniqueCustCount) * 100) : 0;
 
-      const setText = (id, val) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = val;
-      };
+      // Update Header & Badges
+      document.getElementById('headerCounterPill').textContent = `${totalOrders} Orders • ${uniqueCustCount} Customers`;
+      document.getElementById('orderTabBadge').textContent = totalOrders;
+      document.getElementById('earningsTabBadge').textContent = `$${totalCollected.toFixed(0)}`;
+      document.getElementById('custTabBadge').textContent = uniqueCustCount;
 
-      setText('headerCounterPill', `${totalOrders} Orders • ${uniqueCustCount} Customers`);
-      setText('orderTabBadge', totalOrders);
-      setText('earningsTabBadge', `$${totalCollected.toFixed(0)}`);
-      setText('custTabBadge', uniqueCustCount);
-
-      setText('kpiOverdueCount', overdueCount);
-      setText('kpiPendingCount', pendingCount);
-      setText('kpiUpcomingCount', upcomingCount);
-      setText(
-        'kpiUpcomingSub',
-        futureCount > upcomingCount
+      // Top 3 Alert Cards
+      document.getElementById('kpiOverdueCount').textContent = overdueCount;
+      document.getElementById('kpiPendingCount').textContent = pendingCount;
+      document.getElementById('kpiUpcomingCount').textContent = upcomingCount;
+      const kpiUpcomingSub = document.getElementById('kpiUpcomingSub');
+      if (kpiUpcomingSub) {
+        kpiUpcomingSub.textContent = futureCount > upcomingCount
           ? `Next 72h (${futureCount} total future scheduled) →`
-          : 'Scheduled within the next 3 days →'
-      );
+          : 'Scheduled within the next 3 days →';
+      }
 
-      setText('boxTotalOrders', totalOrders);
-      setText('boxTotalBilledSub', `$${totalBilled.toFixed(2)} billed`);
+      // 5 Executive KPI Boxes
+      document.getElementById('boxTotalOrders').textContent = totalOrders;
+      document.getElementById('boxTotalBilledSub').textContent = `$${totalBilled.toFixed(2)} billed`;
 
-      setText('boxPendingOrders', pendingCount + overdueCount);
-      setText('boxPendingAmountSub', `$${totalPendingBalance.toFixed(2)} awaiting`);
+      document.getElementById('boxPendingOrders').textContent = pendingCount + overdueCount;
+      document.getElementById('boxPendingAmountSub').textContent = `$${totalPendingBalance.toFixed(2)} awaiting`;
 
-      setText('boxPaidOrders', paidCount);
-      setText('boxPaidAmountSub', `$${totalCollected.toFixed(2)} verified`);
+      document.getElementById('boxPaidOrders').textContent = paidCount;
+      document.getElementById('boxPaidAmountSub').textContent = `$${totalCollected.toFixed(2)} verified`;
 
-      setText('boxUpcomingOrders', upcomingCount);
-      setText('boxFutureSub', `${futureCount} total future scheduled`);
+      document.getElementById('boxUpcomingOrders').textContent = upcomingCount;
+      const boxFutureSub = document.getElementById('boxFutureSub');
+      if (boxFutureSub) {
+        boxFutureSub.textContent = `${futureCount} total future scheduled`;
+      }
 
       const goalPct = Math.min(100, Math.round((totalCollected / MONTHLY_GOAL) * 100));
       const remainingGoal = Math.max(0, MONTHLY_GOAL - totalCollected);
-      setText('boxGoalPercent', `${goalPct}%`);
-      setText('boxGoalRemainingSub', `$${remainingGoal.toFixed(0)} to $5k`);
+      document.getElementById('boxGoalPercent').textContent = `${goalPct}%`;
+      document.getElementById('boxGoalRemainingSub').textContent = `$${remainingGoal.toFixed(0)} to $5k`;
 
-      setText('returningRatePill', `${returningCustCount} Returning Customers (${returningPct}%)`);
-      setText('pillOverdue', `Overdue (${overdueCount})`);
-      setText('pillPending', `Pending e-Transfer (${pendingCount})`);
-      setText('pillUpcoming', `< 72h Window (${upcomingCount})`);
+      // Pills
+      document.getElementById('returningRatePill').textContent = `${returningCustCount} Returning Customers (${returningPct}%)`;
+      document.getElementById('pillOverdue').textContent = `Overdue (${overdueCount})`;
+      document.getElementById('pillPending').textContent = `Pending Payment (${pendingCount})`;
+      document.getElementById('pillUpcoming').textContent = `< 72h Window (${upcomingCount})`;
 
       const emptyHero = document.getElementById('emptyStateHero');
       if (emptyHero) {
         emptyHero.classList.toggle('hidden', totalOrders > 0);
       }
 
+      // Render 5 Category Progress Cards (counts every order that includes that category)
       const catGrid = document.getElementById('categoryCardsGrid');
-      if (catGrid) {
-        catGrid.innerHTML = CATEGORIES.map(cat => {
-          const catOrders = enriched.filter(o => o.category === cat.name);
-          const cTotal = catOrders.length;
-          const cPaid = catOrders.filter(o => o.isPaid).length;
-          const cOverdue = catOrders.filter(o => o.isOverdue).length;
-          const cPending = catOrders.filter(o => o.isPending).length;
-          const cUpcoming = catOrders.filter(o => o.isUpcoming).length;
-          const rate = cTotal > 0 ? Math.round((cPaid / cTotal) * 100) : 0;
+      catGrid.innerHTML = CATEGORIES.map(cat => {
+        const catOrders = enriched.filter(o => o.categoriesInOrder.includes(cat.name));
+        const totalUnits = catOrders.reduce((sum, o) => {
+          const qtyForCat = o.lineItems
+            .filter(li => li.category === cat.name)
+            .reduce((s, li) => s + (li.qty || 1), 0);
+          return sum + qtyForCat;
+        }, 0);
+        const cTotal = catOrders.length;
+        const cPaid = catOrders.filter(o => o.isPaid).length;
+        const cOverdue = catOrders.filter(o => o.isOverdue).length;
+        const cPending = catOrders.filter(o => o.isPending).length;
+        const cUpcoming = catOrders.filter(o => o.isUpcoming).length;
+        const rate = cTotal > 0 ? Math.round((cPaid / cTotal) * 100) : 0;
 
-          return `
-            <div class="rounded-xl border border-slate-200/90 bg-slate-50/40 p-4 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between gap-2 mb-3">
-                  <span class="px-2.5 py-1 rounded-lg ${cat.badgeBg} text-white text-xs font-bold tracking-tight">
-                    ${cat.name}
-                  </span>
-                  <span class="text-xs font-semibold text-slate-600">${cTotal} orders</span>
-                </div>
-                <div class="flex items-center justify-between text-xs mb-1.5">
-                  <span class="text-slate-500 font-medium">Pre-Paid Rate</span>
-                  <span class="font-bold text-emerald-700">${rate}% (${cPaid}/${cTotal})</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-slate-200 overflow-hidden mb-4">
-                  <div class="h-full bg-emerald-500 rounded-full transition-all duration-300" style="width: ${rate}%"></div>
-                </div>
+        return `
+          <div class="rounded-xl border border-slate-200/90 bg-slate-50/40 p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="px-2.5 py-1 rounded-lg ${cat.badgeBg} text-white text-xs font-bold tracking-tight">
+                  ${cat.name}
+                </span>
+                <span class="text-xs font-semibold text-slate-600">${cTotal} ord${totalUnits > cTotal ? ` (${totalUnits} qty)` : ''}</span>
               </div>
-              <div class="grid grid-cols-3 text-center pt-2.5 border-t border-slate-200/70">
-                <div>
-                  <div class="text-base font-extrabold ${cOverdue > 0 ? 'text-rose-600' : 'text-slate-400'}">${cOverdue}</div>
-                  <div class="text-[11px] text-slate-500">Overdue</div>
-                </div>
-                <div>
-                  <div class="text-base font-extrabold ${cPending > 0 ? 'text-amber-600' : 'text-slate-400'}">${cPending}</div>
-                  <div class="text-[11px] text-slate-500">Pending</div>
-                </div>
-                <div>
-                  <div class="text-base font-extrabold ${cUpcoming > 0 ? 'text-orange-600' : 'text-slate-400'}">${cUpcoming}</div>
-                  <div class="text-[11px] text-slate-500">&lt; 72h Due</div>
-                </div>
+              <div class="flex items-center justify-between text-xs mb-1.5">
+                <span class="text-slate-500 font-medium">Pre-Paid Rate</span>
+                <span class="font-bold text-emerald-700">${rate}% (${cPaid}/${cTotal})</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-slate-200 overflow-hidden mb-4">
+                <div class="h-full bg-emerald-500 rounded-full transition-all duration-300" style="width: ${rate}%"></div>
               </div>
             </div>
-          `;
-        }).join('');
-      }
+            <div class="grid grid-cols-3 text-center pt-2.5 border-t border-slate-200/70">
+              <div>
+                <div class="text-base font-extrabold ${cOverdue > 0 ? 'text-rose-600' : 'text-slate-400'}">${cOverdue}</div>
+                <div class="text-[11px] text-slate-500">Overdue</div>
+              </div>
+              <div>
+                <div class="text-base font-extrabold ${cPending > 0 ? 'text-amber-600' : 'text-slate-400'}">${cPending}</div>
+                <div class="text-[11px] text-slate-500">Pending</div>
+              </div>
+              <div>
+                <div class="text-base font-extrabold ${cUpcoming > 0 ? 'text-orange-600' : 'text-slate-400'}">${cUpcoming}</div>
+                <div class="text-[11px] text-slate-500">&lt; 72h Due</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
 
+      // Update autocomplete suggestions
       const dataList = document.getElementById('customerNameSuggestions');
-      if (dataList) {
-        dataList.innerHTML = Array.from(custMap.values())
-          .map(c => `<option value="${escapeHtml(c.name)}"></option>`)
-          .join('');
-      }
+      dataList.innerHTML = Array.from(custMap.values())
+        .map(c => `<option value="${escapeHtml(c.name)}"></option>`)
+        .join('');
 
       renderOrdersTable(enriched);
       renderMonthlyEarnings(enriched);
       renderCustomersTable(Array.from(custMap.values()));
     }
 
-    function getSpiceBadgeHtml(spice, note) {
+    function getSingleMemberBadgeHtml(m) {
+      const spice = m.spiceLevel || 'Medium';
       let color = 'bg-slate-100 text-slate-700 border-slate-200';
-      if (spice === 'Mild') color = 'bg-sky-50 text-sky-700 border-sky-200';
+      if (spice === 'Extra Mild') color = 'bg-teal-50 text-teal-800 border-teal-200';
+      else if (spice === 'Mild') color = 'bg-sky-50 text-sky-700 border-sky-200';
       else if (spice === 'Medium') color = 'bg-amber-50 text-amber-800 border-amber-200';
       else if (spice === 'Spicy') color = 'bg-orange-50 text-orange-700 border-orange-200';
       else if (spice === 'Extra Spicy') color = 'bg-rose-50 text-rose-700 border-rose-200';
 
-      return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md border text-[10px] font-bold ${color}">🌶️ ${escapeHtml(spice || 'Medium')}${note ? ` • ${escapeHtml(note)}` : ''}</span>`;
+      const who = m.member ? `<strong>${escapeHtml(m.member)}:</strong> ` : '';
+      const note = m.note ? ` • ${escapeHtml(m.note)}` : '';
+      return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md border text-[10px] font-semibold ${color}">🌶️ ${who}${escapeHtml(spice)}${note}</span>`;
+    }
+
+    function getHouseholdTasteBadgesHtml(members) {
+      const list = Array.isArray(members) && members.length > 0
+        ? members
+        : [{ member: '', spiceLevel: 'Medium', note: '' }];
+      return `<div class="flex flex-wrap gap-1 mt-1">${list.map(m => getSingleMemberBadgeHtml(m)).join('')}</div>`;
     }
 
     function renderOrdersTable(enriched) {
       const search = (document.getElementById('searchOrdersInput')?.value || '').toLowerCase().trim();
       const filtered = enriched.filter(o => {
-        if (currentFilter === 'mealbox' && o.category !== 'Meal Box') return false;
+        if (currentFilter === 'mealbox' && !o.categoriesInOrder.includes('Meal Box')) return false;
         if (currentFilter === 'paid' && !o.isPaid) return false;
         if (currentFilter === 'pending' && !o.isPending) return false;
+        if (currentFilter === 'cash' && !['Cash', 'Cash on Delivery (COD)'].includes(o.paymentMethod)) return false;
         if (currentFilter === 'overdue' && !o.isOverdue) return false;
         if (currentFilter === 'upcoming' && !o.isUpcoming) return false;
         if (currentFilter === 'future' && !o.isFuture) return false;
         if (search) {
-          const hay = `${o.customerName} ${o.items} ${o.spiceLevel} ${o.tasteNote}`.toLowerCase();
+          const membersText = formatMembersSummaryText(o.tasteMembers);
+          const hay = `${o.customerName} ${o.lineItemsSummary} ${o.dishesServed} ${o.paymentMethod} ${membersText}`.toLowerCase();
           if (!hay.includes(search)) return false;
         }
         return true;
       });
 
       const tbody = document.getElementById('ordersTableBody');
-      if (!tbody) return;
       if (filtered.length === 0) {
         tbody.innerHTML = `
           <tr>
-            <td colspan="11" class="py-10 text-center text-slate-400 text-sm">
+            <td colspan="10" class="py-10 text-center text-slate-400 text-sm">
               No orders in this view yet. Use the fast-entry bar above or click <strong>+ Add Order</strong>.
             </td>
           </tr>`;
@@ -991,34 +1384,47 @@
         else if (o.isFreeSample) statusBadge = 'bg-slate-100 text-slate-700 border-slate-200';
 
         const typeBadge = o.isReturning
-          ? '<span class="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 text-[11px] font-bold">Returning</span>'
-          : '<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[11px] font-semibold">New</span>';
+          ? '<span class="ml-1.5 px-1.5 py-0.2 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 text-[10px] font-bold">Returning</span>'
+          : '<span class="ml-1.5 px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-600 text-[10px] font-semibold">New</span>';
+
+        const lineItemsHtml = o.lineItems.map(li => `
+          <div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[11px] font-semibold mr-1 mb-1">
+            <span class="font-extrabold text-emerald-700">${li.qty}×</span>
+            <span>${escapeHtml(li.category)}</span>
+            ${li.flavor ? `<span class="text-slate-500">(${escapeHtml(li.flavor)})</span>` : ''}
+          </div>
+        `).join('');
 
         return `
           <tr class="hover:bg-slate-50/80 transition">
-            <td class="py-3 px-3 font-mono text-xs font-bold text-slate-700">${o.displayId}</td>
-            <td class="py-3 px-3 text-xs text-slate-600">${o.orderDate}</td>
+            <td class="py-3 px-3 font-mono text-xs font-bold text-slate-700">
+              <div>${o.displayId}</div>
+              <div class="text-[10px] font-normal text-slate-400">${o.orderDate}</div>
+            </td>
             <td class="py-3 px-3 text-xs font-medium text-slate-800">
               <div>${o.deliveryDate}</div>
               ${o.formattedTime ? `<div class="text-[11px] font-semibold text-blue-600">${o.formattedTime}</div>` : ''}
               ${o.isUpcoming ? '<span class="inline-block mt-0.5 px-1.5 py-0.2 rounded bg-orange-100 text-orange-700 text-[10px] font-bold">&lt;72h</span>' : (o.isFuture ? '<span class="inline-block mt-0.5 px-1.5 py-0.2 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold">Scheduled</span>' : '')}
             </td>
             <td class="py-3 px-3 font-semibold text-slate-900">
-              <div>${escapeHtml(o.customerName)}</div>
-              <div class="mt-1">${getSpiceBadgeHtml(o.spiceLevel, o.tasteNote)}</div>
+              <div class="flex items-center flex-wrap">
+                <span>${escapeHtml(o.customerName)}</span>
+                ${typeBadge}
+              </div>
+              ${getHouseholdTasteBadgesHtml(o.tasteMembers)}
               ${o.contact ? `<div class="text-[11px] font-normal text-slate-400 mt-0.5">${escapeHtml(o.contact)}</div>` : ''}
             </td>
-            <td class="py-3 px-3">${typeBadge}</td>
             <td class="py-3 px-3">
-              <div class="text-xs font-semibold text-slate-800">${escapeHtml(o.items || o.category)}</div>
-              <div class="text-[11px] text-slate-400">${escapeHtml(o.category)}</div>
+              <div class="flex flex-wrap">${lineItemsHtml}</div>
+              ${o.dishesServed ? `<div class="mt-1 text-[11px] text-emerald-900 bg-emerald-50/80 border border-emerald-200/70 rounded-lg px-2 py-1"><strong>🍽️ Dishes Served:</strong> ${escapeHtml(o.dishesServed)}</div>` : ''}
             </td>
+            <td class="py-3 px-3">${getPaymentMethodBadgeHtml(o.paymentMethod)}</td>
             <td class="py-3 px-3 text-right font-semibold text-slate-800">$${o.totalBilled.toFixed(2)}</td>
             <td class="py-3 px-3 text-right font-semibold text-emerald-700">$${o.amountPaid.toFixed(2)}</td>
             <td class="py-3 px-3 text-right font-bold ${o.balance > 0 ? 'text-rose-600' : 'text-slate-400'}">$${o.balance.toFixed(2)}</td>
             <td class="py-3 px-3">
               <span class="px-2.5 py-1 rounded-full border text-xs font-bold ${statusBadge}">
-                ${o.statusLabel}
+                ${escapeHtml(o.statusLabel)}
               </span>
             </td>
             <td class="py-3 px-3 text-right whitespace-nowrap space-x-1">
@@ -1047,13 +1453,16 @@
 
       const allMonths = Array.from(monthMap.values()).sort((a, b) => b.ym.localeCompare(a.ym));
       const selectEl = document.getElementById('earningsMonthFilter');
-      if (!selectEl) return;
       const currentVal = selectEl.value;
       selectEl.innerHTML = `<option value="all">All Months (${allMonths.length})</option>` +
         allMonths.map(m => `<option value="${m.ym}">${formatMonthLabel(m.ym)}</option>`).join('');
       if (allMonths.some(m => m.ym === currentVal)) {
         selectEl.value = currentVal;
       }
+
+      const filteredOrders = selectEl.value === 'all'
+        ? enriched
+        : enriched.filter(o => ((o.deliveryDate || o.orderDate || '').slice(0, 7) || 'Unknown') === selectEl.value);
 
       const visibleMonths = selectEl.value === 'all'
         ? allMonths
@@ -1065,34 +1474,45 @@
       const sumOrders = visibleMonths.reduce((s, m) => s + m.orders, 0);
       const avgOrder = sumOrders > 0 ? sumBilled / sumOrders : 0;
 
-      const cardsEl = document.getElementById('earningsSummaryCards');
-      if (cardsEl) {
-        cardsEl.innerHTML = `
-          <div class="rounded-xl bg-[#0f172a] text-white p-4">
-            <div class="text-xs text-slate-300 font-medium">Total Billed Revenue</div>
-            <div class="text-2xl font-extrabold mt-1">$${sumBilled.toFixed(2)}</div>
-            <div class="text-[11px] text-slate-400 mt-1">Across ${sumOrders} order(s)</div>
-          </div>
-          <div class="rounded-xl bg-emerald-50 border border-emerald-200 p-4">
-            <div class="text-xs text-emerald-900 font-semibold">Verified Cash Collected</div>
-            <div class="text-2xl font-extrabold text-emerald-700 mt-1">$${sumCollected.toFixed(2)}</div>
-            <div class="text-[11px] text-emerald-700/80 mt-1">100% e-Transfer cleared</div>
-          </div>
-          <div class="rounded-xl bg-amber-50 border border-amber-200 p-4">
-            <div class="text-xs text-amber-900 font-semibold">Pending Collection</div>
-            <div class="text-2xl font-extrabold text-amber-700 mt-1">$${sumPending.toFixed(2)}</div>
-            <div class="text-[11px] text-amber-700/80 mt-1">Awaiting e-Transfer</div>
-          </div>
-          <div class="rounded-xl bg-indigo-50 border border-indigo-200 p-4">
-            <div class="text-xs text-indigo-900 font-semibold">Average Ticket Size</div>
-            <div class="text-2xl font-extrabold text-indigo-700 mt-1">$${avgOrder.toFixed(2)}</div>
-            <div class="text-[11px] text-indigo-700/80 mt-1">Target: $45+ per order</div>
-          </div>
-        `;
-      }
+      document.getElementById('earningsSummaryCards').innerHTML = `
+        <div class="rounded-xl bg-[#0f172a] text-white p-4">
+          <div class="text-xs text-slate-300 font-medium">Total Billed Revenue</div>
+          <div class="text-2xl font-extrabold mt-1">$${sumBilled.toFixed(2)}</div>
+          <div class="text-[11px] text-slate-400 mt-1">Across ${sumOrders} order(s)</div>
+        </div>
+        <div class="rounded-xl bg-emerald-50 border border-emerald-200 p-4">
+          <div class="text-xs text-emerald-900 font-semibold">Verified Payments Collected</div>
+          <div class="text-2xl font-extrabold text-emerald-700 mt-1">$${sumCollected.toFixed(2)}</div>
+          <div class="text-[11px] text-emerald-700/80 mt-1">Cash, e-Transfer &amp; Card cleared</div>
+        </div>
+        <div class="rounded-xl bg-amber-50 border border-amber-200 p-4">
+          <div class="text-xs text-amber-900 font-semibold">Pending Collection</div>
+          <div class="text-2xl font-extrabold text-amber-700 mt-1">$${sumPending.toFixed(2)}</div>
+          <div class="text-[11px] text-amber-700/80 mt-1">Awaiting payment</div>
+        </div>
+        <div class="rounded-xl bg-indigo-50 border border-indigo-200 p-4">
+          <div class="text-xs text-indigo-900 font-semibold">Average Ticket Size</div>
+          <div class="text-2xl font-extrabold text-indigo-700 mt-1">$${avgOrder.toFixed(2)}</div>
+          <div class="text-[11px] text-indigo-700/80 mt-1">Target: $45+ per order</div>
+        </div>
+      `;
+
+      // Payment Method Breakdown
+      const pmTotals = new Map();
+      PAYMENT_METHODS.forEach(pm => pmTotals.set(pm, 0));
+      filteredOrders.forEach(o => {
+        const pm = o.paymentMethod || 'Interac e-Transfer';
+        pmTotals.set(pm, (pmTotals.get(pm) || 0) + o.amountPaid);
+      });
+      document.getElementById('paymentMethodBreakdown').innerHTML =
+        `<span class="text-xs font-extrabold text-slate-700 mr-1">Collected by Payment Method:</span>` +
+        Array.from(pmTotals.entries()).map(([pm, amt]) => `
+          <span class="px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-xs font-semibold text-slate-700">
+            ${escapeHtml(pm)}: <strong class="text-emerald-700">$${amt.toFixed(2)}</strong>
+          </span>
+        `).join('');
 
       const tbody = document.getElementById('earningsTableBody');
-      if (!tbody) return;
       if (visibleMonths.length === 0) {
         tbody.innerHTML = `
           <tr>
@@ -1138,12 +1558,11 @@
 
     function renderCustomersTable(custList) {
       const tbody = document.getElementById('customersTableBody');
-      if (!tbody) return;
       if (custList.length === 0) {
         tbody.innerHTML = `
           <tr>
             <td colspan="8" class="py-10 text-center text-slate-400 text-sm">
-              Customer profiles and saved taste preferences will appear automatically as soon as you enter your first order.
+              Customer profiles, household spice levels, and served dish history will appear automatically as soon as you enter your first order.
             </td>
           </tr>`;
         return;
@@ -1155,16 +1574,29 @@
           ? '<span class="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-bold">Returning VIP</span>'
           : '<span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold">First-Time</span>';
 
+        const dishesHtml = c.dishesHistory.length > 0
+          ? c.dishesHistory.slice().reverse().map(d => `
+              <div class="text-[11px] text-slate-700 mb-1">
+                <span class="font-mono text-[10px] text-slate-400">${escapeHtml(d.date)}:</span>
+                <span class="font-medium text-emerald-900">${escapeHtml(d.dishes)}</span>
+              </div>
+            `).join('')
+          : '<span class="text-xs text-slate-400 italic">No dishes logged yet</span>';
+
         return `
           <tr class="hover:bg-slate-50">
             <td class="py-3 px-3 font-bold text-slate-900">${escapeHtml(c.name)}</td>
             <td class="py-3 px-3">${tierBadge}</td>
-            <td class="py-3 px-3">${getSpiceBadgeHtml(c.spiceLevel, c.tasteNote)}</td>
+            <td class="py-3 px-3">${getHouseholdTasteBadgesHtml(c.tasteMembers)}</td>
+            <td class="py-3 px-3 max-w-xs">${dishesHtml}</td>
             <td class="py-3 px-3 text-center font-extrabold text-slate-800">${c.orders}</td>
-            <td class="py-3 px-3 text-xs text-slate-600">${c.lastDate}</td>
-            <td class="py-3 px-3 text-right font-semibold">$${c.billed.toFixed(2)}</td>
             <td class="py-3 px-3 text-right font-semibold text-emerald-700">$${c.paid.toFixed(2)}</td>
             <td class="py-3 px-3 text-right font-bold ${c.balance > 0 ? 'text-rose-600' : 'text-slate-400'}">$${c.balance.toFixed(2)}</td>
+            <td class="py-3 px-3 text-right">
+              <button onclick="openReorderModal('${escapeHtml(c.name).replace(/'/g, "\\'")}')" class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-bold transition">
+                + Re-Order
+              </button>
+            </td>
           </tr>
         `;
       }).join('');
@@ -1174,20 +1606,17 @@
     function switchTab(tab) {
       currentTab = tab;
       ['overview', 'orders', 'earnings', 'customers'].forEach(t => {
-        const viewEl = document.getElementById(`view-${t}`);
-        if (viewEl) viewEl.classList.toggle('hidden', t !== tab);
+        document.getElementById(`view-${t}`).classList.toggle('hidden', t !== tab);
         const btn = document.getElementById(`tab-${t}`);
-        if (btn) {
-          btn.className = t === tab
-            ? 'tab-btn-active px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-1.5'
-            : 'tab-btn-inactive px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-1.5';
-        }
+        btn.className = t === tab
+          ? 'tab-btn-active px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-1.5'
+          : 'tab-btn-inactive px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-1.5';
       });
     }
 
     function setOrderFilter(flt) {
       currentFilter = flt;
-      ['all', 'mealbox', 'paid', 'pending', 'overdue', 'upcoming', 'future'].forEach(f => {
+      ['all', 'mealbox', 'paid', 'pending', 'cash', 'overdue', 'upcoming', 'future'].forEach(f => {
         const el = document.getElementById(`flt-${f}`);
         if (!el) return;
         el.className = f === flt
@@ -1204,17 +1633,15 @@
 
     // Inline Fast Entry Helpers
     function syncInlineTotals() {
-      const food = parseFloat(document.getElementById('inFood')?.value) || 0;
-      const del = parseFloat(document.getElementById('inDelFee')?.value) || 0;
-      const disp = document.getElementById('inTotalDisplay');
-      if (disp) disp.textContent = `$${(food + del).toFixed(2)}`;
+      const food = parseFloat(document.getElementById('inFood').value) || 0;
+      const del = parseFloat(document.getElementById('inDelFee').value) || 0;
+      document.getElementById('inTotalDisplay').textContent = `$${(food + del).toFixed(2)}`;
     }
 
     function fillInlineFullPaid() {
-      const food = parseFloat(document.getElementById('inFood')?.value) || 0;
-      const del = parseFloat(document.getElementById('inDelFee')?.value) || 0;
-      const paidEl = document.getElementById('inPaid');
-      if (paidEl) paidEl.value = (food + del).toFixed(2);
+      const food = parseFloat(document.getElementById('inFood').value) || 0;
+      const del = parseFloat(document.getElementById('inDelFee').value) || 0;
+      document.getElementById('inPaid').value = (food + del).toFixed(2);
     }
 
     function handleInlineSubmit(e) {
@@ -1223,10 +1650,12 @@
       const food = parseFloat(document.getElementById('inFood').value) || 0;
       const delFee = parseFloat(document.getElementById('inDelFee').value) || 0;
       const paid = parseFloat(document.getElementById('inPaid').value) || 0;
-      const spiceLevel = document.getElementById('inSpice').value;
-      const tasteNote = document.getElementById('inTasteNote').value.trim();
+      const lineItems = readInlineItemRows();
+      const tasteMembers = readTasteMemberRows('in');
+      const dishesServed = document.getElementById('inDishesServed').value.trim();
+      const paymentMethod = document.getElementById('inPaymentMethod').value;
 
-      saveCustomerPref(name, spiceLevel, tasteNote);
+      saveCustomerPref(name, tasteMembers);
 
       orders.push({
         id: 'ord_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
@@ -1236,33 +1665,37 @@
         orderDate: document.getElementById('inOrderDate').value,
         deliveryDate: document.getElementById('inDeliveryDate').value,
         deliveryTime: document.getElementById('inDeliveryTime').value || '18:00',
-        category: document.getElementById('inCategory').value,
-        items: document.getElementById('inItems').value.trim() || 'Standard Order',
-        spiceLevel,
-        tasteNote,
+        paymentMethod,
+        category: lineItems[0]?.category || 'Meal Box',
+        items: formatLineItemsSummary(lineItems),
+        lineItems,
+        dishesServed,
+        tasteMembers,
+        spiceLevel: tasteMembers[0]?.spiceLevel || 'Medium',
+        tasteNote: tasteMembers[0]?.note || '',
         subtotal: food,
         deliveryFee: delFee,
         amountPaid: paid
       });
 
       document.getElementById('inName').value = '';
-      document.getElementById('inItems').value = '';
-      document.getElementById('inTasteNote').value = '';
+      document.getElementById('inDishesServed').value = '';
       document.getElementById('inFood').value = '';
       document.getElementById('inDelFee').value = '0';
       document.getElementById('inPaid').value = '';
+      renderInlineItemRows([{ category: 'Meal Box', qty: 1, flavor: '' }]);
+      renderTasteMemberRows('in', [{ member: '', spiceLevel: 'Medium', note: '' }]);
       syncInlineTotals();
       applySavedPreference('in');
 
       saveToStorage();
       renderAll();
-      showToast('Order & customer taste preference saved!');
+      showToast('Order, dishes served & taste profile saved!');
     }
 
     // Modal Add / Edit & Smart Payment Calculation
     function setModalTime(val) {
-      const el = document.getElementById('mDeliveryTime');
-      if (el) el.value = val;
+      document.getElementById('mDeliveryTime').value = val;
     }
 
     function setModalPayMode(mode) {
@@ -1275,18 +1708,17 @@
       Object.entries(modes).forEach(([k, btn]) => {
         if (!btn) return;
         btn.className = k === mode
-          ? 'px-2.5 py-1 rounded-md bg-white text-emerald-800 font-bold shadow-2xs'
-          : 'px-2.5 py-1 rounded-md text-slate-600';
+          ? 'flex-1 px-2 py-1 rounded-md bg-white text-emerald-800 font-bold shadow-2xs'
+          : 'flex-1 px-2 py-1 rounded-md text-slate-600';
       });
       recalcModalTotals();
     }
 
     function recalcModalTotals() {
-      const sub = parseFloat(document.getElementById('mSubtotal')?.value) || 0;
-      const del = parseFloat(document.getElementById('mDeliveryFee')?.value) || 0;
+      const sub = parseFloat(document.getElementById('mSubtotal').value) || 0;
+      const del = parseFloat(document.getElementById('mDeliveryFee').value) || 0;
       const total = sub + del;
       const paidInput = document.getElementById('mPaid');
-      if (!paidInput) return;
 
       if (modalPayMode === 'pending') {
         paidInput.value = '0';
@@ -1296,20 +1728,16 @@
 
       const paid = parseFloat(paidInput.value) || 0;
       const bal = Math.max(0, total - paid);
-      const billedEl = document.getElementById('mTotalBilledText');
-      const balEl = document.getElementById('mBalanceDueText');
-      if (billedEl) billedEl.textContent = `$${total.toFixed(2)}`;
-      if (balEl) {
-        balEl.textContent = `$${bal.toFixed(2)}`;
-        balEl.className = bal > 0 ? 'text-rose-600 font-bold' : 'text-emerald-700 font-bold';
-      }
+      document.getElementById('mTotalBilledText').textContent = `$${total.toFixed(2)}`;
+      document.getElementById('mBalanceDueText').textContent = `$${bal.toFixed(2)}`;
+      document.getElementById('mBalanceDueText').className = bal > 0 ? 'text-rose-600 font-bold' : 'text-emerald-700 font-bold';
     }
 
     function onManualModalPaidInput() {
-      const sub = parseFloat(document.getElementById('mSubtotal')?.value) || 0;
-      const del = parseFloat(document.getElementById('mDeliveryFee')?.value) || 0;
+      const sub = parseFloat(document.getElementById('mSubtotal').value) || 0;
+      const del = parseFloat(document.getElementById('mDeliveryFee').value) || 0;
       const total = sub + del;
-      const paid = parseFloat(document.getElementById('mPaid')?.value) || 0;
+      const paid = parseFloat(document.getElementById('mPaid').value) || 0;
 
       if (paid <= 0) setModalPayMode('pending');
       else if (total > 0 && Math.abs(paid - total) < 0.01) setModalPayMode('full');
@@ -1317,7 +1745,7 @@
         modalPayMode = 'partial';
         ['pending', 'full', 'partial'].forEach(k => {
           const btn = document.getElementById('payMode' + k.charAt(0).toUpperCase() + k.slice(1));
-          if (btn) btn.className = k === 'partial' ? 'px-2.5 py-1 rounded-md bg-white text-blue-800 font-bold shadow-2xs' : 'px-2.5 py-1 rounded-md text-slate-600';
+          if (btn) btn.className = k === 'partial' ? 'flex-1 px-2 py-1 rounded-md bg-white text-blue-800 font-bold shadow-2xs' : 'flex-1 px-2 py-1 rounded-md text-slate-600';
         });
         recalcModalTotals();
       }
@@ -1332,10 +1760,10 @@
       document.getElementById('mOrderDate').value = todayStr;
       document.getElementById('mDeliveryDate').value = todayStr;
       document.getElementById('mDeliveryTime').value = '18:00';
-      document.getElementById('mCategory').value = 'Meal Box';
-      document.getElementById('mItems').value = '';
-      document.getElementById('mSpice').value = 'Medium';
-      document.getElementById('mTasteNote').value = '';
+      document.getElementById('mPaymentMethod').value = 'Interac e-Transfer';
+      document.getElementById('mDishesServed').value = '';
+      renderModalItemRows([{ category: 'Meal Box', qty: 1, flavor: '' }]);
+      renderTasteMemberRows('m', [{ member: '', spiceLevel: 'Medium', note: '' }]);
       document.getElementById('mSubtotal').value = '';
       document.getElementById('mDeliveryFee').value = '0';
       document.getElementById('mSavedPrefBanner').classList.add('hidden');
@@ -1343,9 +1771,16 @@
       document.getElementById('orderModal').classList.remove('hidden');
     }
 
+    function openReorderModal(custName) {
+      openAddModal();
+      document.getElementById('mName').value = custName;
+      applySavedPreference('m');
+    }
+
     function openEditModal(id) {
-      const o = orders.find(x => x.id === id);
-      if (!o) return;
+      const raw = orders.find(x => x.id === id);
+      if (!raw) return;
+      const o = normalizeOrderRecord(raw);
       document.getElementById('modalTitle').textContent = 'Edit Order';
       document.getElementById('editOrderId').value = o.id;
       document.getElementById('mName').value = o.customerName;
@@ -1353,10 +1788,10 @@
       document.getElementById('mOrderDate').value = o.orderDate;
       document.getElementById('mDeliveryDate').value = o.deliveryDate;
       document.getElementById('mDeliveryTime').value = o.deliveryTime || '18:00';
-      document.getElementById('mCategory').value = o.category;
-      document.getElementById('mItems').value = o.items;
-      document.getElementById('mSpice').value = o.spiceLevel || 'Medium';
-      document.getElementById('mTasteNote').value = o.tasteNote || '';
+      document.getElementById('mPaymentMethod').value = o.paymentMethod || 'Interac e-Transfer';
+      document.getElementById('mDishesServed').value = o.dishesServed || '';
+      renderModalItemRows(o.lineItems);
+      renderTasteMemberRows('m', o.tasteMembers);
       document.getElementById('mSubtotal').value = o.subtotal;
       document.getElementById('mDeliveryFee').value = o.deliveryFee;
       document.getElementById('mPaid').value = o.amountPaid;
@@ -1373,10 +1808,12 @@
       e.preventDefault();
       const editId = document.getElementById('editOrderId').value;
       const name = document.getElementById('mName').value.trim();
-      const spiceLevel = document.getElementById('mSpice').value;
-      const tasteNote = document.getElementById('mTasteNote').value.trim();
+      const lineItems = readModalItemRows();
+      const tasteMembers = readTasteMemberRows('m');
+      const dishesServed = document.getElementById('mDishesServed').value.trim();
+      const paymentMethod = document.getElementById('mPaymentMethod').value;
 
-      saveCustomerPref(name, spiceLevel, tasteNote);
+      saveCustomerPref(name, tasteMembers);
 
       const payload = {
         customerName: name,
@@ -1384,10 +1821,14 @@
         orderDate: document.getElementById('mOrderDate').value,
         deliveryDate: document.getElementById('mDeliveryDate').value,
         deliveryTime: document.getElementById('mDeliveryTime').value || '18:00',
-        category: document.getElementById('mCategory').value,
-        items: document.getElementById('mItems').value.trim(),
-        spiceLevel,
-        tasteNote,
+        paymentMethod,
+        category: lineItems[0]?.category || 'Meal Box',
+        items: formatLineItemsSummary(lineItems),
+        lineItems,
+        dishesServed,
+        tasteMembers,
+        spiceLevel: tasteMembers[0]?.spiceLevel || 'Medium',
+        tasteNote: tasteMembers[0]?.note || '',
         subtotal: parseFloat(document.getElementById('mSubtotal').value) || 0,
         deliveryFee: parseFloat(document.getElementById('mDeliveryFee').value) || 0,
         amountPaid: parseFloat(document.getElementById('mPaid').value) || 0
@@ -1398,7 +1839,7 @@
         if (idx !== -1) {
           orders[idx] = { ...orders[idx], ...payload };
         }
-        showToast('Order & taste preference updated!');
+        showToast('Order, dishes served & taste profile updated!');
       } else {
         orders.push({
           id: 'ord_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
@@ -1448,6 +1889,7 @@
       }
     }
 
+    // Bulk Paste Modal
     function openBulkModal() {
       document.getElementById('bulkTextArea').value = '';
       document.getElementById('bulkModal').classList.remove('hidden');
@@ -1468,14 +1910,15 @@
         const parts = line.split(',').map(p => p.trim());
         const name = parts[0];
         if (!name || name.toLowerCase() === 'order id' || name.toLowerCase() === 'customer name') return;
-        const items = parts[1] || 'Order';
+        const itemsStr = parts[1] || 'Order';
         const total = parseFloat((parts[2] || '0').replace(/[^0-9.]/g, '')) || 0;
         const paid = parts[3] !== undefined ? (parseFloat(parts[3].replace(/[^0-9.]/g, '')) || 0) : total;
         const delDate = (parts[4] && /^\d{4}-\d{2}-\d{2}$/.test(parts[4])) ? parts[4] : todayStr;
-        const delTime = (parts[5] && /^\d{1,2}:\d{2}$/.test(parts[5])) ? parts[5].padStart(5, '0') : '18:00';
+        const paymentMethod = parts[5] || 'Interac e-Transfer';
+        const dishesServed = parts[6] || '';
 
         let cat = 'Meal Box';
-        const low = items.toLowerCase();
+        const low = itemsStr.toLowerCase();
         if (low.includes('meal') || low.includes('box') || low.includes('tiffin') || low.includes('thali')) cat = 'Meal Box';
         else if (low.includes('samosa') || low.includes('snack')) cat = 'Samosas & Snacks';
         else if (low.includes('lassi') || low.includes('shake')) cat = 'Shakes & Lassis';
@@ -1484,6 +1927,8 @@
 
         const normKey = name.toLowerCase();
         const savedPref = customerPrefs[normKey];
+        const members = normalizeMembersFromPref(savedPref) || [{ member: '', spiceLevel: 'Medium', note: '' }];
+        const lineItems = [{ category: cat, qty: 1, flavor: itemsStr }];
 
         orders.push({
           id: 'ord_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
@@ -1492,11 +1937,15 @@
           contact: '',
           orderDate: todayStr,
           deliveryDate: delDate,
-          deliveryTime: delTime,
+          deliveryTime: '18:00',
+          paymentMethod,
           category: cat,
-          items,
-          spiceLevel: savedPref ? savedPref.spiceLevel : 'Medium',
-          tasteNote: savedPref ? savedPref.tasteNote : '',
+          items: itemsStr,
+          lineItems,
+          dishesServed,
+          tasteMembers: members,
+          spiceLevel: members[0].spiceLevel,
+          tasteNote: members[0].note,
           subtotal: total,
           deliveryFee: 0,
           amountPaid: paid
@@ -1510,9 +1959,27 @@
       showToast(`Imported ${added} order(s)!`);
     }
 
+    // CSV Export
     function exportCSV() {
       const enriched = enrichOrders();
-      const headers = ['Order ID', 'Order Date', 'Delivery Date', 'Delivery Time', 'Customer Name', 'Customer Type', 'Taste / Spice', 'Taste Note', 'Menu Line', 'Items', 'Subtotal', 'Delivery Fee', 'Total Billed', 'Amount Paid', 'Balance Due', 'Payment Status'];
+      const headers = [
+        'Order ID',
+        'Order Date',
+        'Delivery Date',
+        'Delivery Time',
+        'Customer Name',
+        'Customer Type',
+        'Household Taste Profiles',
+        'Menu Categories & Quantities',
+        'Dishes Served',
+        'Payment Method',
+        'Subtotal',
+        'Delivery Fee',
+        'Total Billed',
+        'Amount Paid',
+        'Balance Due',
+        'Payment Status'
+      ];
       const rows = enriched.map(o => [
         o.displayId,
         o.orderDate,
@@ -1520,10 +1987,10 @@
         `"${o.formattedTime || ''}"`,
         `"${o.customerName.replace(/"/g, '""')}"`,
         o.isReturning ? 'Returning' : 'New',
-        `"${o.spiceLevel || 'Medium'}"`,
-        `"${(o.tasteNote || '').replace(/"/g, '""')}"`,
-        `"${o.category}"`,
-        `"${(o.items || '').replace(/"/g, '""')}"`,
+        `"${formatMembersSummaryText(o.tasteMembers).replace(/"/g, '""')}"`,
+        `"${o.lineItemsSummary.replace(/"/g, '""')}"`,
+        `"${(o.dishesServed || '').replace(/"/g, '""')}"`,
+        `"${o.paymentMethod || 'Interac e-Transfer'}"`,
         o.subtotal.toFixed(2),
         o.deliveryFee.toFixed(2),
         o.totalBilled.toFixed(2),
