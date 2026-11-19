@@ -147,7 +147,7 @@
       <!-- TOP 3 ALERT KPI CARDS -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <!-- Card 1: Payment Risk (Red Border) -->
-        <div onclick="filterAndJump('overdue')" class="cursor-pointer bg-white rounded-2xl p-5 card-shadow border border-slate-200/80 border-l-4 border-l-rose-500 hover:border-rose-300 transition flex items-center justify-between">
+        <div onclick="filterAndJump('overdue', 'Unpaid Overdue Orders')" class="cursor-pointer bg-white rounded-2xl p-5 card-shadow border border-slate-200/80 border-l-4 border-l-rose-500 hover:border-rose-300 transition flex items-center justify-between">
           <div>
             <div class="flex items-center gap-2 mb-2">
               <span class="px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 text-[11px] font-bold uppercase tracking-wider">Payment Risk</span>
@@ -160,7 +160,7 @@
         </div>
 
         <!-- Card 2: Pre-Payment Gate (Amber Border) -->
-        <div onclick="filterAndJump('pending')" class="cursor-pointer bg-white rounded-2xl p-5 card-shadow border border-slate-200/80 border-l-4 border-l-amber-400 hover:border-amber-300 transition flex items-center justify-between">
+        <div onclick="filterAndJump('pending', 'Pending Payment Orders')" class="cursor-pointer bg-white rounded-2xl p-5 card-shadow border border-slate-200/80 border-l-4 border-l-amber-400 hover:border-amber-300 transition flex items-center justify-between">
           <div>
             <div class="flex items-center gap-2 mb-2">
               <span class="px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 text-[11px] font-bold uppercase tracking-wider">Pre-Payment Gate</span>
@@ -173,7 +173,7 @@
         </div>
 
         <!-- Card 3: Delivery Window < 72h (Orange Border) -->
-        <div onclick="filterAndJump('upcoming')" class="cursor-pointer bg-white rounded-2xl p-5 card-shadow border border-slate-200/80 border-l-4 border-l-orange-500 hover:border-orange-300 transition flex items-center justify-between">
+        <div onclick="filterAndJump('upcoming', 'Upcoming Orders (< 72h)')" class="cursor-pointer bg-white rounded-2xl p-5 card-shadow border border-slate-200/80 border-l-4 border-l-orange-500 hover:border-orange-300 transition flex items-center justify-between">
           <div>
             <div class="flex items-center gap-2 mb-2">
               <span class="px-2 py-0.5 rounded-md bg-orange-50 text-orange-700 text-[11px] font-bold uppercase tracking-wider">Delivery Window</span>
@@ -198,7 +198,7 @@
             </p>
           </div>
 
-          <!-- Right 5 Metric Boxes -->
+          <!-- Right 5 Clickable Metric Boxes -->
           <div class="lg:col-span-8 grid grid-cols-2 sm:grid-cols-5 gap-3">
             <!-- Box 1: Total Orders (Dark Navy) -->
             <div onclick="filterAndJump('all', 'All Orders')" class="cursor-pointer rounded-xl bg-[#0f172a] text-white p-4 flex flex-col justify-between hover:bg-slate-800 transition">
@@ -253,39 +253,15 @@
             </p>
           </div>
 
-          <!-- Status Filter Pills -->
+          <!-- Clickable Status Filter Pills -->
           <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
             <button type="button" onclick="filterAndJump('overdue', 'Unpaid Overdue Orders')" id="pillOverdue" class="px-3 py-1 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 transition">Overdue (0)</button>
             <button type="button" onclick="filterAndJump('pending', 'Pending Payment Orders')" id="pillPending" class="px-3 py-1 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 transition">Pending Payment (0)</button>
             <button type="button" onclick="filterAndJump('upcoming', 'Upcoming Orders (< 72h)')" id="pillUpcoming" class="px-3 py-1 rounded-full bg-orange-50 hover:bg-orange-100 text-orange-700 border border-orange-200 transition">&lt; 72h Window (0)</button>
           </div>
         </div>
-      </div>
 
-      <!-- MENU LINE PAYMENT & PREP READINESS -->
-      <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-200/80 space-y-5">
-        <div class="flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <div class="flex flex-wrap items-center gap-2.5">
-              <h3 class="text-lg font-extrabold text-slate-900">Menu Line Payment &amp; Prep Readiness</h3>
-              <span id="returningRatePill" class="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 text-xs font-bold border border-indigo-200/80">
-                0 Returning Customers (0%)
-              </span>
-            </div>
-            <p class="text-xs text-slate-500 mt-1">
-              Pre-payment completion rate, overdue balances, and upcoming kitchen prep across all 5 menu categories (including multi-item orders).
-            </p>
-          </div>
-
-          <!-- Status Filter Pills -->
-          <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
-            <span id="pillOverdue" class="px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200">Overdue (0)</span>
-            <span id="pillPending" class="px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">Pending Payment (0)</span>
-            <span id="pillUpcoming" class="px-3 py-1 rounded-full bg-orange-50 text-orange-700 border border-orange-200">&lt; 72h Window (0)</span>
-          </div>
-        </div>
-
-        <!-- 5 Menu Category Cards -->
+        <!-- 5 Clickable Menu Category Cards -->
         <div id="categoryCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           <!-- Populated dynamically by JS -->
         </div>
@@ -477,7 +453,7 @@
     </section>
 
     <!-- ========================================================= -->
-    <!-- VIEW 3: MONTHLY EARNINGS & $5,000 TARGET TRACKER          -->
+    <!-- VIEW 3: MONTHLY EARNINGS & $500 TARGET TRACKER            -->
     <!-- ========================================================= -->
     <section id="view-earnings" class="hidden space-y-5">
       <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-200/80">
@@ -497,12 +473,12 @@
           </div>
         </div>
 
-        <!-- Monthly Summary KPI Cards -->
+        <!-- Clickable Monthly Summary KPI Cards -->
         <div id="earningsSummaryCards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
           <!-- Populated by JS -->
         </div>
 
-        <!-- Payment Method Breakdown Pills -->
+        <!-- Clickable Payment Method Breakdown Pills -->
         <div id="paymentMethodBreakdown" class="flex flex-wrap items-center gap-2.5 p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 mb-6">
           <!-- Populated by JS -->
         </div>
@@ -793,7 +769,22 @@
       { name: 'Shakes & Lassis', badgeBg: 'bg-amber-500' },
       { name: 'Catering & Party Trays', badgeBg: 'bg-purple-600' }
     ];
-// ... existing code ... -->
+    const SPICE_OPTIONS = [
+      'Extra Mild',
+      'Mild (Less Spicy)',
+      'Medium (Standard)',
+      'Spicy',
+      'Extra Spicy'
+    ];
+    const PAYMENT_METHODS = [
+      'Interac e-Transfer',
+      'Cash',
+      'Cash on Delivery (COD)',
+      'Credit Card',
+      'Debit Card',
+      'Other'
+    ];
+
     let orders = [];
     let customerPrefs = {};
     let currentTab = 'overview';
@@ -801,7 +792,514 @@
     let customDrilldown = null;
     let modalPayMode = 'pending';
     let activeHistoryCustomerKey = null;
-// ... existing code ... -->
+
+    // Date & Time Helpers
+    function getTodayISO() {
+      const now = new Date();
+      const offsetMs = now.getTimezoneOffset() * 60000;
+      return new Date(now.getTime() - offsetMs).toISOString().split('T')[0];
+    }
+
+    function parseDeliveryTimestamp(dateStr, timeStr) {
+      if (!dateStr) return null;
+      const cleanTime = (timeStr && /^\d{2}:\d{2}$/.test(timeStr)) ? timeStr : '18:00';
+      const [y, m, d] = dateStr.split('-').map(Number);
+      const [hh, mm] = cleanTime.split(':').map(Number);
+      if (!y || !m || !d) return null;
+      return new Date(y, m - 1, d, hh || 18, mm || 0, 0, 0).getTime();
+    }
+
+    function formatTime12h(timeStr) {
+      if (!timeStr || !/^\d{2}:\d{2}$/.test(timeStr)) return '';
+      const [hStr, mStr] = timeStr.split(':');
+      let h = parseInt(hStr, 10);
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      return `${h}:${mStr} ${ampm}`;
+    }
+
+    function formatMonthLabel(ym) {
+      if (!ym || !/^\d{4}-\d{2}$/.test(ym)) return ym || 'Unscheduled';
+      const [y, m] = ym.split('-').map(Number);
+      const d = new Date(y, m - 1, 1);
+      return d.toLocaleDateString('en-CA', { month: 'short', year: 'numeric' });
+    }
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function showToast(msg) {
+      const banner = document.getElementById('toastBanner');
+      document.getElementById('toastMessage').textContent = msg;
+      banner.classList.remove('hidden');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => banner.classList.add('hidden'), 2800);
+    }
+
+    // Normalize line items (supports legacy single-category orders seamlessly)
+    function normalizeLineItems(o) {
+      if (Array.isArray(o.lineItems) && o.lineItems.length > 0) {
+        return o.lineItems
+          .map(li => ({
+            category: CATEGORIES.some(c => c.name === li.category) ? li.category : 'Meal Box',
+            qty: Math.max(1, parseInt(li.qty, 10) || 1),
+            details: String(li.details || '').trim()
+          }))
+          .filter(li => li.qty > 0);
+      }
+      return [{
+        category: CATEGORIES.some(c => c.name === o.category) ? o.category : 'Meal Box',
+        qty: 1,
+        details: String(o.items || '').trim()
+      }];
+    }
+
+    function formatLineItemsSummary(lineItems) {
+      return lineItems.map(li => {
+        const desc = li.details ? ` (${li.details})` : '';
+        return `${li.qty}× ${li.category}${desc}`;
+      }).join(' + ');
+    }
+
+    // Multi-Member Taste Profile Helpers
+    function normalizeTasteMembers(o) {
+      if (Array.isArray(o.tasteMembers) && o.tasteMembers.length > 0) {
+        return o.tasteMembers
+          .map(m => ({
+            member: String(m.member || '').trim(),
+            spice: SPICE_OPTIONS.includes(m.spice) ? m.spice : 'Medium (Standard)',
+            note: String(m.note || '').trim()
+          }))
+          .filter(m => m.member || m.spice !== 'Medium (Standard)' || m.note);
+      }
+      if (o.spiceLevel || o.tasteNote) {
+        return [{
+          member: '',
+          spice: SPICE_OPTIONS.includes(o.spiceLevel) ? o.spiceLevel : 'Medium (Standard)',
+          note: String(o.tasteNote || '').trim()
+        }];
+      }
+      return [];
+    }
+
+    function getSpiceBadgeClasses(spice) {
+      if (spice === 'Extra Mild') return 'bg-teal-50 text-teal-800 border-teal-200';
+      if (spice && spice.startsWith('Mild')) return 'bg-sky-50 text-sky-800 border-sky-200';
+      if (spice === 'Extra Spicy') return 'bg-rose-50 text-rose-800 border-rose-200';
+      if (spice === 'Spicy') return 'bg-orange-50 text-orange-800 border-orange-200';
+      return 'bg-amber-50 text-amber-800 border-amber-200';
+    }
+
+    function renderTasteMembersBadges(members, compact = false) {
+      const list = Array.isArray(members) && members.length > 0
+        ? members
+        : [{ member: '', spice: 'Medium (Standard)', note: '' }];
+      return `<div class="flex flex-wrap gap-1 mt-1">` + list.map(m => {
+        const shortSpice = (m.spice || 'Medium').replace(' (Standard)', '').replace(' (Less Spicy)', '');
+        const cls = getSpiceBadgeClasses(m.spice);
+        const who = m.member ? `<strong class="font-bold">${escapeHtml(m.member)}:</strong> ` : '';
+        const extra = m.note ? ` <span class="opacity-80">• ${escapeHtml(m.note)}</span>` : '';
+        return `<span class="inline-flex items-center px-2 py-0.5 rounded-md border text-[11px] font-medium ${cls}">🌶️ ${who}${escapeHtml(shortSpice)}${compact ? '' : extra}</span>`;
+      }).join('') + `</div>`;
+    }
+
+    function formatMembersSummaryText(members) {
+      if (!Array.isArray(members) || members.length === 0) return 'Medium';
+      return members.map(m => {
+        const s = (m.spice || 'Medium').replace(' (Standard)', '').replace(' (Less Spicy)', '');
+        return `${m.member ? m.member + ': ' : ''}${s}${m.note ? ' (' + m.note + ')' : ''}`;
+      }).join(' | ');
+    }
+
+    // Multi-Item Builder Row Renderer (for Modal 'm' and Fast Entry 'in')
+    function createItemRowHTML(prefix, data = {}) {
+      const cat = CATEGORIES.some(c => c.name === data.category) ? data.category : 'Meal Box';
+      const qty = Math.max(1, parseInt(data.qty, 10) || 1);
+      const details = escapeHtml(data.details || '');
+      const opts = CATEGORIES.map(c =>
+        `<option value="${escapeHtml(c.name)}" ${c.name === cat ? 'selected' : ''}>${escapeHtml(c.name)}</option>`
+      ).join('');
+      return `
+        <div class="${prefix}-item-row grid grid-cols-12 gap-1.5 items-center bg-white p-2 rounded-lg border border-slate-200">
+          <div class="col-span-5 sm:col-span-4">
+            <select class="${prefix}-item-cat w-full px-2 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold bg-white">
+              ${opts}
+            </select>
+          </div>
+          <div class="col-span-2">
+            <input type="number" min="1" step="1" value="${qty}" title="Quantity" placeholder="Qty" class="${prefix}-item-qty w-full px-2 py-1.5 rounded-lg border border-slate-300 text-xs font-bold text-center" />
+          </div>
+          <div class="col-span-4 sm:col-span-5">
+            <input type="text" value="${details}" placeholder="Flavors / details (e.g., Mango & Rose Shake)" class="${prefix}-item-details w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs" />
+          </div>
+          <div class="col-span-1 text-right">
+            <button type="button" onclick="removeItemRow(this, '${prefix}')" title="Remove item" class="w-6 h-6 rounded-md text-slate-400 hover:text-rose-600 hover:bg-rose-50 font-bold text-sm leading-none">&times;</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function setItemRows(prefix, itemsList) {
+      const container = document.getElementById(`${prefix}ItemRowsContainer`);
+      if (!container) return;
+      const rows = Array.isArray(itemsList) && itemsList.length > 0
+        ? itemsList
+        : [{ category: 'Meal Box', qty: 1, details: '' }];
+      container.innerHTML = rows.map(r => createItemRowHTML(prefix, r)).join('');
+    }
+
+    function addModalItemRow(data = {}) {
+      const container = document.getElementById('mItemRowsContainer');
+      container.insertAdjacentHTML('beforeend', createItemRowHTML('m', data));
+    }
+
+    function addInlineItemRow(data = {}) {
+      const container = document.getElementById('inItemRowsContainer');
+      container.insertAdjacentHTML('beforeend', createItemRowHTML('in', data));
+    }
+
+    function removeItemRow(btn, prefix) {
+      const container = document.getElementById(`${prefix}ItemRowsContainer`);
+      const row = btn.closest(`.${prefix}-item-row`);
+      if (container.children.length <= 1) {
+        row.querySelector(`.${prefix}-item-cat`).value = 'Meal Box';
+        row.querySelector(`.${prefix}-item-qty`).value = '1';
+        row.querySelector(`.${prefix}-item-details`).value = '';
+        return;
+      }
+      row.remove();
+    }
+
+    function collectItemRows(prefix) {
+      const container = document.getElementById(`${prefix}ItemRowsContainer`);
+      if (!container) return [{ category: 'Meal Box', qty: 1, details: '' }];
+      const rows = Array.from(container.querySelectorAll(`.${prefix}-item-row`));
+      const collected = rows.map(row => ({
+        category: row.querySelector(`.${prefix}-item-cat`).value,
+        qty: Math.max(1, parseInt(row.querySelector(`.${prefix}-item-qty`).value, 10) || 1),
+        details: row.querySelector(`.${prefix}-item-details`).value.trim()
+      }));
+      return collected.length > 0 ? collected : [{ category: 'Meal Box', qty: 1, details: '' }];
+    }
+
+    // Dynamic Taste Member Row Renderer
+    function createTasteMemberRowHTML(prefix, data = {}) {
+      const memberVal = escapeHtml(data.member || '');
+      const spiceVal = SPICE_OPTIONS.includes(data.spice) ? data.spice : 'Medium (Standard)';
+      const noteVal = escapeHtml(data.note || '');
+      const optionsHTML = SPICE_OPTIONS.map(opt =>
+        `<option value="${escapeHtml(opt)}" ${opt === spiceVal ? 'selected' : ''}>${escapeHtml(opt)}</option>`
+      ).join('');
+      return `
+        <div class="${prefix}-taste-row grid grid-cols-12 gap-1.5 items-center bg-white p-1.5 rounded-lg border border-orange-200/80">
+          <div class="col-span-4">
+            <input type="text" value="${memberVal}" placeholder="Member (e.g., Perry)" class="${prefix}-tm-name w-full px-2 py-1.5 rounded-lg border border-slate-300 text-xs" />
+          </div>
+          <div class="col-span-4">
+            <select class="${prefix}-tm-spice w-full px-2 py-1.5 rounded-lg border border-slate-300 text-xs bg-white">
+              ${optionsHTML}
+            </select>
+          </div>
+          <div class="col-span-3">
+            <input type="text" value="${noteVal}" placeholder="Note (e.g., No onion)" class="${prefix}-tm-note w-full px-2 py-1.5 rounded-lg border border-slate-300 text-xs" />
+          </div>
+          <div class="col-span-1 text-right">
+            <button type="button" onclick="removeTasteMemberRow(this, '${prefix}')" title="Remove member" class="w-6 h-6 rounded-md text-slate-400 hover:text-rose-600 hover:bg-rose-50 font-bold text-sm leading-none">&times;</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function setTasteMemberRows(prefix, membersList) {
+      const container = document.getElementById(`${prefix}TasteMembersContainer`);
+      if (!container) return;
+      const rows = Array.isArray(membersList) && membersList.length > 0
+        ? membersList
+        : [{ member: '', spice: 'Medium (Standard)', note: '' }];
+      container.innerHTML = rows.map(m => createTasteMemberRowHTML(prefix, m)).join('');
+    }
+
+    function addTasteMemberRow(prefix, data = {}) {
+      const container = document.getElementById(`${prefix}TasteMembersContainer`);
+      if (!container) return;
+      container.insertAdjacentHTML('beforeend', createTasteMemberRowHTML(prefix, data));
+    }
+
+    function removeTasteMemberRow(btn, prefix) {
+      const container = document.getElementById(`${prefix}TasteMembersContainer`);
+      const row = btn.closest(`.${prefix}-taste-row`);
+      if (container.children.length <= 1) {
+        row.querySelector(`.${prefix}-tm-name`).value = '';
+        row.querySelector(`.${prefix}-tm-spice`).value = 'Medium (Standard)';
+        row.querySelector(`.${prefix}-tm-note`).value = '';
+        return;
+      }
+      row.remove();
+    }
+
+    function collectTasteMemberRows(prefix) {
+      const container = document.getElementById(`${prefix}TasteMembersContainer`);
+      if (!container) return [];
+      const rows = Array.from(container.querySelectorAll(`.${prefix}-taste-row`));
+      return rows.map(row => ({
+        member: row.querySelector(`.${prefix}-tm-name`).value.trim(),
+        spice: row.querySelector(`.${prefix}-tm-spice`).value,
+        note: row.querySelector(`.${prefix}-tm-note`).value.trim()
+      })).filter(m => m.member || m.spice !== 'Medium (Standard)' || m.note);
+    }
+
+    function appendModalDish(dishName) {
+      const input = document.getElementById('mDishesServed');
+      const cur = input.value.trim();
+      if (!cur) {
+        input.value = dishName;
+      } else if (!cur.toLowerCase().includes(dishName.toLowerCase())) {
+        input.value = `${cur}, ${dishName}`;
+      }
+    }
+
+    // Load & Save from LocalStorage (with automatic migration from prior versions)
+    function loadState() {
+      try {
+        let raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          for (const oldKey of LEGACY_STORAGE_KEYS) {
+            const legacyRaw = localStorage.getItem(oldKey);
+            if (legacyRaw) {
+              raw = legacyRaw;
+              break;
+            }
+          }
+        }
+        orders = raw ? JSON.parse(raw) : [];
+        if (!Array.isArray(orders)) orders = [];
+        orders = orders.map(o => ({
+          ...o,
+          paymentMethod: o.paymentMethod || 'Interac e-Transfer',
+          dishesServed: String(o.dishesServed || '').trim(),
+          lineItems: normalizeLineItems(o),
+          tasteMembers: normalizeTasteMembers(o)
+        }));
+      } catch (e) {
+        orders = [];
+      }
+
+      try {
+        const rawPrefs = localStorage.getItem(PREFS_STORAGE_KEY);
+        customerPrefs = rawPrefs ? JSON.parse(rawPrefs) : {};
+        if (!customerPrefs || typeof customerPrefs !== 'object') customerPrefs = {};
+      } catch (e) {
+        customerPrefs = {};
+      }
+
+      orders.forEach(o => {
+        const key = (o.customerName || '').trim().toLowerCase();
+        if (key && !customerPrefs[key] && o.tasteMembers.length > 0) {
+          customerPrefs[key] = { tasteMembers: o.tasteMembers };
+        }
+      });
+
+      const today = getTodayISO();
+      document.getElementById('inOrderDate').value = today;
+      document.getElementById('inDeliveryDate').value = today;
+      setItemRows('in', [{ category: 'Meal Box', qty: 1, details: '' }]);
+      setTasteMemberRows('in', [{ member: '', spice: 'Medium (Standard)', note: '' }]);
+      updateSyncTimestamp();
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
+        localStorage.setItem(PREFS_STORAGE_KEY, JSON.stringify(customerPrefs));
+        updateSyncTimestamp();
+      } catch (e) {
+        showToast('Storage warning: could not save to browser.');
+      }
+    }
+
+    function updateSyncTimestamp() {
+      const now = new Date();
+      document.getElementById('lastSyncedTime').textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function rememberCustomerPreference(name, tasteMembers) {
+      const key = (name || '').trim().toLowerCase();
+      if (!key) return;
+      customerPrefs[key] = {
+        tasteMembers: Array.isArray(tasteMembers) ? tasteMembers : []
+      };
+    }
+
+    function applySavedPreference(prefix) {
+      const nameInput = document.getElementById(`${prefix}Name`);
+      if (!nameInput) return;
+      const key = nameInput.value.trim().toLowerCase();
+      const saved = customerPrefs[key];
+      const banner = document.getElementById('mSavedPrefBanner');
+
+      if (saved && Array.isArray(saved.tasteMembers) && saved.tasteMembers.length > 0) {
+        setTasteMemberRows(prefix, saved.tasteMembers);
+        if (prefix === 'm' && banner) banner.classList.remove('hidden');
+      } else if (prefix === 'm' && banner) {
+        banner.classList.add('hidden');
+      }
+    }
+
+    function generateOrderId() {
+      const maxNum = orders.reduce((max, o) => {
+        const m = String(o.id || '').match(/(\d+)/);
+        return m ? Math.max(max, parseInt(m[1], 10)) : max;
+      }, 100);
+      return `GS-${maxNum + 1}`;
+    }
+
+    // Core Enrichment & 72-Hour Delivery Window Computation
+    function getEnrichedOrders() {
+      const nowMs = Date.now();
+      const next72hMs = nowMs + (72 * 60 * 60 * 1000);
+      const todayStr = getTodayISO();
+
+      const customerCounts = {};
+      orders.forEach(o => {
+        const key = (o.customerName || '').trim().toLowerCase();
+        if (key) customerCounts[key] = (customerCounts[key] || 0) + 1;
+      });
+
+      return orders.map(o => {
+        const food = parseFloat(o.foodSubtotal) || 0;
+        const del = parseFloat(o.deliveryFee) || 0;
+        const total = parseFloat((food + del).toFixed(2));
+        const paid = parseFloat(o.amountPaid) || 0;
+        const balance = Math.max(0, parseFloat((total - paid).toFixed(2)));
+        const isPaid = total > 0 ? balance <= 0.009 : paid > 0;
+
+        const delTs = parseDeliveryTimestamp(o.deliveryDate, o.deliveryTime);
+        const isPastDelivery = delTs !== null ? delTs < nowMs : (o.deliveryDate && o.deliveryDate < todayStr);
+        const isOverdue = !isPaid && isPastDelivery;
+        const isPending = !isPaid;
+        const isUpcoming = delTs !== null && delTs >= nowMs && delTs <= next72hMs;
+        const isFuture = delTs !== null && delTs >= nowMs;
+
+        const custKey = (o.customerName || '').trim().toLowerCase();
+        const isReturning = (customerCounts[custKey] || 0) > 1;
+        const lineItems = normalizeLineItems(o);
+        const categoriesInOrder = [...new Set(lineItems.map(li => li.category))];
+        const tasteMembers = normalizeTasteMembers(o);
+
+        return {
+          ...o,
+          paymentMethod: o.paymentMethod || 'Interac e-Transfer',
+          dishesServed: String(o.dishesServed || '').trim(),
+          lineItems,
+          categoriesInOrder,
+          lineItemsSummary: formatLineItemsSummary(lineItems),
+          foodSubtotal: food,
+          deliveryFee: del,
+          totalBilled: total,
+          amountPaid: paid,
+          balance,
+          isPaid,
+          isOverdue,
+          isPending,
+          isUpcoming,
+          isFuture,
+          isReturning,
+          tasteMembers,
+          deliveryTimestamp: delTs || 0
+        };
+      });
+    }
+
+    // Master Render Function
+    function renderAll() {
+      const enriched = getEnrichedOrders();
+      const totalOrders = enriched.length;
+      const totalBilled = enriched.reduce((s, o) => s + o.totalBilled, 0);
+      const totalCollected = enriched.reduce((s, o) => s + o.amountPaid, 0);
+      const totalPendingAmt = enriched.reduce((s, o) => s + o.balance, 0);
+
+      const overdueCount = enriched.filter(o => o.isOverdue).length;
+      const pendingCount = enriched.filter(o => o.isPending).length;
+      const paidCount = enriched.filter(o => o.isPaid).length;
+      const upcomingCount = enriched.filter(o => o.isUpcoming).length;
+      const futureCount = enriched.filter(o => o.isFuture).length;
+
+      // Customer Aggregation (with Dishes Served History & Complete Order Array)
+      const custMap = new Map();
+      enriched.forEach(o => {
+        const key = (o.customerName || 'Unknown').trim().toLowerCase();
+        if (!custMap.has(key)) {
+          custMap.set(key, {
+            key,
+            name: o.customerName.trim(),
+            contact: o.contact || '',
+            ordersCount: 0,
+            totalBilled: 0,
+            totalPaid: 0,
+            balance: 0,
+            tasteMembers: customerPrefs[key]?.tasteMembers || o.tasteMembers || [],
+            dishesHistory: [],
+            customerOrders: []
+          });
+        }
+        const entry = custMap.get(key);
+        entry.ordersCount += 1;
+        entry.totalBilled += o.totalBilled;
+        entry.totalPaid += o.amountPaid;
+        entry.balance += o.balance;
+        entry.customerOrders.push(o);
+        if (o.contact) entry.contact = o.contact;
+        if (o.tasteMembers && o.tasteMembers.length > 0) {
+          entry.tasteMembers = o.tasteMembers;
+        }
+        if (o.dishesServed) {
+          entry.dishesHistory.push({
+            date: o.deliveryDate || o.orderDate || '',
+            dishes: o.dishesServed
+          });
+        }
+      });
+
+      const custList = Array.from(custMap.values());
+      const uniqueCustomersCount = custList.length;
+      const returningCustCount = custList.filter(c => c.ordersCount > 1).length;
+      const returningPct = uniqueCustomersCount > 0 ? Math.round((returningCustCount / uniqueCustomersCount) * 100) : 0;
+
+      // Update Datalist for Customer Name Auto-Complete
+      const datalist = document.getElementById('customerNameSuggestions');
+      if (datalist) {
+        datalist.innerHTML = custList.map(c => `<option value="${escapeHtml(c.name)}"></option>`).join('');
+      }
+
+      // Header & Badges
+      document.getElementById('headerCounterPill').textContent = `${totalOrders} Orders • ${uniqueCustomersCount} Customers`;
+      document.getElementById('orderTabBadge').textContent = totalOrders;
+      document.getElementById('earningsTabBadge').textContent = `$${totalCollected.toFixed(0)}`;
+      document.getElementById('custTabBadge').textContent = uniqueCustomersCount;
+
+      // Top 3 Alert Cards
+      document.getElementById('kpiOverdueCount').textContent = overdueCount;
+      document.getElementById('kpiPendingCount').textContent = pendingCount;
+      document.getElementById('kpiUpcomingCount').textContent = upcomingCount;
+      document.getElementById('kpiUpcomingSub').textContent = futureCount > upcomingCount
+        ? `Next 72h (${futureCount} total future scheduled) →`
+        : 'Scheduled within the next 3 days →';
+
+      // Executive Summary 5 Metric Boxes
+      document.getElementById('boxTotalOrders').textContent = totalOrders;
+      document.getElementById('boxTotalBilledSub').textContent = `$${totalBilled.toFixed(2)} billed`;
+      document.getElementById('boxPendingOrders').textContent = pendingCount;
+      document.getElementById('boxPendingAmountSub').textContent = `$${totalPendingAmt.toFixed(2)} awaiting`;
+      document.getElementById('boxPaidOrders').textContent = paidCount;
+      document.getElementById('boxPaidAmountSub').textContent = `$${totalCollected.toFixed(2)} verified`;
+      document.getElementById('boxUpcomingOrders').textContent = upcomingCount;
+      document.getElementById('boxFutureSub').textContent = `${futureCount} total future scheduled`;
+
       const goalPct = Math.min(100, Math.round((totalCollected / MONTHLY_GOAL) * 100));
       const remainingGoal = Math.max(0, MONTHLY_GOAL - totalCollected);
       document.getElementById('boxGoalPercent').textContent = `${goalPct}%`;
@@ -818,7 +1316,7 @@
         emptyHero.classList.toggle('hidden', totalOrders > 0);
       }
 
-      // Render 5 Category Progress Cards (counts every order that includes that category, all clickable)
+      // Render 5 Clickable Category Progress Cards
       const catGrid = document.getElementById('categoryCardsGrid');
       catGrid.innerHTML = CATEGORIES.map(cat => {
         const catOrders = enriched.filter(o => o.categoriesInOrder.includes(cat.name));
@@ -874,7 +1372,12 @@
           </div>
         `;
       }).join('');
-// ... existing code ... -->
+
+      renderOrdersTable(enriched);
+      renderMonthlyEarnings(enriched);
+      renderCustomersTable(custList);
+    }
+
     function matchesCustomDrilldown(o, spec) {
       if (!spec) return true;
       if (spec.month && spec.month !== 'all') {
@@ -901,6 +1404,8 @@
         } else {
           if (currentFilter === 'mealbox' && !o.categoriesInOrder.includes('Meal Box')) return false;
           if (currentFilter === 'paid' && !o.isPaid) return false;
+          if (currentFilter === 'collected' && o.amountPaid <= 0) return false;
+          if (currentFilter === 'balance_due' && o.balance <= 0.009) return false;
           if (currentFilter === 'pending' && !o.isPending) return false;
           if (currentFilter === 'cash' && !['Cash', 'Cash on Delivery (COD)'].includes(o.paymentMethod)) return false;
           if (currentFilter === 'overdue' && !o.isOverdue) return false;
@@ -945,7 +1450,112 @@
           </tr>`;
         return;
       }
-// ... existing code ... -->
+
+      const sorted = [...filtered].sort((a, b) => (b.deliveryTimestamp || 0) - (a.deliveryTimestamp || 0));
+
+      tbody.innerHTML = sorted.map(o => {
+        const statusBadge = o.isPaid
+          ? `<span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">Paid • Prep Ready</span>`
+          : o.isOverdue
+            ? `<span class="px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold">Overdue Balance</span>`
+            : `<span class="px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-bold">Pending Payment</span>`;
+
+        const windowBadge = o.isUpcoming
+          ? `<span class="ml-1 px-1.5 py-0.5 rounded bg-orange-100 text-orange-800 text-[10px] font-bold">⚡ &lt;72h</span>`
+          : '';
+
+        const timeLabel = formatTime12h(o.deliveryTime);
+
+        const lineBadgesHTML = o.lineItems.map(li => {
+          const catObj = CATEGORIES.find(c => c.name === li.category);
+          const bg = catObj ? catObj.badgeBg : 'bg-slate-600';
+          return `
+            <div class="flex flex-wrap items-center gap-1.5">
+              <span class="px-2 py-0.5 rounded ${bg} text-white text-[11px] font-bold">${li.qty}× ${escapeHtml(li.category)}</span>
+              ${li.details ? `<span class="text-xs font-semibold text-slate-700">${escapeHtml(li.details)}</span>` : ''}
+            </div>
+          `;
+        }).join('');
+
+        const dishesHTML = o.dishesServed
+          ? `<div class="mt-1.5 px-2 py-1 rounded-lg bg-emerald-50/80 border border-emerald-200/80 text-[11px] text-emerald-950">
+               <strong class="font-bold text-emerald-800">Dishes Served:</strong> ${escapeHtml(o.dishesServed)}
+             </div>`
+          : '';
+
+        const pmBadge = ['Cash', 'Cash on Delivery (COD)'].includes(o.paymentMethod)
+          ? `<span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 text-[11px] font-bold">💵 ${escapeHtml(o.paymentMethod)}</span>`
+          : `<span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200 text-[11px] font-semibold">${escapeHtml(o.paymentMethod)}</span>`;
+
+        return `
+          <tr class="hover:bg-slate-50/80 transition align-top">
+            <td class="py-3.5 px-3 font-mono text-xs font-bold text-slate-600">${escapeHtml(o.id)}</td>
+            <td class="py-3.5 px-3 text-xs">
+              <div class="font-bold text-slate-900">${escapeHtml(o.deliveryDate || '—')}${windowBadge}</div>
+              ${timeLabel ? `<div class="text-slate-600 font-medium">at ${timeLabel}</div>` : ''}
+              <div class="text-[11px] text-slate-400">Ordered: ${escapeHtml(o.orderDate || '—')}</div>
+            </td>
+            <td class="py-3.5 px-3">
+              <div class="font-bold text-slate-900 flex items-center gap-1.5 flex-wrap">
+                <button type="button" onclick="openCustomerHistoryModal('${escapeHtml(o.customerName).replace(/'/g, "\\'")}')" class="hover:text-indigo-700 hover:underline text-left">
+                  ${escapeHtml(o.customerName)}
+                </button>
+                ${o.isReturning ? '<span class="px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 text-[10px] font-bold">VIP</span>' : ''}
+              </div>
+              ${o.contact ? `<div class="text-[11px] text-slate-400">${escapeHtml(o.contact)}</div>` : ''}
+              ${renderTasteMembersBadges(o.tasteMembers)}
+            </td>
+            <td class="py-3.5 px-3 space-y-1 max-w-xs">
+              ${lineBadgesHTML}
+              ${dishesHTML}
+            </td>
+            <td class="py-3.5 px-3">${pmBadge}</td>
+            <td class="py-3.5 px-3 text-right font-bold text-slate-900">$${o.totalBilled.toFixed(2)}</td>
+            <td class="py-3.5 px-3 text-right font-semibold text-emerald-700">$${o.amountPaid.toFixed(2)}</td>
+            <td class="py-3.5 px-3 text-right font-bold ${o.balance > 0 ? 'text-rose-600' : 'text-slate-400'}">$${o.balance.toFixed(2)}</td>
+            <td class="py-3.5 px-3">${statusBadge}</td>
+            <td class="py-3.5 px-3 text-right whitespace-nowrap space-x-1">
+              ${!o.isPaid ? `<button onclick="markOrderPaid('${o.id}')" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold">Mark Paid</button>` : ''}
+              <button onclick="openEditModal('${o.id}')" class="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold">Edit</button>
+              <button onclick="deleteOrder('${o.id}')" class="px-2 py-1 rounded-lg text-rose-600 hover:bg-rose-50 text-xs font-semibold">✕</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Monthly Earnings Renderer (Every metric clickable for instant drill-down)
+    function renderMonthlyEarnings(enriched) {
+      const monthMap = new Map();
+      enriched.forEach(o => {
+        const ym = (o.deliveryDate || o.orderDate || '').slice(0, 7) || 'Unknown';
+        if (!monthMap.has(ym)) {
+          monthMap.set(ym, { ym, orders: 0, billed: 0, collected: 0, pending: 0 });
+        }
+        const m = monthMap.get(ym);
+        m.orders += 1;
+        m.billed += o.totalBilled;
+        m.collected += o.amountPaid;
+        m.pending += o.balance;
+      });
+
+      const monthsSorted = Array.from(monthMap.values()).sort((a, b) => b.ym.localeCompare(a.ym));
+      const selectEl = document.getElementById('earningsMonthFilter');
+      const prevVal = selectEl.value;
+      selectEl.innerHTML = `<option value="all">All Months (${monthsSorted.length})</option>` +
+        monthsSorted.map(m => `<option value="${m.ym}">${formatMonthLabel(m.ym)}</option>`).join('');
+      if (Array.from(selectEl.options).some(opt => opt.value === prevVal)) {
+        selectEl.value = prevVal;
+      }
+
+      const visibleMonths = selectEl.value === 'all'
+        ? monthsSorted
+        : monthsSorted.filter(m => m.ym === selectEl.value);
+
+      const filteredOrders = selectEl.value === 'all'
+        ? enriched
+        : enriched.filter(o => ((o.deliveryDate || o.orderDate || '').slice(0, 7) || 'Unknown') === selectEl.value);
+
       const sumBilled = visibleMonths.reduce((s, m) => s + m.billed, 0);
       const sumCollected = visibleMonths.reduce((s, m) => s + m.collected, 0);
       const sumPending = visibleMonths.reduce((s, m) => s + m.pending, 0);
@@ -1063,50 +1673,6 @@
         `;
       }).join('');
     }
-    function setOrderFilter(flt, preserveDrill = false) {
-      currentFilter = flt;
-      if (!preserveDrill) {
-        drillDownState = {
-          month: 'all',
-          paymentMethod: 'all',
-          category: 'all',
-          sortBy: 'default',
-          customLabel: ''
-        };
-      }
-      ['all', 'mealbox', 'paid', 'collected', 'balance_due', 'pending', 'cash', 'overdue', 'upcoming', 'future'].forEach(f => {
-        const el = document.getElementById(`flt-${f}`);
-        if (!el) return;
-        el.className = f === flt
-          ? 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white'
-          : 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200';
-      });
-      renderAll();
-    }
-
-    function drillDownOrders(opts = {}) {
-      drillDownState = {
-        month: opts.month || 'all',
-        paymentMethod: opts.paymentMethod || 'all',
-        category: opts.category || 'all',
-        sortBy: opts.sortBy || 'default',
-        customLabel: opts.label || ''
-      };
-      const searchInput = document.getElementById('searchOrdersInput');
-      if (searchInput) searchInput.value = '';
-      switchTab('orders');
-      setOrderFilter(opts.status || 'all', true);
-    }
-
-    function resetDrillDownFilters() {
-      const searchInput = document.getElementById('searchOrdersInput');
-      if (searchInput) searchInput.value = '';
-      setOrderFilter('all', false);
-    }
-
-    function filterAndJump(flt) {
-      drillDownOrders({ status: flt });
-    }
 
     function renderCustomersTable(custList) {
       const tbody = document.getElementById('customersTableBody');
@@ -1114,53 +1680,51 @@
         tbody.innerHTML = `
           <tr>
             <td colspan="8" class="py-10 text-center text-slate-400 text-sm">
-              Customer profiles, household spice levels, and served dish history will appear automatically as soon as you enter your first order.
+              Your customer directory, family taste profiles &amp; dishes served history will build automatically as you log orders.
             </td>
           </tr>`;
         return;
       }
+      const sorted = [...custList].sort((a, b) => b.ordersCount - a.ordersCount);
+      tbody.innerHTML = sorted.map(c => {
+        const tier = c.ordersCount > 1
+          ? `<span class="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-bold">Returning VIP</span>`
+          : `<span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold">First-Time</span>`;
 
-      custList.sort((a, b) => b.orders - a.orders || b.paid - a.paid);
-      tbody.innerHTML = custList.map(c => {
-        const safeKey = escapeHtml(c.key).replace(/'/g, "\\'");
-        const tierBadge = c.orders >= 2
-          ? '<span class="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-bold">Returning VIP</span>'
-          : '<span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold">First-Time</span>';
+        const dishesListHTML = c.dishesHistory.length > 0
+          ? `<div class="space-y-1 max-w-xs">` + [...c.dishesHistory].reverse().map(d =>
+              `<div class="text-xs text-slate-700"><span class="font-mono text-[10px] text-slate-400">${escapeHtml(d.date)}:</span> <span class="font-medium text-emerald-900">${escapeHtml(d.dishes)}</span></div>`
+            ).join('') + `</div>`
+          : `<span class="text-xs text-slate-400 italic">No dishes logged yet</span>`;
 
-        const dishesHtml = c.dishesHistory.length > 0
-          ? c.dishesHistory.slice().reverse().map(d => `
-              <div class="text-[11px] text-slate-700 mb-1">
-                <span class="font-mono text-[10px] text-slate-400">${escapeHtml(d.date)}:</span>
-                <span class="font-medium text-emerald-900">${escapeHtml(d.dishes)}</span>
-              </div>
-            `).join('')
-          : '<span class="text-xs text-slate-400 italic">No dishes logged yet</span>';
+        const safeNameAttr = escapeHtml(c.name).replace(/'/g, "\\'");
 
         return `
-          <tr class="hover:bg-slate-50">
-            <td class="py-3 px-3 font-bold text-slate-900">
-              <button type="button" onclick="openCustomerHistoryModal('${safeKey}')" class="text-left hover:text-blue-700 hover:underline transition">
+          <tr class="hover:bg-slate-50 align-top">
+            <td class="py-3.5 px-3 font-bold text-slate-900">
+              <button type="button" onclick="openCustomerHistoryModal('${safeNameAttr}')" class="text-left font-bold text-slate-900 hover:text-indigo-700 hover:underline">
                 ${escapeHtml(c.name)}
               </button>
+              ${c.contact ? `<div class="text-[11px] font-normal text-slate-400">${escapeHtml(c.contact)}</div>` : ''}
             </td>
-            <td class="py-3 px-3">${tierBadge}</td>
-            <td class="py-3 px-3">${getHouseholdTasteBadgesHtml(c.tasteMembers)}</td>
-            <td class="py-3 px-3 max-w-xs">${dishesHtml}</td>
-            <td class="py-3 px-3 text-center">
+            <td class="py-3.5 px-3">${tier}</td>
+            <td class="py-3.5 px-3">${renderTasteMembersBadges(c.tasteMembers)}</td>
+            <td class="py-3.5 px-3">${dishesListHTML}</td>
+            <td class="py-3.5 px-3 text-center">
               <button
                 type="button"
-                onclick="openCustomerHistoryModal('${safeKey}')"
-                title="Click to view all ${c.orders} order(s), dates &amp; dishes served"
-                class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-indigo-50 hover:bg-indigo-600 text-indigo-700 hover:text-white border border-indigo-200 hover:border-indigo-600 text-xs font-extrabold transition shadow-2xs"
+                onclick="openCustomerHistoryModal('${safeNameAttr}')"
+                title="Click to view all ${c.ordersCount} order(s) & dates for ${escapeHtml(c.name)}"
+                class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-indigo-50 hover:bg-indigo-600 text-indigo-700 hover:text-white border border-indigo-200 font-extrabold text-xs transition shadow-2xs"
               >
-                <span>${c.orders}</span>
-                <span class="text-[10px] font-semibold">View ↗</span>
+                <span>${c.ordersCount}</span>
+                <span class="text-[10px] opacity-85">View ↗</span>
               </button>
             </td>
-            <td class="py-3 px-3 text-right font-semibold text-emerald-700">$${c.paid.toFixed(2)}</td>
-            <td class="py-3 px-3 text-right font-bold ${c.balance > 0 ? 'text-rose-600' : 'text-slate-400'}">$${c.balance.toFixed(2)}</td>
-            <td class="py-3 px-3 text-right">
-              <button onclick="openReorderModal('${escapeHtml(c.name).replace(/'/g, "\\'")}')" class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-bold transition">
+            <td class="py-3.5 px-3 text-right font-semibold text-emerald-700">$${c.totalPaid.toFixed(2)}</td>
+            <td class="py-3.5 px-3 text-right font-bold ${c.balance > 0 ? 'text-rose-600' : 'text-slate-400'}">$${c.balance.toFixed(2)}</td>
+            <td class="py-3.5 px-3 text-right">
+              <button onclick="quickReorderCustomer('${safeNameAttr}')" class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-bold transition">
                 + Re-Order
               </button>
             </td>
@@ -1169,126 +1733,107 @@
       }).join('');
     }
 
-    // =========================================================
-    // CUSTOMER FULL ORDER HISTORY MODAL (CLICKABLE VIP RECORD)
-    // =========================================================
-    function openCustomerHistoryModal(custKey) {
-      const normalizedKey = String(custKey || '').trim().toLowerCase();
-      activeHistoryCustomerKey = normalizedKey;
+    // Customer Full Order History Modal (Triggered by clicking Orders count or Customer Name)
+    function openCustomerHistoryModal(customerName) {
+      const enriched = getEnrichedOrders();
+      const key = (customerName || '').trim().toLowerCase();
+      activeHistoryCustomerKey = key;
 
-      const enriched = enrichOrders();
       const custOrders = enriched
-        .filter(o => o.customerName.trim().toLowerCase() === normalizedKey)
-        .sort((a, b) => (b.deliveryDate || b.orderDate).localeCompare(a.deliveryDate || a.orderDate) || b.seq - a.seq);
+        .filter(o => (o.customerName || '').trim().toLowerCase() === key)
+        .sort((a, b) => (b.deliveryTimestamp || 0) - (a.deliveryTimestamp || 0));
 
-      if (custOrders.length === 0) {
-        closeCustomerHistoryModal();
-        return;
-      }
+      if (custOrders.length === 0) return;
 
-      const displayName = custOrders[0].customerName.trim();
-      const pref = customerPrefs[normalizedKey];
-      const tasteMembers = normalizeMembersFromPref(pref) || custOrders[0].tasteMembers;
-
+      const displayName = custOrders[0].customerName;
+      const totalOrders = custOrders.length;
       const totalBilled = custOrders.reduce((s, o) => s + o.totalBilled, 0);
       const totalPaid = custOrders.reduce((s, o) => s + o.amountPaid, 0);
-      const totalBal = custOrders.reduce((s, o) => s + o.balance, 0);
+      const totalBalance = custOrders.reduce((s, o) => s + o.balance, 0);
+      const savedMembers = customerPrefs[key]?.tasteMembers || custOrders[0].tasteMembers || [];
 
       document.getElementById('chModalCustomerName').textContent = displayName;
-      const tierEl = document.getElementById('chModalTierBadge');
-      if (custOrders.length >= 2) {
-        tierEl.textContent = `Returning VIP (${custOrders.length} Orders)`;
-        tierEl.className = 'px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-bold';
-      } else {
-        tierEl.textContent = 'First-Time Customer (1 Order)';
-        tierEl.className = 'px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold';
-      }
-
-      document.getElementById('chModalTasteBadges').innerHTML = getHouseholdTasteBadgesHtml(tasteMembers);
+      document.getElementById('chModalTierBadge').textContent = totalOrders > 1 ? `Returning VIP • ${totalOrders} Orders` : 'First-Time Customer';
+      document.getElementById('chModalTasteBadges').innerHTML = renderTasteMembersBadges(savedMembers);
 
       document.getElementById('chModalStatsStrip').innerHTML = `
         <div class="rounded-xl bg-slate-900 text-white p-3">
           <div class="text-[11px] text-slate-300">Total Orders</div>
-          <div class="text-xl font-extrabold mt-0.5">${custOrders.length}</div>
+          <div class="text-xl font-extrabold mt-0.5">${totalOrders}</div>
         </div>
         <div class="rounded-xl bg-slate-50 border border-slate-200 p-3">
-          <div class="text-[11px] text-slate-500 font-semibold">Total Billed</div>
+          <div class="text-[11px] text-slate-500">Total Billed</div>
           <div class="text-xl font-extrabold text-slate-900 mt-0.5">$${totalBilled.toFixed(2)}</div>
         </div>
         <div class="rounded-xl bg-emerald-50 border border-emerald-200 p-3">
-          <div class="text-[11px] text-emerald-800 font-semibold">Total Paid</div>
+          <div class="text-[11px] text-emerald-800">Total Paid</div>
           <div class="text-xl font-extrabold text-emerald-700 mt-0.5">$${totalPaid.toFixed(2)}</div>
         </div>
-        <div class="rounded-xl ${totalBal > 0 ? 'bg-rose-50 border-rose-200' : 'bg-slate-50 border-slate-200'} border p-3">
-          <div class="text-[11px] ${totalBal > 0 ? 'text-rose-800' : 'text-slate-500'} font-semibold">Balance Due</div>
-          <div class="text-xl font-extrabold ${totalBal > 0 ? 'text-rose-600' : 'text-slate-400'} mt-0.5">$${totalBal.toFixed(2)}</div>
+        <div class="rounded-xl ${totalBalance > 0 ? 'bg-rose-50 border-rose-200' : 'bg-slate-50 border-slate-200'} border p-3">
+          <div class="text-[11px] ${totalBalance > 0 ? 'text-rose-800' : 'text-slate-500'}">Balance Due</div>
+          <div class="text-xl font-extrabold ${totalBalance > 0 ? 'text-rose-600' : 'text-slate-400'} mt-0.5">$${totalBalance.toFixed(2)}</div>
         </div>
       `;
 
       document.getElementById('chModalOrdersList').innerHTML = custOrders.map((o, idx) => {
-        let statusBadge = 'bg-amber-50 text-amber-800 border-amber-200';
-        if (o.isPaid) statusBadge = 'bg-emerald-50 text-emerald-700 border-emerald-200';
-        else if (o.isOverdue) statusBadge = 'bg-rose-50 text-rose-700 border-rose-200';
-        else if (o.isFreeSample) statusBadge = 'bg-slate-100 text-slate-700 border-slate-200';
+        const statusChip = o.isPaid
+          ? `<span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">Paid • Prep Ready</span>`
+          : o.isOverdue
+            ? `<span class="px-2.5 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold">Overdue Balance</span>`
+            : `<span class="px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-bold">Pending Payment</span>`;
 
-        const lineItemsHtml = o.lineItems.map(li => `
-          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-xs font-semibold">
-            <span class="font-extrabold text-emerald-700">${li.qty}×</span>
-            <span>${escapeHtml(li.category)}</span>
-            ${li.flavor ? `<span class="text-slate-500">(${escapeHtml(li.flavor)})</span>` : ''}
-          </span>
-        `).join(' ');
+        const itemsBadges = o.lineItems.map(li => {
+          const catObj = CATEGORIES.find(c => c.name === li.category);
+          const bg = catObj ? catObj.badgeBg : 'bg-slate-600';
+          return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded ${bg} text-white text-xs font-bold">${li.qty}× ${escapeHtml(li.category)}${li.details ? ` — ${escapeHtml(li.details)}` : ''}</span>`;
+        }).join(' ');
+
+        const timeLabel = formatTime12h(o.deliveryTime);
 
         return `
           <div class="rounded-xl border border-slate-200 bg-slate-50/50 p-4 space-y-2.5">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/70 pb-2">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/80 pb-2">
               <div class="flex flex-wrap items-center gap-2">
-                <span class="px-2 py-0.5 rounded bg-slate-900 text-white font-mono text-xs font-bold">${o.displayId}</span>
-                <span class="text-xs font-bold text-slate-800">Delivery: ${o.deliveryDate}${o.formattedTime ? ` at ${o.formattedTime}` : ''}</span>
-                <span class="text-[11px] text-slate-400">(Ordered: ${o.orderDate})</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 text-white font-mono text-xs font-bold">#${totalOrders - idx} • ${escapeHtml(o.id)}</span>
+                <span class="text-xs font-bold text-slate-900">Delivery: ${escapeHtml(o.deliveryDate || '—')}${timeLabel ? ` at ${timeLabel}` : ''}</span>
+                <span class="text-xs text-slate-400">(Ordered: ${escapeHtml(o.orderDate || '—')})</span>
               </div>
               <div class="flex items-center gap-2">
-                ${getPaymentMethodBadgeHtml(o.paymentMethod)}
-                <span class="px-2.5 py-0.5 rounded-full border text-[11px] font-bold ${statusBadge}">${escapeHtml(o.statusLabel)}</span>
+                ${statusChip}
               </div>
             </div>
 
             <div class="flex flex-wrap items-center gap-1.5">
-              ${lineItemsHtml}
+              ${itemsBadges}
             </div>
 
             ${o.dishesServed ? `
-              <div class="text-xs text-emerald-950 bg-emerald-50 border border-emerald-200/80 rounded-lg px-3 py-2">
-                <strong>🍽️ Dishes Served:</strong> ${escapeHtml(o.dishesServed)}
+              <div class="px-3 py-2 rounded-lg bg-emerald-50/90 border border-emerald-200 text-xs text-emerald-950">
+                <strong class="font-bold text-emerald-800">🍽️ Dishes Served:</strong> ${escapeHtml(o.dishesServed)}
               </div>
             ` : `
               <div class="text-xs text-slate-400 italic">No specific dishes recorded for this order.</div>
             `}
 
-            <div>
-              ${getHouseholdTasteBadgesHtml(o.tasteMembers)}
-            </div>
-
-            <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200/70 text-xs">
-              <div class="flex flex-wrap items-center gap-3">
-                <span>Subtotal: <strong>$${Number(o.subtotal || 0).toFixed(2)}</strong></span>
-                <span>Delivery: <strong>$${Number(o.deliveryFee || 0).toFixed(2)}</strong></span>
-                <span>Total: <strong class="text-slate-900">$${o.totalBilled.toFixed(2)}</strong></span>
+            <div class="flex flex-wrap items-center justify-between gap-2 pt-1 text-xs">
+              <div class="flex flex-wrap items-center gap-3 text-slate-600">
+                <span>Payment: <strong class="text-slate-800">${escapeHtml(o.paymentMethod)}</strong></span>
+                <span>Billed: <strong class="text-slate-900">$${o.totalBilled.toFixed(2)}</strong></span>
                 <span>Paid: <strong class="text-emerald-700">$${o.amountPaid.toFixed(2)}</strong></span>
-                ${o.balance > 0 ? `<span class="text-rose-600 font-bold">Balance Due: $${o.balance.toFixed(2)}</span>` : ''}
+                <span>Balance: <strong class="${o.balance > 0 ? 'text-rose-600' : 'text-slate-400'}">$${o.balance.toFixed(2)}</strong></span>
               </div>
               <div class="flex items-center gap-1.5">
-                ${!o.isPaid && !o.isFreeSample ? `<button type="button" onclick="markOrderPaid('${o.id}')" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold">Mark Paid</button>` : ''}
-                <button type="button" onclick="closeCustomerHistoryModal(); openEditModal('${o.id}');" class="px-2.5 py-1 rounded-lg bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold">Edit Order</button>
+                ${!o.isPaid ? `<button type="button" onclick="markOrderPaid('${o.id}')" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold">Mark Paid</button>` : ''}
+                <button type="button" onclick="closeCustomerHistoryModal(); openEditModal('${o.id}')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 text-xs font-semibold">Edit Order</button>
               </div>
             </div>
           </div>
         `;
       }).join('');
 
-      document.getElementById('chModalNewOrderBtn').onclick = function () {
+      document.getElementById('chModalNewOrderBtn').onclick = () => {
         closeCustomerHistoryModal();
-        openReorderModal(displayName);
+        quickReorderCustomer(displayName);
       };
 
       document.getElementById('customerHistoryModal').classList.remove('hidden');
@@ -1314,7 +1859,7 @@
     function setOrderFilter(flt) {
       customDrilldown = null;
       currentFilter = flt;
-      ['all', 'mealbox', 'paid', 'pending', 'cash', 'overdue', 'upcoming', 'future'].forEach(f => {
+      ['all', 'mealbox', 'paid', 'collected', 'balance_due', 'pending', 'cash', 'overdue', 'upcoming', 'future'].forEach(f => {
         const el = document.getElementById(`flt-${f}`);
         if (!el) return;
         el.className = f === flt
@@ -1336,7 +1881,7 @@
     function drillDownTo(spec, label) {
       customDrilldown = { ...spec, label };
       currentFilter = 'all';
-      ['all', 'mealbox', 'paid', 'pending', 'cash', 'overdue', 'upcoming', 'future'].forEach(f => {
+      ['all', 'mealbox', 'paid', 'collected', 'balance_due', 'pending', 'cash', 'overdue', 'upcoming', 'future'].forEach(f => {
         const el = document.getElementById(`flt-${f}`);
         if (!el) return;
         el.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200';
@@ -1352,177 +1897,158 @@
       setOrderFilter('all');
     }
 
-    function filterAndJump(flt) {
-      switchTab('orders');
-      setOrderFilter(flt);
-    }
-
     // Inline Fast Entry Helpers
     function syncInlineTotals() {
       const food = parseFloat(document.getElementById('inFood').value) || 0;
-      const del = parseFloat(document.getElementById('inDelFee').value) || 0;
-      document.getElementById('inTotalDisplay').textContent = `$${(food + del).toFixed(2)}`;
+      const fee = parseFloat(document.getElementById('inDelFee').value) || 0;
+      document.getElementById('inTotalDisplay').textContent = `$${(food + fee).toFixed(2)}`;
     }
 
     function fillInlineFullPaid() {
       const food = parseFloat(document.getElementById('inFood').value) || 0;
-      const del = parseFloat(document.getElementById('inDelFee').value) || 0;
-      document.getElementById('inPaid').value = (food + del).toFixed(2);
+      const fee = parseFloat(document.getElementById('inDelFee').value) || 0;
+      document.getElementById('inPaid').value = (food + fee).toFixed(2);
     }
 
     function handleInlineSubmit(e) {
       e.preventDefault();
       const name = document.getElementById('inName').value.trim();
-      const food = parseFloat(document.getElementById('inFood').value) || 0;
-      const delFee = parseFloat(document.getElementById('inDelFee').value) || 0;
-      const paid = parseFloat(document.getElementById('inPaid').value) || 0;
-      const lineItems = readInlineItemRows();
-      const tasteMembers = readTasteMemberRows('in');
+      if (!name) return;
+
+      const lineItems = collectItemRows('in');
+      const tasteMembers = collectTasteMemberRows('in');
       const dishesServed = document.getElementById('inDishesServed').value.trim();
       const paymentMethod = document.getElementById('inPaymentMethod').value;
 
-      saveCustomerPref(name, tasteMembers);
+      rememberCustomerPreference(name, tasteMembers);
 
       orders.push({
-        id: 'ord_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
-        seq: orders.length + 1,
+        id: generateOrderId(),
         customerName: name,
         contact: '',
-        orderDate: document.getElementById('inOrderDate').value,
-        deliveryDate: document.getElementById('inDeliveryDate').value,
+        orderDate: document.getElementById('inOrderDate').value || getTodayISO(),
+        deliveryDate: document.getElementById('inDeliveryDate').value || getTodayISO(),
         deliveryTime: document.getElementById('inDeliveryTime').value || '18:00',
-        paymentMethod,
-        category: lineItems[0]?.category || 'Meal Box',
-        items: formatLineItemsSummary(lineItems),
         lineItems,
+        category: lineItems[0].category,
+        items: formatLineItemsSummary(lineItems),
         dishesServed,
+        paymentMethod,
         tasteMembers,
-        spiceLevel: tasteMembers[0]?.spiceLevel || 'Medium',
-        tasteNote: tasteMembers[0]?.note || '',
-        subtotal: food,
-        deliveryFee: delFee,
-        amountPaid: paid
+        foodSubtotal: parseFloat(document.getElementById('inFood').value) || 0,
+        deliveryFee: parseFloat(document.getElementById('inDelFee').value) || 0,
+        amountPaid: parseFloat(document.getElementById('inPaid').value) || 0
       });
 
+      saveState();
+      renderAll();
       document.getElementById('inName').value = '';
       document.getElementById('inDishesServed').value = '';
       document.getElementById('inFood').value = '';
       document.getElementById('inDelFee').value = '0';
       document.getElementById('inPaid').value = '';
-      renderInlineItemRows([{ category: 'Meal Box', qty: 1, flavor: '' }]);
-      renderTasteMemberRows('in', [{ member: '', spiceLevel: 'Medium', note: '' }]);
+      setItemRows('in', [{ category: 'Meal Box', qty: 1, details: '' }]);
+      setTasteMemberRows('in', [{ member: '', spice: 'Medium (Standard)', note: '' }]);
       syncInlineTotals();
-      applySavedPreference('in');
-
-      saveToStorage();
-      renderAll();
-      showToast('Order, dishes served & taste profile saved!');
+      showToast(`Order saved for ${name} (${paymentMethod})!`);
     }
 
-    // Modal Add / Edit & Smart Payment Calculation
-    function setModalTime(val) {
-      document.getElementById('mDeliveryTime').value = val;
+    // Modal Add / Edit Helpers
+    function setModalTime(t) {
+      document.getElementById('mDeliveryTime').value = t;
     }
 
     function setModalPayMode(mode) {
       modalPayMode = mode;
-      const modes = {
+      const styles = {
         pending: document.getElementById('payModePending'),
         full: document.getElementById('payModeFull'),
         partial: document.getElementById('payModePartial')
       };
-      Object.entries(modes).forEach(([k, btn]) => {
-        if (!btn) return;
+      Object.entries(styles).forEach(([k, btn]) => {
         btn.className = k === mode
-          ? 'flex-1 px-2 py-1 rounded-md bg-white text-emerald-800 font-bold shadow-2xs'
+          ? 'flex-1 px-2 py-1 rounded-md bg-white text-slate-900 shadow-2xs font-bold'
           : 'flex-1 px-2 py-1 rounded-md text-slate-600';
       });
       recalcModalTotals();
     }
 
+    function onManualModalPaidInput() {
+      modalPayMode = 'partial';
+      setModalPayMode('partial');
+    }
+
     function recalcModalTotals() {
       const sub = parseFloat(document.getElementById('mSubtotal').value) || 0;
-      const del = parseFloat(document.getElementById('mDeliveryFee').value) || 0;
-      const total = sub + del;
-      const paidInput = document.getElementById('mPaid');
+      const fee = parseFloat(document.getElementById('mDeliveryFee').value) || 0;
+      const total = sub + fee;
 
       if (modalPayMode === 'pending') {
-        paidInput.value = '0';
+        document.getElementById('mPaid').value = '0';
       } else if (modalPayMode === 'full') {
-        paidInput.value = total.toFixed(2);
+        document.getElementById('mPaid').value = total.toFixed(2);
       }
 
-      const paid = parseFloat(paidInput.value) || 0;
-      const bal = Math.max(0, total - paid);
-      document.getElementById('mTotalBilledText').textContent = `$${total.toFixed(2)}`;
-      document.getElementById('mBalanceDueText').textContent = `$${bal.toFixed(2)}`;
-      document.getElementById('mBalanceDueText').className = bal > 0 ? 'text-rose-600 font-bold' : 'text-emerald-700 font-bold';
-    }
-
-    function onManualModalPaidInput() {
-      const sub = parseFloat(document.getElementById('mSubtotal').value) || 0;
-      const del = parseFloat(document.getElementById('mDeliveryFee').value) || 0;
-      const total = sub + del;
       const paid = parseFloat(document.getElementById('mPaid').value) || 0;
-
-      if (paid <= 0) setModalPayMode('pending');
-      else if (total > 0 && Math.abs(paid - total) < 0.01) setModalPayMode('full');
-      else {
-        modalPayMode = 'partial';
-        ['pending', 'full', 'partial'].forEach(k => {
-          const btn = document.getElementById('payMode' + k.charAt(0).toUpperCase() + k.slice(1));
-          if (btn) btn.className = k === 'partial' ? 'flex-1 px-2 py-1 rounded-md bg-white text-blue-800 font-bold shadow-2xs' : 'flex-1 px-2 py-1 rounded-md text-slate-600';
-        });
-        recalcModalTotals();
-      }
+      const balance = Math.max(0, total - paid);
+      document.getElementById('mTotalBilledText').textContent = `$${total.toFixed(2)}`;
+      const balEl = document.getElementById('mBalanceDueText');
+      balEl.textContent = `$${balance.toFixed(2)}`;
+      balEl.className = balance > 0 ? 'text-rose-600 font-bold' : 'text-emerald-700 font-bold';
     }
 
-    function openAddModal() {
-      const todayStr = getLocalTodayStr();
+    function openAddModal(prefillCustomerName = '') {
       document.getElementById('modalTitle').textContent = 'Add New Customer Order';
       document.getElementById('editOrderId').value = '';
-      document.getElementById('mName').value = '';
+      document.getElementById('mName').value = prefillCustomerName;
       document.getElementById('mContact').value = '';
-      document.getElementById('mOrderDate').value = todayStr;
-      document.getElementById('mDeliveryDate').value = todayStr;
+      const today = getTodayISO();
+      document.getElementById('mOrderDate').value = today;
+      document.getElementById('mDeliveryDate').value = today;
       document.getElementById('mDeliveryTime').value = '18:00';
       document.getElementById('mPaymentMethod').value = 'Interac e-Transfer';
+      setItemRows('m', [{ category: 'Meal Box', qty: 1, details: '' }]);
       document.getElementById('mDishesServed').value = '';
-      renderModalItemRows([{ category: 'Meal Box', qty: 1, flavor: '' }]);
-      renderTasteMemberRows('m', [{ member: '', spiceLevel: 'Medium', note: '' }]);
+      setTasteMemberRows('m', [{ member: '', spice: 'Medium (Standard)', note: '' }]);
+      document.getElementById('mSavedPrefBanner').classList.add('hidden');
       document.getElementById('mSubtotal').value = '';
       document.getElementById('mDeliveryFee').value = '0';
-      document.getElementById('mSavedPrefBanner').classList.add('hidden');
       setModalPayMode('pending');
+      if (prefillCustomerName) applySavedPreference('m');
       document.getElementById('orderModal').classList.remove('hidden');
     }
 
-    function openReorderModal(custName) {
-      openAddModal();
-      document.getElementById('mName').value = custName;
-      applySavedPreference('m');
+    function quickReorderCustomer(customerName) {
+      openAddModal(customerName);
     }
 
     function openEditModal(id) {
-      const raw = orders.find(x => x.id === id);
-      if (!raw) return;
-      const o = normalizeOrderRecord(raw);
-      document.getElementById('modalTitle').textContent = 'Edit Order';
+      const o = orders.find(item => item.id === id);
+      if (!o) return;
+      document.getElementById('modalTitle').textContent = `Edit Order ${o.id}`;
       document.getElementById('editOrderId').value = o.id;
       document.getElementById('mName').value = o.customerName;
       document.getElementById('mContact').value = o.contact || '';
-      document.getElementById('mOrderDate').value = o.orderDate;
-      document.getElementById('mDeliveryDate').value = o.deliveryDate;
+      document.getElementById('mOrderDate').value = o.orderDate || getTodayISO();
+      document.getElementById('mDeliveryDate').value = o.deliveryDate || getTodayISO();
       document.getElementById('mDeliveryTime').value = o.deliveryTime || '18:00';
       document.getElementById('mPaymentMethod').value = o.paymentMethod || 'Interac e-Transfer';
+      setItemRows('m', normalizeLineItems(o));
       document.getElementById('mDishesServed').value = o.dishesServed || '';
-      renderModalItemRows(o.lineItems);
-      renderTasteMemberRows('m', o.tasteMembers);
-      document.getElementById('mSubtotal').value = o.subtotal;
+      setTasteMemberRows('m', normalizeTasteMembers(o));
+      document.getElementById('mSavedPrefBanner').classList.add('hidden');
+      document.getElementById('mSubtotal').value = o.foodSubtotal;
       document.getElementById('mDeliveryFee').value = o.deliveryFee;
       document.getElementById('mPaid').value = o.amountPaid;
-      document.getElementById('mSavedPrefBanner').classList.add('hidden');
-      onManualModalPaidInput();
+
+      const total = (parseFloat(o.foodSubtotal) || 0) + (parseFloat(o.deliveryFee) || 0);
+      if ((parseFloat(o.amountPaid) || 0) <= 0) {
+        setModalPayMode('pending');
+      } else if ((parseFloat(o.amountPaid) || 0) >= total - 0.01) {
+        setModalPayMode('full');
+      } else {
+        setModalPayMode('partial');
+      }
       document.getElementById('orderModal').classList.remove('hidden');
     }
 
@@ -1533,89 +2059,73 @@
     function handleModalSubmit(e) {
       e.preventDefault();
       const editId = document.getElementById('editOrderId').value;
-      const name = document.getElementById('mName').value.trim();
-      const lineItems = readModalItemRows();
-      const tasteMembers = readTasteMemberRows('m');
+      const lineItems = collectItemRows('m');
+      const tasteMembers = collectTasteMemberRows('m');
       const dishesServed = document.getElementById('mDishesServed').value.trim();
       const paymentMethod = document.getElementById('mPaymentMethod').value;
 
-      saveCustomerPref(name, tasteMembers);
-
       const payload = {
-        customerName: name,
+        customerName: document.getElementById('mName').value.trim(),
         contact: document.getElementById('mContact').value.trim(),
         orderDate: document.getElementById('mOrderDate').value,
         deliveryDate: document.getElementById('mDeliveryDate').value,
         deliveryTime: document.getElementById('mDeliveryTime').value || '18:00',
-        paymentMethod,
-        category: lineItems[0]?.category || 'Meal Box',
-        items: formatLineItemsSummary(lineItems),
         lineItems,
+        category: lineItems[0].category,
+        items: formatLineItemsSummary(lineItems),
         dishesServed,
+        paymentMethod,
         tasteMembers,
-        spiceLevel: tasteMembers[0]?.spiceLevel || 'Medium',
-        tasteNote: tasteMembers[0]?.note || '',
-        subtotal: parseFloat(document.getElementById('mSubtotal').value) || 0,
+        foodSubtotal: parseFloat(document.getElementById('mSubtotal').value) || 0,
         deliveryFee: parseFloat(document.getElementById('mDeliveryFee').value) || 0,
         amountPaid: parseFloat(document.getElementById('mPaid').value) || 0
       };
 
+      rememberCustomerPreference(payload.customerName, tasteMembers);
+
       if (editId) {
-        const idx = orders.findIndex(x => x.id === editId);
-        if (idx !== -1) {
-          orders[idx] = { ...orders[idx], ...payload };
-        }
-        showToast('Order, dishes served & taste profile updated!');
+        const idx = orders.findIndex(o => o.id === editId);
+        if (idx !== -1) orders[idx] = { ...orders[idx], ...payload };
+        showToast(`Updated order ${editId}.`);
       } else {
-        orders.push({
-          id: 'ord_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
-          seq: orders.length + 1,
-          ...payload
-        });
-        showToast('New order logged!');
+        orders.push({ id: generateOrderId(), ...payload });
+        showToast(`Added order for ${payload.customerName} (${paymentMethod}).`);
       }
-      closeAddModal();
-      saveToStorage();
+
+      saveState();
       renderAll();
+      closeAddModal();
     }
 
     function markOrderPaid(id) {
-      const idx = orders.findIndex(x => x.id === id);
+      const idx = orders.findIndex(o => o.id === id);
       if (idx === -1) return;
-      const total = Number(orders[idx].subtotal || 0) + Number(orders[idx].deliveryFee || 0);
-      orders[idx].amountPaid = total;
-      saveToStorage();
+      const total = (parseFloat(orders[idx].foodSubtotal) || 0) + (parseFloat(orders[idx].deliveryFee) || 0);
+      orders[idx].amountPaid = parseFloat(total.toFixed(2));
+      saveState();
       renderAll();
-      showToast('Marked Paid — Kitchen cleared to cook!');
+      if (activeHistoryCustomerKey) {
+        openCustomerHistoryModal(orders[idx].customerName);
+      }
+      showToast(`Order ${id} marked 100% Paid!`);
     }
 
     function deleteOrder(id) {
-      orders = orders.filter(x => x.id !== id);
-      saveToStorage();
+      orders = orders.filter(o => o.id !== id);
+      saveState();
       renderAll();
-      showToast('Order removed.');
+      showToast(`Removed order ${id}.`);
     }
 
     function confirmClearAll() {
-      const btn = event.currentTarget;
-      if (btn.dataset.armed === 'true') {
-        orders = [];
-        saveToStorage();
-        renderAll();
-        btn.dataset.armed = 'false';
-        btn.textContent = 'Reset All';
-        showToast('All orders cleared.');
-      } else {
-        btn.dataset.armed = 'true';
-        btn.textContent = 'Click again to confirm';
-        setTimeout(() => {
-          btn.dataset.armed = 'false';
-          btn.textContent = 'Reset All';
-        }, 3500);
-      }
+      if (orders.length === 0) return;
+      orders = [];
+      saveState();
+      renderAll();
+      showToast('All orders cleared.');
     }
 
-    // Bulk Paste Modal
+    // Bulk Paste Helpers
     function openBulkModal() {
       document.getElementById('bulkTextArea').value = '';
       document.getElementById('bulkModal').classList.remove('hidden');
@@ -1626,127 +2136,116 @@
     }
 
     function processBulkPaste() {
-      const raw = document.getElementById('bulkTextArea').value.trim();
-      if (!raw) return;
-      const todayStr = getLocalTodayStr();
-      const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
-      let added = 0;
+      const text = document.getElementById('bulkTextArea').value.trim();
+      if (!text) return;
+      const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+      const today = getTodayISO();
+      let imported = 0;
 
       lines.forEach(line => {
         const parts = line.split(',').map(p => p.trim());
-        const name = parts[0];
-        if (!name || name.toLowerCase() === 'order id' || name.toLowerCase() === 'customer name') return;
-        const itemsStr = parts[1] || 'Order';
-        const total = parseFloat((parts[2] || '0').replace(/[^0-9.]/g, '')) || 0;
-        const paid = parts[3] !== undefined ? (parseFloat(parts[3].replace(/[^0-9.]/g, '')) || 0) : total;
-        const delDate = (parts[4] && /^\d{4}-\d{2}-\d{2}$/.test(parts[4])) ? parts[4] : todayStr;
-        const paymentMethod = parts[5] || 'Interac e-Transfer';
-        const dishesServed = parts[6] || '';
+        if (parts.length >= 2) {
+          const name = parts[0];
+          const itemsDesc = parts[1] || 'Meal Box';
+          const total = parseFloat(parts[2]) || 0;
+          const paid = parseFloat(parts[3]) || 0;
+          const delDate = (parts[4] && /^\d{4}-\d{2}-\d{2}$/.test(parts[4])) ? parts[4] : today;
+          const paymentMethod = parts[5] || 'Interac e-Transfer';
+          const dishesServed = parts[6] || '';
+          const lower = itemsDesc.toLowerCase();
+          let cat = 'Meal Box';
+          if (lower.includes('samosa') || lower.includes('snack')) cat = 'Samosas & Snacks';
+          else if (lower.includes('parantha') || lower.includes('paneer')) cat = 'Paranthas & Mains';
+          else if (lower.includes('shake') || lower.includes('lassi')) cat = 'Shakes & Lassis';
+          else if (lower.includes('cater') || lower.includes('tray')) cat = 'Catering & Party Trays';
 
-        let cat = 'Meal Box';
-        const low = itemsStr.toLowerCase();
-        if (low.includes('meal') || low.includes('box') || low.includes('tiffin') || low.includes('thali')) cat = 'Meal Box';
-        else if (low.includes('samosa') || low.includes('snack')) cat = 'Samosas & Snacks';
-        else if (low.includes('lassi') || low.includes('shake')) cat = 'Shakes & Lassis';
-        else if (low.includes('tray') || low.includes('catering') || total >= 100) cat = 'Catering & Party Trays';
-        else if (low.includes('parantha') || low.includes('paratha') || low.includes('paneer') || low.includes('bharta')) cat = 'Paranthas & Mains';
+          const key = name.toLowerCase();
+          const savedMembers = customerPrefs[key]?.tasteMembers || [];
+          const lineItems = [{ category: cat, qty: 1, details: itemsDesc }];
 
-        const normKey = name.toLowerCase();
-        const savedPref = customerPrefs[normKey];
-        const members = normalizeMembersFromPref(savedPref) || [{ member: '', spiceLevel: 'Medium', note: '' }];
-        const lineItems = [{ category: cat, qty: 1, flavor: itemsStr }];
-
-        orders.push({
-          id: 'ord_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
-          seq: orders.length + 1,
-          customerName: name,
-          contact: '',
-          orderDate: todayStr,
-          deliveryDate: delDate,
-          deliveryTime: '18:00',
-          paymentMethod,
-          category: cat,
-          items: itemsStr,
-          lineItems,
-          dishesServed,
-          tasteMembers: members,
-          spiceLevel: members[0].spiceLevel,
-          tasteNote: members[0].note,
-          subtotal: total,
-          deliveryFee: 0,
-          amountPaid: paid
-        });
-        added++;
+          orders.push({
+            id: generateOrderId(),
+            customerName: name,
+            contact: '',
+            orderDate: today,
+            deliveryDate: delDate,
+            deliveryTime: '18:00',
+            lineItems,
+            category: cat,
+            items: itemsDesc,
+            dishesServed,
+            paymentMethod,
+            tasteMembers: savedMembers,
+            foodSubtotal: total,
+            deliveryFee: 0,
+            amountPaid: paid
+          });
+          imported++;
+        }
       });
 
-      closeBulkModal();
-      saveToStorage();
+      saveState();
       renderAll();
-      showToast(`Imported ${added} order(s)!`);
+      closeBulkModal();
+      showToast(`Imported ${imported} order(s)!`);
     }
 
-    // CSV Export
+    // Export CSV
     function exportCSV() {
-      const enriched = enrichOrders();
+      const enriched = getEnrichedOrders();
       const headers = [
         'Order ID',
         'Order Date',
         'Delivery Date',
         'Delivery Time',
         'Customer Name',
-        'Customer Type',
-        'Household Taste Profiles',
-        'Menu Categories & Quantities',
+        'Menu Categories & Items',
         'Dishes Served',
         'Payment Method',
-        'Subtotal',
-        'Delivery Fee',
-        'Total Billed',
-        'Amount Paid',
-        'Balance Due',
-        'Payment Status'
+        'Household Taste Profiles',
+        'Food Subtotal ($)',
+        'Delivery Fee ($)',
+        'Total Billed ($)',
+        'Amount Paid ($)',
+        'Balance ($)',
+        'Status'
       ];
       const rows = enriched.map(o => [
-        o.displayId,
+        o.id,
         o.orderDate,
         o.deliveryDate,
-        `"${o.formattedTime || ''}"`,
-        `"${o.customerName.replace(/"/g, '""')}"`,
-        o.isReturning ? 'Returning' : 'New',
-        `"${formatMembersSummaryText(o.tasteMembers).replace(/"/g, '""')}"`,
-        `"${o.lineItemsSummary.replace(/"/g, '""')}"`,
+        o.deliveryTime || '',
+        `"${(o.customerName || '').replace(/"/g, '""')}"`,
+        `"${(o.lineItemsSummary || '').replace(/"/g, '""')}"`,
         `"${(o.dishesServed || '').replace(/"/g, '""')}"`,
-        `"${o.paymentMethod || 'Interac e-Transfer'}"`,
-        o.subtotal.toFixed(2),
+        `"${(o.paymentMethod || '').replace(/"/g, '""')}"`,
+        `"${formatMembersSummaryText(o.tasteMembers).replace(/"/g, '""')}"`,
+        o.foodSubtotal.toFixed(2),
         o.deliveryFee.toFixed(2),
         o.totalBilled.toFixed(2),
         o.amountPaid.toFixed(2),
         o.balance.toFixed(2),
-        `"${o.statusLabel}"`
+        o.isPaid ? 'Paid' : (o.isOverdue ? 'Overdue' : 'Pending Payment')
       ]);
-      const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+
+      const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `The_Green_Spicery_Orders_${getLocalTodayStr()}.csv`;
+      a.download = `the_green_spicery_orders_${getTodayISO()}.csv`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      showToast('CSV exported!');
+      showToast('CSV exported successfully!');
     }
 
-    function escapeHtml(str) {
-      return String(str || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
-    }
-
-    window.addEventListener('DOMContentLoaded', init);
+    // Boot Application
+    window.addEventListener('DOMContentLoaded', () => {
+      loadState();
+      renderAll();
+    });
   </script>
 </body>
 </html>
