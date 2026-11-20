@@ -353,6 +353,12 @@
         </div>
       </div>
 
+      <!-- Smart Month-on-Month Charts & Revenue Breakdown -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div id="earningsMomChartCard" class="lg:col-span-7 bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow"></div>
+        <div id="earningsMixChartCard" class="lg:col-span-5 bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow"></div>
+      </div>
+
       <div class="bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow">
         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
           <div>
@@ -2162,17 +2168,26 @@
       });
 
       const months = Object.values(byMonth).sort((a, b) => b.ym.localeCompare(a.ym));
+      renderEarningsCharts(months, totalFood, totalDelivery, totalTips, totalCollected);
+
       const tbody = document.getElementById('monthlyEarningsBody');
       if (months.length === 0) {
         tbody.innerHTML = `<tr><td colspan="9" class="py-8 text-center text-slate-400">No orders recorded yet.</td></tr>`;
         return;
       }
 
-      tbody.innerHTML = months.map(m => {
+      tbody.innerHTML = months.map((m, idx) => {
         const pct = Math.min(100, Math.round((m.collected / MONTHLY_GOAL) * 100));
+        const prev = months[idx + 1];
+        let momBadge = '';
+        if (prev && prev.billed > 0) {
+          const diffPct = Math.round(((m.billed - prev.billed) / prev.billed) * 100);
+          const up = diffPct >= 0;
+          momBadge = `<span class="ml-1.5 px-1.5 py-0.5 rounded text-[10px] font-extrabold ${up ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-rose-50 text-rose-700 border border-rose-200'}">${up ? '▲' : '▼'} ${Math.abs(diffPct)}%</span>`;
+        }
         return `
           <tr onclick="drillToOrders('custom', '${formatMonthLabel(m.ym)} Orders', o => o.deliveryMonth === '${m.ym}')" class="cursor-pointer hover:bg-emerald-50/50 transition">
-            <td class="py-3.5 px-3 font-extrabold text-slate-900 whitespace-nowrap">${formatMonthLabel(m.ym)}</td>
+            <td class="py-3.5 px-3 font-extrabold text-slate-900 whitespace-nowrap">${formatMonthLabel(m.ym)}${momBadge}</td>
             <td class="py-3.5 px-3 text-center font-bold text-slate-700">${m.orders}</td>
             <td class="py-3.5 px-3 text-right font-semibold text-slate-800">$${m.food.toFixed(2)}</td>
             <td class="py-3.5 px-3 text-right text-slate-600">$${m.delivery.toFixed(2)}</td>
@@ -2194,217 +2209,290 @@
       }).join('');
     }
 
-    function renderCustomersTable(enriched) {
-      const map = {};
+    function renderEarningsCharts(monthsDesc, totalFood, totalDelivery, totalTips, totalCollected) {
+      const momCard = document.getElementById('earningsMomChartCard');
+      const mixCard = document.getElementById('earningsMixChartCard');
+      if (!momCard || !mixCard) return;
+
+      const chrono = [...monthsDesc].reverse(); // Oldest -> Newest for trend chart
+      const latest = monthsDesc[0];
+      const previous = monthsDesc[1];
+
+      let growthPill = `<span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[11px] font-bold">Baseline Month</span>`;
+      let insightText = 'Add orders across multiple months to track Month-on-Month velocity.';
+      if (latest && previous) {
+        const delta = latest.billed - previous.billed;
+        const pct = previous.billed > 0 ? Math.round((delta / previous.billed) * 100) : 100;
+        const orderDelta = latest.orders - previous.orders;
+        const isUp = delta >= 0;
+        growthPill = `<span class="px-2.5 py-0.5 rounded-full ${isUp ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-rose-50 text-rose-800 border border-rose-200'} text-xs font-extrabold">${isUp ? '▲ +' : '▼ '}${pct}% MoM Revenue</span>`;
+        insightText = `<strong>${formatMonthLabel(latest.ym)}</strong> vs <strong>${formatMonthLabel(previous.ym)}</strong>: ${isUp ? '+' : '-'}$${Math.abs(delta).toFixed(2)} billed (${orderDelta >= 0 ? '+' : ''}${orderDelta} orders) • Avg Order Value: <strong>$${(latest.billed / Math.max(1, latest.orders)).toFixed(2)}</strong>`;
+      } else if (latest) {
+        insightText = `<strong>${formatMonthLabel(latest.ym)}</strong>: <strong>${latest.orders}</strong> orders • Avg Order Value: <strong>$${(latest.billed / Math.max(1, latest.orders)).toFixed(2)}</strong>`;
+      }
+
+      const maxVal = Math.max(MONTHLY_GOAL, ...chrono.map(m => m.billed), 100);
+
+      momCard.innerHTML = `
+        <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+          <div>
+            <h3 class="text-base font-extrabold text-slate-900">Month-on-Month (MoM) Revenue Comparison</h3>
+            <p class="text-xs text-slate-500 mt-0.5">${insightText}</p>
+          </div>
+          ${growthPill}
+        </div>
+        <div class="flex items-center gap-4 text-[11px] font-bold mb-4">
+          <span class="inline-flex items-center gap-1.5 text-emerald-800"><span class="w-2.5 h-2.5 rounded-xs bg-emerald-600"></span>Collected</span>
+          <span class="inline-flex items-center gap-1.5 text-rose-700"><span class="w-2.5 h-2.5 rounded-xs bg-rose-400"></span>Unpaid Due</span>
+          <span class="inline-flex items-center gap-1.5 text-slate-500"><span class="w-3 border-t-2 border-dashed border-amber-500"></span>$${MONTHLY_GOAL} Target</span>
+        </div>
+        ${chrono.length === 0
+          ? `<div class="py-12 text-center text-xs text-slate-400">No monthly data yet.</div>`
+          : `<div class="relative pt-4">
+              <div class="grid grid-cols-${Math.min(6, Math.max(2, chrono.length))} gap-4 items-end h-44 px-2 border-b border-slate-200">
+                ${chrono.slice(-6).map((m, idx, arr) => {
+                  const colH = Math.max(m.collected > 0 ? 6 : 0, Math.round((m.collected / maxVal) * 140));
+                  const dueH = Math.max(m.due > 0.009 ? 6 : 0, Math.round((m.due / maxVal) * 140));
+                  const prevM = arr[idx - 1];
+                  let tag = '';
+                  if (prevM && prevM.billed > 0) {
+                    const p = Math.round(((m.billed - prevM.billed) / prevM.billed) * 100);
+                    tag = `<span class="text-[10px] font-extrabold ${p >= 0 ? 'text-emerald-700' : 'text-rose-600'}">${p >= 0 ? '▲' : '▼'}${Math.abs(p)}%</span>`;
+                  }
+                  return `
+                    <div onclick="drillToOrders('custom', '${formatMonthLabel(m.ym)} Orders', o => o.deliveryMonth === '${m.ym}')" class="cursor-pointer group flex flex-col items-center justify-end h-full">
+                      <div class="text-center mb-1.5 leading-tight">
+                        <div class="text-xs font-black text-slate-900 group-hover:text-emerald-700">$${m.billed.toFixed(0)}</div>
+                        ${tag}
+                      </div>
+                      <div class="w-full max-w-[54px] flex flex-col-reverse rounded-t-lg overflow-hidden shadow-xs group-hover:ring-2 group-hover:ring-emerald-500 transition">
+                        <div style="height:${colH}px" class="bg-emerald-600 w-full transition-all" title="Collected: $${m.collected.toFixed(2)}"></div>
+                        <div style="height:${dueH}px" class="bg-rose-400 w-full transition-all" title="Balance Due: $${m.due.toFixed(2)}"></div>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+              <div class="grid grid-cols-${Math.min(6, Math.max(2, chrono.length))} gap-4 px-2 pt-2 text-center">
+                ${chrono.slice(-6).map(m => `
+                  <div>
+                    <div class="text-xs font-extrabold text-slate-800">${formatMonthLabel(m.ym)}</div>
+                    <div class="text-[10px] text-slate-500 font-semibold">${m.orders} order${m.orders === 1 ? '' : 's'}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>`
+        }
+      `;
+
+      // Right Card: Revenue Stream Breakdown & Collection Efficiency
+      const totalStream = Math.max(0.01, totalFood + totalDelivery + totalTips);
+      const foodPct = Math.round((totalFood / totalStream) * 100);
+      const delPct = Math.round((totalDelivery / totalStream) * 100);
+      const tipPct = Math.max(0, 100 - foodPct - delPct);
+      const totalBilledAll = monthsDesc.reduce((s, m) => s + m.billed, 0);
+      const collRate = totalBilledAll > 0 ? Math.round((totalCollected / totalBilledAll) * 100) : 0;
+
+      mixCard.innerHTML = `
+        <div class="flex items-start justify-between gap-2 mb-3">
+          <div>
+            <h3 class="text-base font-extrabold text-slate-900">Revenue Stream Breakdown</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Food Sales vs. Delivery Fees vs. Customer Tips</p>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-extrabold">${collRate}% Collected</span>
+        </div>
+
+        <!-- Stacked Horizontal Bar -->
+        <div class="w-full h-4 rounded-full bg-slate-100 overflow-hidden flex my-4 shadow-inner">
+          <div style="width:${foodPct}%" class="bg-[#0B2E1E] h-full" title="Food Sales: $${totalFood.toFixed(2)}"></div>
+          <div style="width:${delPct}%" class="bg-amber-400 h-full" title="Delivery Fees: $${totalDelivery.toFixed(2)}"></div>
+          <div style="width:${tipPct}%" class="bg-emerald-500 h-full" title="Tips: $${totalTips.toFixed(2)}"></div>
+        </div>
+
+        <div class="space-y-2.5 text-xs">
+          <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-xs bg-[#0B2E1E]"></span>
+              <span class="font-bold text-slate-800">Food Subtotal Sales</span>
+            </div>
+            <div class="text-right">
+              <strong class="font-black text-slate-900">$${totalFood.toFixed(2)}</strong>
+              <span class="text-slate-500 ml-1">(${foodPct}%)</span>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between p-2.5 rounded-xl bg-amber-50/50 border border-amber-200/80">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-xs bg-amber-400"></span>
+              <span class="font-bold text-slate-800">Delivery Fees</span>
+            </div>
+            <div class="text-right">
+              <strong class="font-black text-slate-900">$${totalDelivery.toFixed(2)}</strong>
+              <span class="text-slate-500 ml-1">(${delPct}%)</span>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between p-2.5 rounded-xl bg-emerald-50/60 border border-emerald-200/80">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-xs bg-emerald-500"></span>
+              <span class="font-bold text-emerald-950">Tips &amp; Gratuity</span>
+            </div>
+            <div class="text-right">
+              <strong class="font-black text-emerald-700">$${totalTips.toFixed(2)}</strong>
+              <span class="text-emerald-700/80 ml-1">(${tipPct}%)</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCustomersTable(preEnriched = null) {
+      const enriched = preEnriched || getEnrichedOrders();
+      const tbody = document.getElementById('customersTableBody');
+      if (!tbody) return;
+
+      const byCust = {};
       enriched.forEach(o => {
         const key = o.customerName.trim().toLowerCase();
-        if (!map[key]) {
-          map[key] = {
+        if (!key) return;
+        if (!byCust[key]) {
+          byCust[key] = {
             key,
             name: o.customerName,
+            contact: o.contact || '',
             orders: [],
-            dishes: new Set(),
-            paid: 0,
-            due: 0
+            totalPaid: 0,
+            totalDue: 0,
+            dishes: new Set()
           };
         }
-        map[key].orders.push(o);
-        map[key].paid += o.amountPaid;
-        map[key].due += o.balance;
+        byCust[key].orders.push(o);
+        if (o.contact && !byCust[key].contact) byCust[key].contact = o.contact;
+        byCust[key].totalPaid += o.amountPaid;
+        byCust[key].totalDue += o.balance;
         if (o.dishesServed) {
-          o.dishesServed.split(',').map(d => d.trim()).filter(Boolean).forEach(d => map[key].dishes.add(d));
+          o.dishesServed.split(',').map(d => d.trim()).filter(Boolean).forEach(d => byCust[key].dishes.add(d));
         }
       });
 
-      let list = Object.values(map).sort((a, b) => b.orders.length - a.orders.length || b.paid - a.paid);
+      let list = Object.values(byCust).sort((a, b) => b.orders.length - a.orders.length || b.totalPaid - a.totalPaid);
       if (customerTierFilter === 'vip') list = list.filter(c => c.orders.length >= 2);
       if (customerTierFilter === 'first') list = list.filter(c => c.orders.length === 1);
 
-      const tbody = document.getElementById('customersTableBody');
       if (list.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-slate-400">No customers match this tier filter.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-slate-400">No customers match this filter.</td></tr>`;
         return;
       }
 
       tbody.innerHTML = list.map(c => {
         const isVIP = c.orders.length >= 2;
+        const latestOrder = [...c.orders].sort((a, b) => (b.deliveryTimestamp || 0) - (a.deliveryTimestamp || 0))[0];
         const pref = customerPrefs[c.key];
         const members = (pref && Array.isArray(pref.tasteMembers) && pref.tasteMembers.length > 0)
           ? pref.tasteMembers
-          : normalizeTasteMembers(c.orders[c.orders.length - 1]);
-        const dishesList = [...c.dishes].join(', ') || '—';
+          : (latestOrder ? normalizeTasteMembers(latestOrder) : []);
+        const dishesList = [...c.dishes].slice(0, 6).join(', ') || '—';
 
         return `
-          <tr class="hover:bg-slate-50/90 transition align-top">
-            <td class="py-3.5 px-3 font-bold text-slate-900">
-              <button type="button" onclick="openCustomerHistoryModal('${escapeHtml(c.name).replace(/'/g, "\\'")}')" class="hover:text-emerald-700 hover:underline text-left">
-                ${escapeHtml(c.name)}
-              </button>
+          <tr onclick="openCustomerHistoryModal('${escapeHtml(c.name).replace(/'/g, "\\'")}')" class="cursor-pointer hover:bg-emerald-50/50 transition align-top">
+            <td class="py-3.5 px-3">
+              <div class="font-extrabold text-slate-900">${escapeHtml(c.name)}</div>
+              ${c.contact ? `<div class="text-[11px] text-slate-500">${escapeHtml(c.contact)}</div>` : ''}
             </td>
             <td class="py-3.5 px-3 whitespace-nowrap">
               ${isVIP
                 ? `<span class="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-bold">★ Returning VIP</span>`
-                : `<span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold">First-Time</span>`}
+                : `<span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs font-semibold">First-Time</span>`}
             </td>
             <td class="py-3.5 px-3">${renderTasteMembersBadges(members)}</td>
             <td class="py-3.5 px-3 text-xs text-slate-700 max-w-xs">${escapeHtml(dishesList)}</td>
             <td class="py-3.5 px-3 text-center">
-              <button type="button" onclick="openCustomerHistoryModal('${escapeHtml(c.name).replace(/'/g, "\\'")}')" class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-extrabold">
-                ${c.orders.length} order(s)
-              </button>
+              <span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-extrabold text-xs">${c.orders.length}</span>
             </td>
-            <td class="py-3.5 px-3 text-right font-extrabold text-emerald-700 whitespace-nowrap">$${c.paid.toFixed(2)}</td>
-            <td class="py-3.5 px-3 text-right whitespace-nowrap">
-              ${c.due > 0.009
-                ? `<span class="px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 text-xs font-extrabold">Due $${c.due.toFixed(2)}</span>`
-                : `<span class="text-xs font-bold text-slate-400">$0.00</span>`}
-            </td>
-            <td class="py-3.5 px-3 text-right whitespace-nowrap">
-              <button type="button" onclick="openAddModal('${escapeHtml(c.name).replace(/'/g, "\\'")}')" class="px-3 py-1.5 rounded-xl bg-[#0B2E1E] hover:bg-[#13442E] text-white text-xs font-bold">
-                + Re-Order
-              </button>
+            <td class="py-3.5 px-3 text-right font-extrabold text-emerald-700 whitespace-nowrap">$${c.totalPaid.toFixed(2)}</td>
+            <td class="py-3.5 px-3 text-right font-extrabold ${c.totalDue > 0.009 ? 'text-rose-700' : 'text-slate-400'} whitespace-nowrap">$${c.totalDue.toFixed(2)}</td>
+            <td onclick="event.stopPropagation()" class="py-3.5 px-3 text-right whitespace-nowrap space-x-1">
+              <button type="button" onclick="openAddModal('${escapeHtml(c.name).replace(/'/g, "\\'")}')" class="px-2.5 py-1 rounded-lg bg-[#0B2E1E] hover:bg-[#13442E] text-white text-xs font-bold">+ Re-Order</button>
+              <button type="button" onclick="openCustomerHistoryModal('${escapeHtml(c.name).replace(/'/g, "\\'")}')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold">History</button>
             </td>
           </tr>
         `;
       }).join('');
     }
 
-    function renderChartsTab(enriched) {
+    function renderChartsTab(preEnriched = null) {
+      const enriched = preEnriched || getEnrichedOrders();
+      const pillsEl = document.getElementById('chartsTopPills');
+      const retEl = document.getElementById('chartRetentionCard');
+      const monEl = document.getElementById('chartMonthlyCard');
+      const catEl = document.getElementById('chartCategoryCard');
+      const payEl = document.getElementById('chartPaymentCard');
+      const spiceEl = document.getElementById('chartSpiceCard');
+      if (!pillsEl || !retEl || !monEl || !catEl || !payEl || !spiceEl) return;
+
       const custCounts = {};
       enriched.forEach(o => {
         const k = o.customerName.trim().toLowerCase();
         custCounts[k] = (custCounts[k] || 0) + 1;
       });
       const totalCust = Object.keys(custCounts).length;
-      const vipCust = Object.values(custCounts).filter(c => c >= 2).length;
-      const firstCust = Math.max(0, totalCust - vipCust);
-      const vipPct = totalCust > 0 ? Math.round((vipCust / totalCust) * 100) : 0;
-
-      const vipOrdersCount = enriched.filter(o => o.isReturning).length;
-      const repeatOrderShare = enriched.length > 0 ? Math.round((vipOrdersCount / enriched.length) * 100) : 0;
-      const avgOrdersPerVip = vipCust > 0 ? (vipOrdersCount / vipCust).toFixed(1) : '0.0';
+      const vipCust = Object.values(custCounts).filter(n => n >= 2).length;
+      const firstCust = totalCust - vipCust;
+      const repeatRate = totalCust > 0 ? Math.round((vipCust / totalCust) * 100) : 0;
 
       const totalBilled = enriched.reduce((s, o) => s + o.totalBilled, 0);
       const totalCollected = enriched.reduce((s, o) => s + o.amountPaid, 0);
-      const collectionRate = totalBilled > 0 ? Math.round((totalCollected / totalBilled) * 100) : 0;
+      const totalDue = enriched.reduce((s, o) => s + o.balance, 0);
 
-      // Top Summary Pills
-      document.getElementById('chartsTopPills').innerHTML = `
-        <button type="button" onclick="drillToCustomers('vip')" class="px-3.5 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 text-xs font-bold transition">
-          Returning Rate: <strong>${vipPct}% (${vipCust}/${totalCust})</strong> ↗
-        </button>
-        <button type="button" onclick="drillToOrders('custom', 'VIP Repeat Orders (${vipOrdersCount})', o => o.isReturning)" class="px-3.5 py-1.5 rounded-full bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-200 text-xs font-bold transition">
-          Repeat Order Share: <strong>${repeatOrderShare}% of Orders</strong> ↗
-        </button>
-        <button type="button" onclick="drillToOrders('collected', 'Collected Payments')" class="px-3.5 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold transition">
-          Payment Collection Rate: <strong>${collectionRate}%</strong> ↗
-        </button>
+      pillsEl.innerHTML = `
+        <button type="button" onclick="drillToCustomers('vip')" class="px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200 text-xs font-extrabold transition">★ Repeat Rate: ${repeatRate}% (${vipCust}/${totalCust} VIPs)</button>
+        <button type="button" onclick="drillToOrders('collected', 'Collected Payments')" class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-extrabold transition">Collected: $${totalCollected.toFixed(2)}</button>
+        <button type="button" onclick="drillToOrders('balance_due', 'Unpaid Balance Due')" class="px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200 text-xs font-extrabold transition">Due: $${totalDue.toFixed(2)}</button>
+        <button type="button" onclick="drillToOrders('all', 'All Orders')" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-extrabold transition">Avg Order: $${(totalBilled / Math.max(1, enriched.length)).toFixed(2)}</button>
       `;
 
-      // Donut SVG
-      const r = 46;
-      const circ = 2 * Math.PI * r;
-      const vipDash = (vipPct / 100) * circ;
-      document.getElementById('chartRetentionCard').innerHTML = `
-        <div class="flex items-center justify-between mb-3">
-          <div>
-            <h3 class="text-base font-extrabold text-slate-900">Returning Customer Retention</h3>
-            <p class="text-xs text-slate-500">Click any segment or card to filter customers &amp; orders</p>
+      // 1. Customer Retention Card
+      retEl.innerHTML = `
+        <h3 class="text-base font-extrabold text-slate-900">Customer Loyalty &amp; Retention</h3>
+        <p class="text-xs text-slate-500 mb-4">Click a segment to filter your Customer Directory</p>
+        <div class="grid grid-cols-2 gap-3">
+          <div onclick="drillToCustomers('vip')" class="cursor-pointer p-4 rounded-xl bg-indigo-50/70 hover:bg-indigo-100/70 border border-indigo-200 transition">
+            <div class="text-xs font-bold text-indigo-700">Returning VIPs (2+ Orders)</div>
+            <div class="text-2xl font-black text-indigo-950 mt-1">${vipCust}</div>
+            <div class="text-[11px] text-indigo-700 mt-1">${repeatRate}% of customer base</div>
           </div>
-          <span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">Repeat Loyalty</span>
-        </div>
-        <div class="flex flex-col sm:flex-row items-center gap-6 my-4">
-          <div onclick="drillToCustomers('vip')" class="cursor-pointer relative w-36 h-36 flex items-center justify-center shrink-0">
-            <svg viewBox="0 0 120 120" class="w-full h-full -rotate-90">
-              <circle cx="60" cy="60" r="${r}" fill="none" stroke="#94a3b8" stroke-width="16" />
-              <circle cx="60" cy="60" r="${r}" fill="none" stroke="#059669" stroke-width="16" stroke-dasharray="${vipDash} ${circ}" />
-            </svg>
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
-              <span class="text-2xl font-black text-slate-900">${vipPct}%</span>
-              <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-700">Returning</span>
-            </div>
-          </div>
-          <div class="flex-1 w-full space-y-2.5">
-            <div onclick="drillToCustomers('vip')" class="cursor-pointer flex items-center justify-between p-3 rounded-xl border border-emerald-200 bg-emerald-50/60 hover:bg-emerald-100/70 transition">
-              <div class="flex items-center gap-2.5">
-                <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
-                <div>
-                  <div class="text-xs font-extrabold text-slate-900">Returning VIPs</div>
-                  <div class="text-[11px] text-slate-500">2+ orders placed</div>
-                </div>
-              </div>
-              <div class="text-right">
-                <div class="text-sm font-black text-slate-900">${vipCust}</div>
-                <div class="text-[11px] font-bold text-emerald-700">${vipPct}%</div>
-              </div>
-            </div>
-            <div onclick="drillToCustomers('first')" class="cursor-pointer flex items-center justify-between p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 transition">
-              <div class="flex items-center gap-2.5">
-                <span class="w-3 h-3 rounded-full bg-slate-400"></span>
-                <div>
-                  <div class="text-xs font-extrabold text-slate-900">First-Time</div>
-                  <div class="text-[11px] text-slate-500">1 order placed</div>
-                </div>
-              </div>
-              <div class="text-right">
-                <div class="text-sm font-black text-slate-900">${firstCust}</div>
-                <div class="text-[11px] font-bold text-slate-500">${totalCust > 0 ? 100 - vipPct : 0}%</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-3 pt-2">
-          <div onclick="drillToOrders('custom', 'VIP Repeat Orders', o => o.isReturning)" class="cursor-pointer bg-slate-50 hover:bg-emerald-50 border border-slate-200 rounded-xl p-3 text-center transition">
-            <div class="text-[11px] text-slate-500 font-semibold">VIP Repeat Orders</div>
-            <div class="text-sm font-black text-slate-900 mt-0.5">${vipOrdersCount} of ${enriched.length} orders</div>
-          </div>
-          <div onclick="drillToCustomers('vip')" class="cursor-pointer bg-slate-50 hover:bg-emerald-50 border border-slate-200 rounded-xl p-3 text-center transition">
-            <div class="text-[11px] text-slate-500 font-semibold">Avg Orders / VIP</div>
-            <div class="text-sm font-black text-emerald-700 mt-0.5">${avgOrdersPerVip}x</div>
+          <div onclick="drillToCustomers('first')" class="cursor-pointer p-4 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 transition">
+            <div class="text-xs font-bold text-slate-600">First-Time Customers</div>
+            <div class="text-2xl font-black text-slate-900 mt-1">${firstCust}</div>
+            <div class="text-[11px] text-slate-500 mt-1">${100 - repeatRate}% of customer base</div>
           </div>
         </div>
       `;
 
-      // Monthly Revenue Card
+      // 2. Monthly Revenue Snapshot Card
       const byMonth = {};
       enriched.forEach(o => {
         const m = o.deliveryMonth || 'Unscheduled';
-        if (!byMonth[m]) byMonth[m] = { ym: m, count: 0, collected: 0, pending: 0 };
-        byMonth[m].count++;
+        if (!byMonth[m]) byMonth[m] = { ym: m, billed: 0, collected: 0 };
+        byMonth[m].billed += o.totalBilled;
         byMonth[m].collected += o.amountPaid;
-        byMonth[m].pending += o.balance;
       });
-      const mList = Object.values(byMonth).sort((a, b) => b.ym.localeCompare(a.ym));
-      document.getElementById('chartMonthlyCard').innerHTML = `
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <h3 class="text-base font-extrabold text-slate-900">Monthly Revenue vs. $${MONTHLY_GOAL} CAD Target</h3>
-            <p class="text-xs text-slate-500">Click any month or bar segment to inspect orders</p>
-          </div>
-          <div class="flex items-center gap-3 text-[11px] font-bold">
-            <span class="inline-flex items-center gap-1 text-emerald-700"><span class="w-2.5 h-2.5 rounded-xs bg-emerald-600"></span>Collected</span>
-            <span class="inline-flex items-center gap-1 text-amber-700"><span class="w-2.5 h-2.5 rounded-xs bg-amber-400"></span>Pending</span>
-          </div>
-        </div>
-        <div class="space-y-4">
+      const mList = Object.values(byMonth).sort((a, b) => a.ym.localeCompare(b.ym)).slice(-5);
+      const mMax = Math.max(1, ...mList.map(m => m.billed));
+      monEl.innerHTML = `
+        <h3 class="text-base font-extrabold text-slate-900">Monthly Billed vs. Collected</h3>
+        <p class="text-xs text-slate-500 mb-4">Click any bar to inspect that month's orders</p>
+        <div class="space-y-3">
           ${mList.map(m => {
-            const colPct = Math.min(100, Math.round((m.collected / MONTHLY_GOAL) * 100));
-            const penPct = Math.min(100 - colPct, Math.round((m.pending / MONTHLY_GOAL) * 100));
+            const w = Math.max(8, Math.round((m.billed / mMax) * 100));
             return `
-              <div class="space-y-1.5">
-                <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
-                  <button type="button" onclick="drillToOrders('custom', '${formatMonthLabel(m.ym)} Orders', o => o.deliveryMonth === '${m.ym}')" class="font-extrabold text-slate-900 hover:text-emerald-700 hover:underline">
-                    ${formatMonthLabel(m.ym)} <span class="font-normal text-slate-500">(${m.count} orders)</span>
-                  </button>
-                  <div class="flex items-center gap-2">
-                    <button type="button" onclick="drillToOrders('custom', '${formatMonthLabel(m.ym)} Collected', o => o.deliveryMonth === '${m.ym}' && o.amountPaid > 0)" class="font-bold text-emerald-700 hover:underline">$${m.collected.toFixed(2)} collected</button>
-                    ${m.pending > 0.009 ? `<button type="button" onclick="drillToOrders('custom', '${formatMonthLabel(m.ym)} Pending Due', o => o.deliveryMonth === '${m.ym}' && !o.isPaid)" class="font-extrabold text-rose-700 hover:underline">+ $${m.pending.toFixed(2)} due</button>` : ''}
-                    <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 font-bold text-[11px]">${colPct}% of $${MONTHLY_GOAL}</span>
-                  </div>
+              <div onclick="drillToOrders('custom', '${formatMonthLabel(m.ym)} Orders', o => o.deliveryMonth === '${m.ym}')" class="cursor-pointer group">
+                <div class="flex justify-between text-xs font-bold mb-1">
+                  <span class="text-slate-800 group-hover:text-emerald-700">${formatMonthLabel(m.ym)}</span>
+                  <span class="text-slate-900">$${m.billed.toFixed(2)} <span class="text-emerald-700 font-semibold">(Paid $${m.collected.toFixed(0)})</span></span>
                 </div>
-                <div class="w-full h-3.5 rounded-full bg-slate-100 overflow-hidden flex">
-                  <div onclick="drillToOrders('custom', '${formatMonthLabel(m.ym)} Collected', o => o.deliveryMonth === '${m.ym}' && o.amountPaid > 0)" title="Collected" class="cursor-pointer bg-emerald-600 hover:bg-emerald-500 h-full transition" style="width:${colPct}%"></div>
-                  <div onclick="drillToOrders('custom', '${formatMonthLabel(m.ym)} Pending Due', o => o.deliveryMonth === '${m.ym}' && !o.isPaid)" title="Pending Due" class="cursor-pointer bg-amber-400 hover:bg-amber-300 h-full transition" style="width:${penPct}%"></div>
+                <div class="w-full h-2.5 rounded-full bg-slate-100 overflow-hidden">
+                  <div style="width:${w}%" class="h-full bg-[#0B2E1E] group-hover:bg-emerald-600 rounded-full transition-all"></div>
                 </div>
               </div>
             `;
@@ -2412,84 +2500,69 @@
         </div>
       `;
 
-      // Menu Category Demand
-      const catUnits = {};
-      CATEGORIES.forEach(c => catUnits[c.name] = 0);
-      enriched.forEach(o => o.lineItems.forEach(li => catUnits[li.category] = (catUnits[li.category] || 0) + li.qty));
-      const totalUnits = Object.values(catUnits).reduce((s, v) => s + v, 0) || 1;
-      document.getElementById('chartCategoryCard').innerHTML = `
-        <h3 class="text-sm font-extrabold text-slate-900">Menu Category Demand</h3>
-        <p class="text-[11px] text-slate-500 mb-3">Click any category to filter orders</p>
-        <div class="space-y-2.5">
+      // 3. Category Breakdown
+      const catCounts = {};
+      enriched.forEach(o => o.lineItems.forEach(li => {
+        catCounts[li.category] = (catCounts[li.category] || 0) + li.qty;
+      }));
+      const totalItems = Math.max(1, Object.values(catCounts).reduce((a, b) => a + b, 0));
+      catEl.innerHTML = `
+        <h3 class="text-sm font-extrabold text-slate-900 mb-3">Menu Category Volume</h3>
+        <div class="space-y-2.5 text-xs">
           ${CATEGORIES.map(c => {
-            const units = catUnits[c.name] || 0;
-            const pct = Math.round((units / totalUnits) * 100);
+            const cnt = catCounts[c.name] || 0;
+            const pct = Math.round((cnt / totalItems) * 100);
             return `
-              <div onclick="drillToOrders('custom', 'Category: ${c.name}', o => o.lineItems.some(li => li.category === '${c.name}'))" class="cursor-pointer group space-y-1">
-                <div class="flex items-center justify-between text-xs">
-                  <span class="font-bold text-slate-800 group-hover:text-emerald-700">${escapeHtml(c.name)}</span>
-                  <span class="text-slate-600 font-semibold">${units} units (${pct}%)</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                  <div class="${c.badgeBg} h-full rounded-full" style="width:${pct}%"></div>
-                </div>
+              <div onclick="drillToOrders('custom', 'Category: ${c.name}', o => o.lineItems.some(li => li.category === '${c.name}'))" class="cursor-pointer">
+                <div class="flex justify-between font-semibold mb-1"><span>${c.name}</span><span>${cnt} (${pct}%)</span></div>
+                <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden"><div style="width:${pct}%" class="${c.badgeBg} h-full rounded-full"></div></div>
               </div>
             `;
           }).join('')}
         </div>
       `;
 
-      // Payment Method Mix
-      const payCounts = {};
-      PAYMENT_METHODS.forEach(m => payCounts[m] = 0);
-      enriched.forEach(o => payCounts[o.paymentMethod] = (payCounts[o.paymentMethod] || 0) + 1);
-      const totalOrd = enriched.length || 1;
-      document.getElementById('chartPaymentCard').innerHTML = `
-        <h3 class="text-sm font-extrabold text-slate-900">Payment Method Mix</h3>
-        <p class="text-[11px] text-slate-500 mb-3">Click any payment method to filter orders</p>
-        <div class="space-y-2.5">
-          ${PAYMENT_METHODS.map(m => {
-            const cnt = payCounts[m] || 0;
-            const pct = Math.round((cnt / totalOrd) * 100);
+      // 4. Payment Method Breakdown
+      const payTotals = {};
+      enriched.forEach(o => {
+        payTotals[o.paymentMethod] = (payTotals[o.paymentMethod] || 0) + o.totalBilled;
+      });
+      const paySum = Math.max(1, Object.values(payTotals).reduce((a, b) => a + b, 0));
+      payEl.innerHTML = `
+        <h3 class="text-sm font-extrabold text-slate-900 mb-3">Payment Methods</h3>
+        <div class="space-y-2.5 text-xs">
+          ${PAYMENT_METHODS.map(pm => {
+            const amt = payTotals[pm] || 0;
+            const pct = Math.round((amt / paySum) * 100);
             return `
-              <div onclick="drillToOrders('custom', 'Payment: ${m}', o => o.paymentMethod === '${m}')" class="cursor-pointer group space-y-1">
-                <div class="flex items-center justify-between text-xs">
-                  <span class="font-bold text-slate-800 group-hover:text-emerald-700">${escapeHtml(m)}</span>
-                  <span class="text-slate-600 font-semibold">${cnt} orders (${pct}%)</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                  <div class="bg-[#0B2E1E] h-full rounded-full" style="width:${pct}%"></div>
-                </div>
+              <div onclick="drillToOrders('custom', 'Method: ${pm}', o => o.paymentMethod === '${pm}')" class="cursor-pointer">
+                <div class="flex justify-between font-semibold mb-1"><span>${pm}</span><span>$${amt.toFixed(0)} (${pct}%)</span></div>
+                <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden"><div style="width:${pct}%" class="bg-emerald-600 h-full rounded-full"></div></div>
               </div>
             `;
           }).join('')}
         </div>
       `;
 
-      // Household Spice Profiles
+      // 5. Spice Preference Breakdown
       const spiceCounts = {};
-      SPICE_OPTIONS.forEach(s => spiceCounts[s] = 0);
       enriched.forEach(o => {
         const list = o.tasteMembers.length > 0 ? o.tasteMembers : [{ spice: 'Medium (Standard)' }];
-        list.forEach(tm => spiceCounts[tm.spice] = (spiceCounts[tm.spice] || 0) + 1);
+        list.forEach(m => {
+          spiceCounts[m.spice] = (spiceCounts[m.spice] || 0) + 1;
+        });
       });
-      const totalSpice = Object.values(spiceCounts).reduce((s, v) => s + v, 0) || 1;
-      document.getElementById('chartSpiceCard').innerHTML = `
-        <h3 class="text-sm font-extrabold text-slate-900">Household Spice Profiles</h3>
-        <p class="text-[11px] text-slate-500 mb-3">Click any spice level to view matching orders</p>
-        <div class="space-y-2.5">
+      const spiceTotal = Math.max(1, Object.values(spiceCounts).reduce((a, b) => a + b, 0));
+      spiceEl.innerHTML = `
+        <h3 class="text-sm font-extrabold text-slate-900 mb-3">Household Spice Profiles</h3>
+        <div class="space-y-2 text-xs">
           ${SPICE_OPTIONS.map(sp => {
             const cnt = spiceCounts[sp] || 0;
-            const pct = Math.round((cnt / totalSpice) * 100);
+            const pct = Math.round((cnt / spiceTotal) * 100);
             return `
-              <div onclick="drillToOrders('custom', 'Spice: ${sp}', o => (o.tasteMembers.length ? o.tasteMembers : [{spice:'Medium (Standard)'}]).some(m => m.spice === '${sp}'))" class="cursor-pointer group space-y-1">
-                <div class="flex items-center justify-between text-xs">
-                  <span class="font-bold text-slate-800 group-hover:text-emerald-700">${escapeHtml(sp.replace(' (Standard)', ''))}</span>
-                  <span class="text-slate-600 font-semibold">${cnt} (${pct}%)</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                  <div class="bg-orange-500 h-full rounded-full" style="width:${pct}%"></div>
-                </div>
+              <div onclick="drillToOrders('custom', 'Spice: ${sp}', o => o.tasteMembers.some(m => m.spice === '${sp}'))" class="cursor-pointer">
+                <div class="flex justify-between font-semibold mb-1"><span>${sp.replace(' (Standard)', '')}</span><span>${cnt} (${pct}%)</span></div>
+                <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden"><div style="width:${pct}%" class="bg-orange-500 h-full rounded-full"></div></div>
               </div>
             `;
           }).join('')}
