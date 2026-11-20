@@ -18,7 +18,10 @@
       box-shadow: 0 2px 14px rgba(11, 46, 30, 0.05);
     }
     .header-forest {
-      background: linear-gradient(135deg, #0B2E1E 0%, #13442E 58%, #0E3524 100%);
+      background: linear-gradient(135deg, #0D3822 0%, #14492E 58%, #0A2B1A 100%);
+    }
+    .brand-logo-card {
+      background: radial-gradient(circle at 30% 45%, #165132 0%, #0D3822 72%, #082416 100%);
     }
     .tab-btn-active {
       background-color: #ffffff;
@@ -60,28 +63,71 @@
 <body class="min-h-screen flex flex-col">
 
   <!-- ========================================================= -->
-  <!-- TOP EXECUTIVE BRAND HEADER & SEGMENTED NAVIGATION         -->
+  <!-- TOP EXECUTIVE BRAND HEADER WITH OFFICIAL LOGO BANNER      -->
   <!-- ========================================================= -->
-  <header class="header-forest text-white border-b border-emerald-950/60 shadow-lg">
+  <header class="header-forest text-white border-b-2 border-[#FACC15]/80 shadow-lg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-5">
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-        <!-- Brand Emblem & Title -->
-        <div class="flex items-center gap-3.5">
-          <div class="shrink-0 w-36 sm:w-40 rounded-xl bg-[#0a2719] border border-emerald-700/60 px-3 py-2 text-center shadow-inner select-none">
-            <div class="text-xs font-extrabold tracking-tight leading-none">
-              <span class="text-white">THE</span> <span class="text-emerald-400">GREEN</span>
+      <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
+        <!-- Brand Logo Emblem & Tracker Title -->
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+          <!-- Custom SVG + Typographic Match of The Green Spicery Banner Logo -->
+          <div class="brand-logo-card shrink-0 rounded-2xl border-t-4 border-[#FACC15] border-x border-b border-emerald-700/70 px-4 py-2.5 shadow-lg select-none flex items-center gap-3.5">
+            <!-- Left Botanical & Spice Accent -->
+            <div class="hidden xs:flex flex-col items-center justify-center opacity-90">
+              <svg class="w-7 h-7" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="8" fill="#D97706" stroke="#92400E" stroke-width="1.5"/>
+                <circle cx="12" cy="12" r="5" fill="#F59E0B"/>
+                <circle cx="24" cy="22" r="8" fill="#B91C1C" stroke="#7F1D1D" stroke-width="1.5"/>
+                <circle cx="24" cy="22" r="5" fill="#EF4444"/>
+                <path d="M22 7C25 5 29 6 30 9C27 11 23 10 22 7Z" fill="#4ADE80"/>
+                <path d="M6 25C9 23 13 24 14 27C11 29 7 28 6 25Z" fill="#22C55E"/>
+              </svg>
             </div>
-            <div class="text-sm sm:text-base font-black tracking-wide text-[#FACC15] leading-tight mt-0.5">
-              SPICERY
+
+            <!-- Center Official Wordmark with Two Leaves above GREEN -->
+            <div class="text-center">
+              <div class="relative inline-flex items-center justify-center gap-1.5 font-black tracking-tight text-lg sm:text-xl leading-none pt-2">
+                <!-- Two Green Leaves Positioned Above "GREEN" -->
+                <svg class="w-6 h-4 absolute -top-2 right-4" viewBox="0 0 32 20" fill="none" aria-hidden="true">
+                  <path d="M15 17C14 10 8 5 2 6C3 12 9 17 15 17Z" fill="#65C466" stroke="#14532D" stroke-width="1"/>
+                  <path d="M16 17C18 9 24 3 30 4C29 11 23 17 16 17Z" fill="#4ADE80" stroke="#14532D" stroke-width="1"/>
+                </svg>
+                <span class="text-white">THE</span>
+                <span class="text-[#65C466]">GREEN</span>
+              </div>
+              <div class="text-xl sm:text-2xl font-black tracking-wide text-[#FACC15] leading-none mt-0.5">
+                SPICERY
+              </div>
+              <div class="text-[9px] sm:text-[10px] font-bold tracking-wider text-white/95 uppercase mt-1 leading-tight">
+                HOME-COOKED INDIAN FOOD
+              </div>
+              <div class="text-[9px] sm:text-[10px] font-extrabold tracking-wider text-emerald-100 uppercase leading-tight flex items-center justify-center gap-1">
+                <span>NOW SERVING LEAMINGTON</span>
+                <span class="text-red-500 text-xs leading-none">🍁</span>
+              </div>
             </div>
-            <div class="text-[8px] font-bold tracking-wider text-emerald-100/90 uppercase mt-0.5">
-              HOME-COOKED • LEAMINGTON <span class="text-rose-500">🍁</span>
+
+            <!-- Right 3 Quality Pillars from Logo -->
+            <div class="hidden sm:flex flex-col gap-1.5 pl-3 border-l border-emerald-700/60 text-[9px] font-bold uppercase tracking-wider text-emerald-50">
+              <div class="flex items-center gap-1.5">
+                <span class="w-4 h-4 rounded-full border border-emerald-300/80 flex items-center justify-center text-[9px]">🌿</span>
+                <span class="leading-none">Fresh<br/><span class="text-emerald-200/85 font-semibold">Ingredients</span></span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="w-4 h-4 rounded-full border border-emerald-300/80 flex items-center justify-center text-[9px]">🏠</span>
+                <span class="leading-none">Homemade<br/><span class="text-emerald-200/85 font-semibold">Taste</span></span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="w-4 h-4 rounded-full border border-emerald-300/80 flex items-center justify-center text-[9px]">💚</span>
+                <span class="leading-none">Made<br/><span class="text-emerald-200/85 font-semibold">With Care</span></span>
+              </div>
             </div>
           </div>
 
+          <!-- Dashboard Title & Status Pills -->
           <div>
             <h1 class="text-lg sm:text-2xl font-extrabold tracking-tight text-white leading-snug">
-              The Green Spicery — Order &amp; Payment Tracker
+              Order &amp; Payment Tracker
             </h1>
             <div class="flex flex-wrap items-center gap-2 mt-1.5">
               <span id="headerCountsBadge" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/12 text-emerald-50 border border-white/15">
@@ -92,14 +138,14 @@
                 Auto-Save Active
               </span>
             </div>
-            <p class="text-xs text-emerald-200/80 mt-1">
-              Home-Cooked Indian Food • Leamington, ON • Last Saved: <span id="lastSavedText" class="text-[#FACC15] font-semibold">—</span>
+            <p class="text-xs text-emerald-200/85 mt-1">
+              WhatsApp: <strong class="text-white">226-739-8921</strong> • Last Saved: <span id="lastSavedText" class="text-[#FACC15] font-semibold">—</span>
             </p>
           </div>
         </div>
 
         <!-- Top-Right Action Bar with Prominent + Add Order CTA -->
-        <div class="flex flex-wrap items-center gap-2 sm:gap-2.5 lg:justify-end">
+        <div class="flex flex-wrap items-center gap-2 sm:gap-2.5 xl:justify-end">
           <button type="button" onclick="openSyncModal()" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-emerald-50 border border-white/15 text-xs font-semibold transition">
             <span>🔄</span> Sync / Backup
           </button>
@@ -385,10 +431,7 @@
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Returning Customer Retention Donut -->
         <div id="chartRetentionCard" class="bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow"></div>
-
-        <!-- Monthly Revenue vs $500 Target -->
         <div id="chartMonthlyCard" class="bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow"></div>
       </div>
 
@@ -679,15 +722,28 @@
   <div id="receiptModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
     <div class="bg-white rounded-2xl max-w-lg w-full p-5 shadow-2xl border border-slate-200 my-auto">
       <div id="receiptPrintableArea" class="bg-white border border-slate-300 rounded-xl overflow-hidden">
-        <div class="header-forest text-white px-5 py-4 border-b-2 border-[#FACC15] flex items-center justify-between">
-          <div>
-            <div class="text-base font-black tracking-tight text-[#FACC15]">THE GREEN SPICERY</div>
-            <div class="text-[11px] text-emerald-100">Home-Cooked Indian Food • Leamington, ON</div>
-            <div class="text-[11px] text-emerald-200 font-semibold">WhatsApp / Tel: 226-739-8921</div>
+        <!-- Official Branded Receipt Header Matching Your Logo -->
+        <div class="brand-logo-card text-white px-5 py-4 border-t-4 border-[#FACC15] border-b-2 border-[#FACC15] flex items-center justify-between gap-3">
+          <div class="text-left">
+            <div class="relative inline-flex items-center gap-1 font-black tracking-tight text-base sm:text-lg leading-none pt-1.5">
+              <svg class="w-5 h-3.5 absolute -top-2 right-3" viewBox="0 0 32 20" fill="none" aria-hidden="true">
+                <path d="M15 17C14 10 8 5 2 6C3 12 9 17 15 17Z" fill="#65C466"/>
+                <path d="M16 17C18 9 24 3 30 4C29 11 23 17 16 17Z" fill="#4ADE80"/>
+              </svg>
+              <span class="text-white">THE</span>
+              <span class="text-[#65C466]">GREEN</span>
+            </div>
+            <div class="text-lg sm:text-xl font-black tracking-wide text-[#FACC15] leading-none mt-0.5">
+              SPICERY
+            </div>
+            <div class="text-[9px] font-bold tracking-wider text-white/95 uppercase mt-1">
+              HOME-COOKED INDIAN FOOD • LEAMINGTON <span class="text-red-500">🍁</span>
+            </div>
+            <div class="text-[11px] text-emerald-200 font-semibold mt-0.5">WhatsApp / Tel: 226-739-8921</div>
           </div>
-          <div class="text-right">
+          <div class="text-right shrink-0">
             <span class="px-2.5 py-1 rounded bg-[#FACC15] text-[#0B2E1E] text-[10px] font-black uppercase tracking-wider">Official Receipt</span>
-            <div id="recOrderId" class="text-xs font-mono font-bold text-[#FACC15] mt-1">Order #: GS-1001</div>
+            <div id="recOrderId" class="text-xs font-mono font-bold text-[#FACC15] mt-1.5">Order #: GS-1001</div>
           </div>
         </div>
         <div class="p-5 space-y-4 text-xs sm:text-sm">
@@ -736,7 +792,7 @@
           </div>
 
           <div class="pt-4 flex items-end justify-between text-xs text-slate-600">
-            <div>Thank you for supporting local home-cooked food!</div>
+            <div>Fresh Ingredients • Homemade Taste • Made With Care</div>
             <div class="text-right">
               <div class="w-36 border-b border-slate-800 mb-1"></div>
               <span class="text-[10px] font-semibold uppercase">Authorized Signature</span>
