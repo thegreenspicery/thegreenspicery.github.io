@@ -60,288 +60,211 @@
 <body class="min-h-screen flex flex-col">
 
   <!-- ========================================================= -->
-  <!-- 1. EXECUTIVE FOREST-EMERALD & WARM GOLD HEADER BANNER     -->
+  <!-- TOP EXECUTIVE BRAND HEADER & SEGMENTED NAVIGATION         -->
   <!-- ========================================================= -->
-  <header class="header-forest text-white border-b border-emerald-950 sticky top-0 z-30 shadow-lg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-3.5">
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3.5 pb-3.5 border-b border-emerald-800/60">
-        <!-- Left: Brand Emblem & Executive Title -->
+  <header class="header-forest text-white border-b border-emerald-950/60 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-5">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <!-- Brand Emblem & Title -->
         <div class="flex items-center gap-3.5">
-          <div class="relative shrink-0 rounded-xl overflow-hidden border border-amber-400/50 shadow-md bg-[#0f3822]">
-            <img
-              src="logo.png"
-              alt="The Green Spicery"
-              onload="this.classList.remove('hidden'); document.getElementById('brandVectorEmblem').classList.add('hidden');"
-              onerror="this.remove();"
-              class="hidden h-14 w-auto object-contain"
-            />
-            <div id="brandVectorEmblem" class="px-3.5 py-2 flex flex-col items-center justify-center leading-none select-none bg-gradient-to-br from-[#144728] via-[#17522e] to-[#0d331d]">
-              <svg class="w-4 h-3 text-[#65c458] mb-0.5" viewBox="0 0 36 22" fill="currentColor" aria-hidden="true">
-                <path d="M17 19C17 10 9 4 1 5C2 13 9 19 17 19Z" />
-                <path d="M19 19C19 9 27 2 35 3C34 12 27 19 19 19Z" />
-              </svg>
-              <div class="text-xs font-black tracking-tight">
-                <span class="text-white">THE</span>
-                <span class="text-[#65c458]">GREEN</span>
-              </div>
-              <div class="text-sm font-black tracking-tight text-[#FACC15] -mt-0.5">
-                SPICERY
-              </div>
-              <div class="text-[7.5px] font-bold tracking-wider text-white/95 uppercase mt-0.5 flex items-center gap-0.5">
-                <span>HOME-COOKED • LEAMINGTON</span>
-                <span class="text-red-500 text-[9px]">🍁</span>
-              </div>
+          <div class="shrink-0 w-36 sm:w-40 rounded-xl bg-[#0a2719] border border-emerald-700/60 px-3 py-2 text-center shadow-inner select-none">
+            <div class="text-xs font-extrabold tracking-tight leading-none">
+              <span class="text-white">THE</span> <span class="text-emerald-400">GREEN</span>
+            </div>
+            <div class="text-sm sm:text-base font-black tracking-wide text-[#FACC15] leading-tight mt-0.5">
+              SPICERY
+            </div>
+            <div class="text-[8px] font-bold tracking-wider text-emerald-100/90 uppercase mt-0.5">
+              HOME-COOKED • LEAMINGTON <span class="text-rose-500">🍁</span>
             </div>
           </div>
 
           <div>
-            <div class="flex flex-wrap items-center gap-2">
-              <h1 class="text-base sm:text-xl font-extrabold tracking-tight text-white">
-                The Green Spicery — Order &amp; Payment Tracker
-              </h1>
-              <span id="headerCounterPill" class="px-2.5 py-0.5 rounded-full bg-emerald-950/90 text-emerald-100 text-xs font-semibold border border-emerald-700/70">
+            <h1 class="text-lg sm:text-2xl font-extrabold tracking-tight text-white leading-snug">
+              The Green Spicery — Order &amp; Payment Tracker
+            </h1>
+            <div class="flex flex-wrap items-center gap-2 mt-1.5">
+              <span id="headerCountsBadge" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/12 text-emerald-50 border border-white/15">
                 0 Orders • 0 Customers
               </span>
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-900/80 text-emerald-300 text-xs font-semibold border border-emerald-600/50">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-200 border border-emerald-400/30">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 Auto-Save Active
               </span>
             </div>
-            <p class="text-xs text-emerald-200/85 mt-0.5">
-              Home-Cooked Indian Food • Leamington, ON • Last Saved: <span id="lastSyncedTime" class="text-[#FACC15] font-semibold">Ready</span>
+            <p class="text-xs text-emerald-200/80 mt-1">
+              Home-Cooked Indian Food • Leamington, ON • Last Saved: <span id="lastSavedText" class="text-[#FACC15] font-semibold">—</span>
             </p>
           </div>
         </div>
 
-        <!-- Top-Right Action Cluster: Utility Controls + Prominent Gold + Add Order CTA -->
-        <div class="flex flex-wrap items-center gap-2 self-start lg:self-center">
-          <button type="button" onclick="openSyncModal()" title="Sync orders across laptop & mobile via WhatsApp" class="px-3 py-2 rounded-xl bg-emerald-950/85 hover:bg-emerald-900 text-emerald-100 text-xs font-semibold border border-emerald-700/70 transition flex items-center gap-1.5">
-            <span>🔄</span>
-            <span>Sync / Backup</span>
+        <!-- Top-Right Action Bar with Prominent + Add Order CTA -->
+        <div class="flex flex-wrap items-center gap-2 sm:gap-2.5 lg:justify-end">
+          <button type="button" onclick="openSyncModal()" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-emerald-50 border border-white/15 text-xs font-semibold transition">
+            <span>🔄</span> Sync / Backup
           </button>
-          <button type="button" onclick="openBulkModal()" title="Paste multiple orders at once" class="px-3 py-2 rounded-xl bg-emerald-950/85 hover:bg-emerald-900 text-emerald-100 text-xs font-semibold border border-emerald-700/70 transition flex items-center gap-1.5">
-            <span>📋</span>
-            <span>Paste / Bulk Add</span>
+          <button type="button" onclick="openBulkModal()" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-emerald-50 border border-white/15 text-xs font-semibold transition">
+            <span>📋</span> Paste / Bulk Add
           </button>
-          <button type="button" onclick="exportCSV()" title="Download CSV spreadsheet" class="px-3 py-2 rounded-xl bg-emerald-950/85 hover:bg-emerald-900 text-emerald-100 text-xs font-semibold border border-emerald-700/70 transition flex items-center gap-1.5">
-            <span>↓</span>
-            <span>Export CSV</span>
+          <button type="button" onclick="exportOrdersCSV()" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-emerald-50 border border-white/15 text-xs font-semibold transition">
+            <span>⬇</span> Export CSV
           </button>
-          <button type="button" onclick="openAddModal()" class="px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FACC15] to-amber-400 hover:from-yellow-300 hover:to-amber-300 text-[#0B2E1E] text-xs sm:text-sm font-black shadow-lg shadow-black/30 border border-yellow-200 transition flex items-center gap-1.5">
-            <span class="text-base leading-none font-black">+</span>
-            <span>Add Order</span>
+          <button type="button" onclick="openAddModal()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#FACC15] hover:bg-yellow-300 text-[#0B2E1E] font-extrabold text-xs sm:text-sm shadow-md hover:shadow-lg transition">
+            <span class="text-base leading-none">+</span> Add Order
           </button>
         </div>
       </div>
 
-      <!-- 5-Tab Segmented Navigation -->
-      <nav aria-label="Dashboard Navigation" class="pt-3 flex items-center justify-between overflow-x-auto no-scrollbar">
-        <div class="inline-flex items-center bg-emerald-950/85 p-1 rounded-xl border border-emerald-800/80 gap-1 min-w-max">
-          <button type="button" onclick="switchTab('overview')" id="tab-overview" class="tab-btn-active px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition flex items-center gap-1.5">
-            <span>Executive Overview</span>
+      <!-- Segmented 5-Tab Navigation Bar -->
+      <nav aria-label="Dashboard Navigation" class="mt-4">
+        <div class="inline-flex w-full sm:w-auto overflow-x-auto no-scrollbar rounded-2xl bg-[#072115]/90 p-1.5 border border-emerald-800/60 gap-1">
+          <button type="button" id="tabBtn-overview" onclick="switchTab('overview')" class="tab-btn-active whitespace-nowrap px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition">
+            Executive Overview
           </button>
-          <button type="button" onclick="switchTab('orders')" id="tab-orders" class="tab-btn-inactive px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-1.5">
+          <button type="button" id="tabBtn-orders" onclick="switchTab('orders')" class="tab-btn-inactive whitespace-nowrap px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition inline-flex items-center gap-1.5">
             <span>Order Log</span>
-            <span id="orderTabBadge" class="px-1.5 py-0.2 rounded-md bg-emerald-800/90 text-emerald-100 text-[11px] font-bold">0</span>
+            <span id="navOrdersCount" class="px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-emerald-700 text-white">0</span>
           </button>
-          <button type="button" onclick="switchTab('earnings')" id="tab-earnings" class="tab-btn-inactive px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-1.5">
+          <button type="button" id="tabBtn-earnings" onclick="switchTab('earnings')" class="tab-btn-inactive whitespace-nowrap px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition inline-flex items-center gap-1.5">
             <span>Monthly Earnings</span>
-            <span id="earningsTabBadge" class="px-1.5 py-0.2 rounded-md bg-amber-400/20 text-[#FACC15] border border-amber-400/30 text-[11px] font-bold">$0</span>
+            <span id="navEarningsBadge" class="px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-[#FACC15]/20 text-[#FACC15] border border-[#FACC15]/30">$0</span>
           </button>
-          <button type="button" onclick="switchTab('customers')" id="tab-customers" class="tab-btn-inactive px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-1.5">
+          <button type="button" id="tabBtn-customers" onclick="switchTab('customers')" class="tab-btn-inactive whitespace-nowrap px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition inline-flex items-center gap-1.5">
             <span>Returning Customers</span>
-            <span id="custTabBadge" class="px-1.5 py-0.2 rounded-md bg-emerald-800/90 text-emerald-100 text-[11px] font-bold">0</span>
+            <span id="navCustomersCount" class="px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-emerald-600 text-white">0</span>
           </button>
-          <button type="button" onclick="switchTab('charts')" id="tab-charts" class="tab-btn-inactive px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-1.5">
+          <button type="button" id="tabBtn-charts" onclick="switchTab('charts')" class="tab-btn-inactive whitespace-nowrap px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition inline-flex items-center gap-1.5">
             <span>Charts &amp; Insights</span>
-            <span class="px-1.5 py-0.2 rounded-md bg-[#FACC15] text-[#0B2E1E] text-[10px] font-extrabold uppercase">Interactive</span>
+            <span class="px-1.5 py-0.5 rounded bg-[#FACC15] text-[#0B2E1E] text-[10px] font-black tracking-wide">INTERACTIVE</span>
           </button>
         </div>
       </nav>
     </div>
   </header>
 
-  <!-- Toast Notification Banner -->
-  <div id="toastBanner" class="hidden fixed bottom-5 right-5 z-50 bg-[#0B2E1E] text-white px-4 py-3 rounded-xl shadow-xl border border-emerald-700 text-sm font-medium flex items-center gap-2.5">
-    <span class="w-2 h-2 rounded-full bg-[#FACC15]"></span>
-    <span id="toastMessage">Saved</span>
+  <!-- Toast Notification -->
+  <div id="toastBanner" class="hidden fixed bottom-5 right-5 z-50 bg-[#0B2E1E] text-white border border-emerald-600 px-4 py-3 rounded-2xl shadow-2xl text-xs sm:text-sm font-semibold">
+    <span id="toastMessage">Saved!</span>
   </div>
 
   <!-- ========================================================= -->
-  <!-- MAIN CONTENT CONTAINER                                    -->
+  <!-- MAIN CONTENT WORKSPACE                                    -->
   <!-- ========================================================= -->
-  <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 flex-1">
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
 
-    <!-- ========================================================= -->
-    <!-- TAB 1: EXECUTIVE OVERVIEW                                 -->
-    <!-- ========================================================= -->
-    <section id="view-overview" class="space-y-6">
-
-      <!-- Top 3 Operational Alert Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div onclick="filterAndJump('overdue', 'Unpaid Overdue Orders')" class="cursor-pointer bg-white rounded-2xl p-5 card-shadow border border-slate-200/80 border-l-4 border-l-rose-500 hover:border-rose-300 transition flex items-center justify-between">
-          <div>
-            <div class="flex items-center gap-2 mb-1.5">
-              <span class="px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 text-[11px] font-bold uppercase tracking-wider">Payment Risk</span>
-              <span class="text-xs text-slate-500 font-medium">Past Delivery</span>
-            </div>
-            <h2 class="text-base font-bold text-slate-900">Unpaid Overdue Orders</h2>
-            <p class="text-xs text-slate-500 mt-1">Delivered without full payment →</p>
+    <!-- ======================================================= -->
+    <!-- TAB 1: EXECUTIVE OVERVIEW                               -->
+    <!-- ======================================================= -->
+    <section id="tab-overview" class="space-y-6">
+      <!-- Top 4 Clickable KPI Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div onclick="drillToOrders('all', 'All Orders')" class="cursor-pointer bg-white rounded-2xl p-5 border border-slate-200/80 hover:border-emerald-500 card-shadow transition">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Total Gross Billed</span>
+            <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[11px] font-bold">All Orders</span>
           </div>
-          <div id="kpiOverdueCount" class="text-3xl sm:text-4xl font-extrabold text-rose-600">0</div>
+          <div id="kpiGrossBilled" class="text-2xl sm:text-3xl font-black text-slate-900 mt-2">$0.00</div>
+          <p id="kpiGrossSub" class="text-xs text-slate-500 mt-1">Food + Delivery + Tips across 0 orders</p>
         </div>
 
-        <div onclick="filterAndJump('pending', 'Pending Payment Orders')" class="cursor-pointer bg-white rounded-2xl p-5 card-shadow border border-slate-200/80 border-l-4 border-l-amber-400 hover:border-amber-300 transition flex items-center justify-between">
-          <div>
-            <div class="flex items-center gap-2 mb-1.5">
-              <span class="px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 text-[11px] font-bold uppercase tracking-wider">Pre-Payment Gate</span>
-              <span class="text-xs text-slate-500 font-medium">Awaiting Funds</span>
-            </div>
-            <h2 class="text-base font-bold text-slate-900">Pending Balances</h2>
-            <p id="kpiPendingAmtSub" class="text-xs text-slate-500 mt-1">$0.00 awaiting Cash / e-Transfer →</p>
+        <div onclick="drillToOrders('collected', 'Collected Payments')" class="cursor-pointer bg-white rounded-2xl p-5 border border-slate-200/80 hover:border-emerald-500 card-shadow transition">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">Cash &amp; e-Transfer Collected</span>
+            <span id="kpiCollectionPct" class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold">0%</span>
           </div>
-          <div id="kpiPendingCount" class="text-3xl sm:text-4xl font-extrabold text-amber-600">0</div>
+          <div id="kpiCollected" class="text-2xl sm:text-3xl font-black text-emerald-700 mt-2">$0.00</div>
+          <p id="kpiCollectedSub" class="text-xs text-slate-500 mt-1">Includes $0.00 in tips collected</p>
         </div>
 
-        <div onclick="filterAndJump('upcoming', 'Today & Upcoming Deliveries (< 72h)')" class="cursor-pointer bg-white rounded-2xl p-5 card-shadow border border-slate-200/80 border-l-4 border-l-orange-500 hover:border-orange-300 transition flex items-center justify-between">
-          <div>
-            <div class="flex items-center gap-2 mb-1.5">
-              <span class="px-2 py-0.5 rounded-md bg-orange-50 text-orange-700 text-[11px] font-bold uppercase tracking-wider">Kitchen Prep</span>
-              <span class="text-xs text-slate-500 font-medium">Next 72 Hours</span>
-            </div>
-            <h2 class="text-base font-bold text-slate-900">Today &amp; Upcoming</h2>
-            <p id="kpiUpcomingSub" class="text-xs text-slate-500 mt-1">Scheduled within the next 3 days →</p>
+        <div onclick="drillToOrders('balance_due', 'Unpaid Balance Due')" class="cursor-pointer bg-white rounded-2xl p-5 border border-rose-200 hover:border-rose-500 card-shadow transition">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-rose-700">Unpaid Balance Due</span>
+            <span id="kpiDueCountBadge" class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 text-[11px] font-extrabold">0 Due</span>
           </div>
-          <div id="kpiUpcomingCount" class="text-3xl sm:text-4xl font-extrabold text-orange-600">0</div>
-        </div>
-      </div>
-
-      <!-- Executive Summary Card + 6 Clickable KPI Tiles -->
-      <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-200/80 space-y-5">
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-          <div>
-            <p class="text-xs font-bold uppercase tracking-wider text-emerald-700">Executive Kitchen Summary</p>
-            <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">The Green Spicery Performance &amp; $500 CAD Target</h2>
-            <p class="text-sm text-slate-600 mt-1">
-              Every metric card below is clickable to inspect the matching orders or VIP customers.
-            </p>
-          </div>
-          <div class="flex flex-wrap items-center gap-2">
-            <button type="button" onclick="switchTab('charts')" class="px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 text-xs font-bold transition">
-              Open Visual Charts →
-            </button>
-            <button type="button" onclick="openAddModal()" class="px-4 py-2 rounded-xl bg-[#0B2E1E] hover:bg-[#13442E] text-white text-xs font-bold transition">
-              + New Order
-            </button>
-          </div>
+          <div id="kpiBalanceDue" class="text-2xl sm:text-3xl font-black text-rose-700 mt-2">$0.00</div>
+          <p id="kpiDueSub" class="text-xs text-slate-500 mt-1">Click to inspect pending balances</p>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
-          <!-- KPI 1: Verified Revenue Collected -->
-          <div onclick="filterAndJump('collected', 'Verified Revenue Collected')" class="cursor-pointer rounded-xl bg-[#0B2E1E] text-white p-4 flex flex-col justify-between hover:bg-[#13442E] transition">
-            <span class="text-xs font-medium text-emerald-200">Verified Collected</span>
-            <div id="boxVerifiedCollected" class="text-2xl font-extrabold text-[#FACC15] mt-2">$0.00</div>
-            <span id="boxTipsCollectedSub" class="text-[11px] text-emerald-300/90 mt-1">Incl. $0.00 tips</span>
+        <div onclick="drillToOrders('upcoming', 'Upcoming Deliveries (<72h Unpaid)')" class="cursor-pointer bg-white rounded-2xl p-5 border border-amber-200 hover:border-amber-500 card-shadow transition">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-800">&lt;72h Unpaid Deliveries</span>
+            <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[11px] font-bold">⚡ Action</span>
           </div>
-
-          <!-- KPI 2: Pending Balances -->
-          <div onclick="filterAndJump('balance_due', 'Orders with Pending Balance Due')" class="cursor-pointer rounded-xl bg-amber-50/80 border border-amber-200 p-4 flex flex-col justify-between hover:bg-amber-100/70 transition">
-            <span class="text-xs font-semibold text-amber-900">Pending Balances</span>
-            <div id="boxPendingBalance" class="text-2xl font-extrabold text-amber-700 mt-2">$0.00</div>
-            <span id="boxPendingOrdersSub" class="text-[11px] text-amber-800/80 mt-1">0 orders due</span>
-          </div>
-
-          <!-- KPI 3: Monthly Goal Progress vs $500 CAD -->
-          <div onclick="switchTab('earnings')" class="cursor-pointer rounded-xl bg-indigo-50/80 border border-indigo-200 p-4 flex flex-col justify-between hover:bg-indigo-100/70 transition">
-            <span class="text-xs font-semibold text-indigo-900">Goal ($500 CAD)</span>
-            <div id="boxGoalPercent" class="text-2xl font-extrabold text-indigo-700 mt-2">0%</div>
-            <span id="boxGoalRemainingSub" class="text-[11px] text-indigo-800/80 mt-1">$500 to target</span>
-          </div>
-
-          <!-- KPI 4: Total Orders -->
-          <div onclick="filterAndJump('all', 'All Logged Orders')" class="cursor-pointer rounded-xl bg-slate-50 border border-slate-200 p-4 flex flex-col justify-between hover:bg-slate-100 transition">
-            <span class="text-xs font-semibold text-slate-700">Total Orders</span>
-            <div id="boxTotalOrders" class="text-2xl font-extrabold text-slate-900 mt-2">0</div>
-            <span id="boxTotalBilledSub" class="text-[11px] text-slate-500 mt-1">$0.00 billed</span>
-          </div>
-
-          <!-- KPI 5: Returning VIPs -->
-          <div onclick="jumpToCustomerTier('vip', 'Returning VIP Customers')" class="cursor-pointer rounded-xl bg-emerald-50/80 border border-emerald-200 p-4 flex flex-col justify-between hover:bg-emerald-100/70 transition">
-            <span class="text-xs font-semibold text-emerald-900">Returning VIPs</span>
-            <div id="boxReturningVips" class="text-2xl font-extrabold text-emerald-700 mt-2">0</div>
-            <span id="boxReturningRateSub" class="text-[11px] text-emerald-800/80 mt-1">0% repeat loyalty</span>
-          </div>
-
-          <!-- KPI 6: Today / Upcoming Deliveries -->
-          <div onclick="filterAndJump('upcoming', 'Today & Upcoming Deliveries (< 72h)')" class="cursor-pointer rounded-xl bg-orange-50/80 border border-orange-200 p-4 flex flex-col justify-between hover:bg-orange-100/70 transition">
-            <span class="text-xs font-semibold text-orange-900">Today / &lt; 72h</span>
-            <div id="boxUpcomingOrders" class="text-2xl font-extrabold text-orange-700 mt-2">0</div>
-            <span id="boxFutureSub" class="text-[11px] text-orange-800/80 mt-1">0 total scheduled</span>
-          </div>
+          <div id="kpiUpcomingCount" class="text-2xl sm:text-3xl font-black text-amber-700 mt-2">0</div>
+          <p id="kpiUpcomingSub" class="text-xs text-slate-500 mt-1">Unpaid deliveries due within 72 hours</p>
         </div>
       </div>
 
-      <!-- Menu Category Readiness Grid -->
-      <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-200/80 space-y-4">
-        <div class="flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <h3 class="text-lg font-extrabold text-slate-900">Menu Line Demand &amp; Pre-Payment Readiness</h3>
-            <p class="text-xs text-slate-500 mt-0.5">Click any category card or number to filter the Order Log immediately.</p>
+      <!-- Upcoming Kitchen Prep & Unpaid Balance Queue -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+            <div>
+              <h2 class="text-base font-extrabold text-slate-900">Unpaid Balances Requiring Follow-Up</h2>
+              <p class="text-xs text-slate-500">Click any order card to edit or mark Paid 100%</p>
+            </div>
+            <button type="button" onclick="drillToOrders('balance_due', 'Unpaid Balance Due')" class="text-xs font-bold text-rose-700 hover:underline">View All →</button>
           </div>
-          <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
-            <button type="button" onclick="filterAndJump('overdue', 'Unpaid Overdue Orders')" id="pillOverdue" class="px-3 py-1 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 transition">Overdue (0)</button>
-            <button type="button" onclick="filterAndJump('pending', 'Pending Payment Orders')" id="pillPending" class="px-3 py-1 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 transition">Pending (0)</button>
-            <button type="button" onclick="filterAndJump('upcoming', 'Upcoming Deliveries (< 72h)')" id="pillUpcoming" class="px-3 py-1 rounded-full bg-orange-50 hover:bg-orange-100 text-orange-700 border border-orange-200 transition">&lt; 72h Window (0)</button>
-          </div>
+          <div id="overviewUnpaidList" class="space-y-2.5"></div>
         </div>
-        <div id="categoryCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4"></div>
+
+        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+            <div>
+              <h2 class="text-base font-extrabold text-slate-900">Recent &amp; Upcoming Kitchen Schedule</h2>
+              <p class="text-xs text-slate-500">Household spice profiles &amp; dishes at a glance</p>
+            </div>
+            <button type="button" onclick="switchTab('orders')" class="text-xs font-bold text-emerald-700 hover:underline">Full Log →</button>
+          </div>
+          <div id="overviewScheduleList" class="space-y-2.5"></div>
+        </div>
       </div>
     </section>
 
-    <!-- ========================================================= -->
-    <!-- TAB 2: ORDER LOG                                          -->
-    <!-- ========================================================= -->
-    <section id="view-orders" class="hidden space-y-5">
-      <div class="bg-white rounded-2xl p-5 card-shadow border border-slate-200/80 space-y-4">
-
-        <!-- Live Drilldown Filter Banner -->
-        <div id="drilldownBanner" class="hidden flex-wrap items-center justify-between gap-3 p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm">
-          <div class="flex flex-wrap items-center gap-2">
-            <span class="px-2 py-0.5 rounded-md bg-[#0B2E1E] text-white text-[11px] font-bold uppercase tracking-wider">Filtered View</span>
-            <span id="drilldownLabel" class="font-extrabold text-slate-900">All Orders</span>
-            <span id="drilldownStats" class="text-slate-600 font-medium"></span>
+    <!-- ======================================================= -->
+    <!-- TAB 2: ORDER LOG                                        -->
+    <!-- ======================================================= -->
+    <section id="tab-orders" class="hidden space-y-4">
+      <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 card-shadow space-y-4">
+        <!-- Reconciling Filtered View Banner with Prominent Due Badge -->
+        <div id="drilldownBanner" class="hidden flex-wrap items-center justify-between gap-3 bg-emerald-50/90 border border-emerald-200 rounded-xl px-4 py-2.5">
+          <div class="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
+            <span class="px-2.5 py-0.5 rounded-lg bg-[#0B2E1E] text-white font-extrabold text-[11px] uppercase tracking-wider">Filtered View</span>
+            <strong id="drilldownLabel" class="text-slate-900 font-extrabold">Filter: ALL</strong>
+            <span id="drilldownStats" class="text-slate-600"></span>
           </div>
-          <button type="button" onclick="resetDrilldown()" class="px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 text-xs font-bold transition">
+          <button type="button" onclick="resetOrderFilters()" class="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 text-xs font-bold transition">
             Reset to All Orders
           </button>
         </div>
 
-        <!-- Filter Pills + Search -->
+        <!-- Filter Pills + Search + Add Order -->
         <div class="flex flex-wrap items-center justify-between gap-3">
           <div class="flex flex-wrap items-center gap-1.5">
-            <button type="button" onclick="setOrderFilter('all')" id="flt-all" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#0B2E1E] text-white">All Orders</button>
-            <button type="button" onclick="setOrderFilter('mealbox')" id="flt-mealbox" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Meal Box</button>
-            <button type="button" onclick="setOrderFilter('paid')" id="flt-paid" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Paid (100%)</button>
-            <button type="button" onclick="setOrderFilter('collected')" id="flt-collected" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Collected</button>
-            <button type="button" onclick="setOrderFilter('balance_due')" id="flt-balance_due" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Balance Due</button>
-            <button type="button" onclick="setOrderFilter('pending')" id="flt-pending" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Pending</button>
-            <button type="button" onclick="setOrderFilter('cash')" id="flt-cash" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Cash / COD</button>
-            <button type="button" onclick="setOrderFilter('overdue')" id="flt-overdue" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Overdue</button>
-            <button type="button" onclick="setOrderFilter('upcoming')" id="flt-upcoming" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">&lt; 72h Due</button>
+            <button type="button" id="fPill-all" onclick="setOrderFilter('all')" class="px-3 py-1.5 rounded-xl bg-[#0B2E1E] text-white text-xs font-bold transition">All Orders</button>
+            <button type="button" id="fPill-mealbox" onclick="setOrderFilter('mealbox')" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">Meal Box</button>
+            <button type="button" id="fPill-paid" onclick="setOrderFilter('paid')" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">Paid (100%)</button>
+            <button type="button" id="fPill-collected" onclick="setOrderFilter('collected')" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">Collected</button>
+            <button type="button" id="fPill-balance_due" onclick="setOrderFilter('balance_due')" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">Balance Due</button>
+            <button type="button" id="fPill-pending" onclick="setOrderFilter('pending')" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">Pending</button>
+            <button type="button" id="fPill-cash" onclick="setOrderFilter('cash')" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">Cash / COD</button>
+            <button type="button" id="fPill-overdue" onclick="setOrderFilter('overdue')" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">Overdue</button>
+            <button type="button" id="fPill-upcoming" onclick="setOrderFilter('upcoming')" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">&lt; 72h Due</button>
           </div>
-          <div class="flex items-center gap-2">
-            <input type="text" id="searchOrdersInput" oninput="renderAll()" placeholder="Search customer, dish, spice, or method..." class="px-3 py-1.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-emerald-700" />
-            <button type="button" onclick="openAddModal()" class="px-3.5 py-1.5 rounded-xl bg-[#0B2E1E] hover:bg-[#13442E] text-white text-xs font-bold transition">
+
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <input type="text" id="orderSearchInput" oninput="renderOrdersTable()" placeholder="Search GS-1001, customer, dish, spice..." class="flex-1 sm:w-64 px-3.5 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-emerald-700" />
+            <button type="button" onclick="openAddModal()" class="px-3.5 py-2 rounded-xl bg-[#0B2E1E] hover:bg-[#13442E] text-white text-xs font-bold whitespace-nowrap">
               + Add Order
             </button>
           </div>
         </div>
 
-        <!-- Single-Line Formatted Order Log Table -->
-        <div class="overflow-x-auto">
+        <!-- Responsive Orders Table (Click Anywhere on Row to Open Edit Modal) -->
+        <div class="overflow-x-auto rounded-xl border border-slate-200/80">
           <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="border-b border-slate-200 bg-slate-50/90 text-[11px] font-bold uppercase tracking-wider text-slate-600">
+              <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-extrabold uppercase tracking-wider text-slate-600">
                 <th class="py-3 px-3 whitespace-nowrap">Order #</th>
                 <th class="py-3 px-3 whitespace-nowrap">Customer</th>
                 <th class="py-3 px-3 whitespace-nowrap">Delivery Date &amp; Time</th>
@@ -352,162 +275,137 @@
                 <th class="py-3 px-3 whitespace-nowrap">Paid &amp; Method</th>
                 <th class="py-3 px-3 text-right whitespace-nowrap">Balance Due</th>
                 <th class="py-3 px-3 whitespace-nowrap">Status</th>
-                <th class="py-3 px-3 text-right whitespace-nowrap">Actions</th>
+                <th class="py-3 px-3 text-right whitespace-nowrap sticky right-0 bg-slate-50 shadow-[-6px_0_10px_-6px_rgba(15,23,42,0.12)]">Actions</th>
               </tr>
             </thead>
-            <tbody id="ordersTableBody" class="divide-y divide-slate-100 text-sm"></tbody>
+            <tbody id="ordersTableBody" class="divide-y divide-slate-100 text-xs sm:text-sm"></tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- ========================================================= -->
-    <!-- TAB 3: MONTHLY EARNINGS & $500 CAD GOAL                   -->
-    <!-- ========================================================= -->
-    <section id="view-earnings" class="hidden space-y-5">
-      <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-200/80">
-        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+    <!-- ======================================================= -->
+    <!-- TAB 3: MONTHLY EARNINGS                                 -->
+    <!-- ======================================================= -->
+    <section id="tab-earnings" class="hidden space-y-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-500">All-Time Collected</span>
+          <div id="earnAllCollected" class="text-2xl font-black text-emerald-700 mt-1.5">$0.00</div>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-500">All-Time Food Revenue</span>
+          <div id="earnAllFood" class="text-2xl font-black text-slate-900 mt-1.5">$0.00</div>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Delivery Fees Billed</span>
+          <div id="earnAllDelivery" class="text-2xl font-black text-slate-900 mt-1.5">$0.00</div>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-emerald-200 card-shadow">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">Tips Collected</span>
+          <div id="earnAllTips" class="text-2xl font-black text-emerald-700 mt-1.5">$0.00</div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
           <div>
-            <p class="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-1">Financial Performance</p>
-            <h3 class="text-xl font-extrabold text-slate-900">Monthly Earnings &amp; $500 CAD Target</h3>
-            <p class="text-xs text-slate-500 mt-1">Click any summary card or monthly row to drill down into the underlying orders.</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <label for="earningsMonthFilter" class="text-xs font-semibold text-slate-600">Filter Month:</label>
-            <select id="earningsMonthFilter" onchange="renderAll()" class="px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm font-semibold bg-white focus:outline-none focus:border-emerald-700">
-              <option value="all">All Months</option>
-            </select>
+            <h2 class="text-base font-extrabold text-slate-900">Monthly Earnings Ledger ($500 CAD Monthly Target)</h2>
+            <p class="text-xs text-slate-500">Click any month row to inspect those exact orders</p>
           </div>
         </div>
-
-        <div id="earningsSummaryCards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5"></div>
-        <div id="paymentMethodBreakdown" class="flex flex-wrap items-center gap-2.5 p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 mb-6"></div>
-
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto rounded-xl border border-slate-200/80">
           <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="border-b border-slate-200 bg-slate-50/90 text-[11px] font-bold uppercase tracking-wider text-slate-600">
+              <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-extrabold uppercase tracking-wider text-slate-600">
                 <th class="py-3 px-3 whitespace-nowrap">Month</th>
                 <th class="py-3 px-3 text-center whitespace-nowrap">Orders</th>
-                <th class="py-3 px-3 text-right whitespace-nowrap">Food Subtotal</th>
+                <th class="py-3 px-3 text-right whitespace-nowrap">Food Sales</th>
                 <th class="py-3 px-3 text-right whitespace-nowrap">Delivery Fees</th>
-                <th class="py-3 px-3 text-right whitespace-nowrap">Tips Collected</th>
+                <th class="py-3 px-3 text-right whitespace-nowrap">Tips</th>
                 <th class="py-3 px-3 text-right whitespace-nowrap">Total Billed</th>
                 <th class="py-3 px-3 text-right whitespace-nowrap">Collected</th>
-                <th class="py-3 px-3 text-right whitespace-nowrap">Pending</th>
-                <th class="py-3 px-3 w-56 whitespace-nowrap">% of $500 CAD Goal</th>
+                <th class="py-3 px-3 text-right whitespace-nowrap">Balance Due</th>
+                <th class="py-3 px-3 whitespace-nowrap">$500 Goal Progress</th>
               </tr>
             </thead>
-            <tbody id="earningsTableBody" class="divide-y divide-slate-100 text-sm"></tbody>
+            <tbody id="monthlyEarningsBody" class="divide-y divide-slate-100 text-xs sm:text-sm"></tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- ========================================================= -->
-    <!-- TAB 4: RETURNING CUSTOMERS DIRECTORY                      -->
-    <!-- ========================================================= -->
-    <section id="view-customers" class="hidden space-y-5">
-      <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-200/80">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+    <!-- ======================================================= -->
+    <!-- TAB 4: RETURNING CUSTOMERS                              -->
+    <!-- ======================================================= -->
+    <section id="tab-customers" class="hidden space-y-5">
+      <div class="bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h3 class="text-lg font-extrabold text-slate-900">Returning Customers &amp; Household Taste Profiles</h3>
-            <p class="text-xs text-slate-500 mt-0.5">Click any customer name or order count to inspect their complete history, or tap Quick Re-Order.</p>
+            <h2 class="text-base font-extrabold text-slate-900">Customer Directory, Household Spice Profiles &amp; Dish History</h2>
+            <p class="text-xs text-slate-500">Click any customer name or order count to view full history and quick re-order</p>
           </div>
-          <div class="flex flex-wrap items-center gap-1.5">
-            <button type="button" onclick="customerTierFilter='all'; renderAll();" id="ctier-all" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0B2E1E] text-white">All Customers</button>
-            <button type="button" onclick="customerTierFilter='vip'; renderAll();" id="ctier-vip" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Returning VIPs</button>
-            <button type="button" onclick="customerTierFilter='first'; renderAll();" id="ctier-first" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">First-Time</button>
+          <div class="flex items-center gap-1.5">
+            <button type="button" id="custTier-all" onclick="setCustomerTierFilter('all')" class="px-3 py-1.5 rounded-xl bg-[#0B2E1E] text-white text-xs font-bold">All Customers</button>
+            <button type="button" id="custTier-vip" onclick="setCustomerTierFilter('vip')" class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold">Returning VIPs (2+)</button>
+            <button type="button" id="custTier-first" onclick="setCustomerTierFilter('first')" class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold">First-Time (1)</button>
           </div>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto rounded-xl border border-slate-200/80">
           <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="border-b border-slate-200 bg-slate-50/90 text-[11px] font-bold uppercase tracking-wider text-slate-600">
-                <th class="py-3 px-3.5 whitespace-nowrap">Customer</th>
-                <th class="py-3 px-3.5 whitespace-nowrap">Loyalty Tier</th>
-                <th class="py-3 px-3.5 whitespace-nowrap">Household Taste Profile</th>
-                <th class="py-3 px-3.5 whitespace-nowrap">Dishes Served</th>
-                <th class="py-3 px-3.5 text-center whitespace-nowrap">Orders</th>
-                <th class="py-3 px-3.5 text-right whitespace-nowrap">Total Paid</th>
-                <th class="py-3 px-3.5 text-right whitespace-nowrap">Balance Due</th>
-                <th class="py-3 px-3.5 text-right whitespace-nowrap">Action</th>
+              <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-extrabold uppercase tracking-wider text-slate-600">
+                <th class="py-3 px-3 whitespace-nowrap">Customer</th>
+                <th class="py-3 px-3 whitespace-nowrap">Loyalty Tier</th>
+                <th class="py-3 px-3 whitespace-nowrap">Household Taste Profile</th>
+                <th class="py-3 px-3 whitespace-nowrap">Dishes Served</th>
+                <th class="py-3 px-3 text-center whitespace-nowrap">Orders</th>
+                <th class="py-3 px-3 text-right whitespace-nowrap">Total Paid</th>
+                <th class="py-3 px-3 text-right whitespace-nowrap">Balance Due</th>
+                <th class="py-3 px-3 text-right whitespace-nowrap">Action</th>
               </tr>
             </thead>
-            <tbody id="customersTableBody" class="divide-y divide-slate-100 text-sm"></tbody>
+            <tbody id="customersTableBody" class="divide-y divide-slate-100 text-xs sm:text-sm"></tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- ========================================================= -->
-    <!-- TAB 5: CHARTS & INSIGHTS (100% CLICKABLE DRILL-DOWN)      -->
-    <!-- ========================================================= -->
-    <section id="view-charts" class="hidden space-y-6">
-      <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-200/80 flex flex-wrap items-center justify-between gap-4">
+    <!-- ======================================================= -->
+    <!-- TAB 5: INTERACTIVE CHARTS & INSIGHTS                    -->
+    <!-- ======================================================= -->
+    <section id="tab-charts" class="hidden space-y-6">
+      <div class="bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow space-y-3">
         <div>
-          <p class="text-xs font-bold uppercase tracking-wider text-emerald-700">Interactive Visual Analytics</p>
-          <h3 class="text-xl font-extrabold text-slate-900 mt-0.5">Customer Retention, Revenue &amp; Menu Insights</h3>
-          <p class="text-xs text-slate-500 mt-1">Click any pill, donut segment, legend card, monthly bar, category, payment method, or spice row to inspect matching records.</p>
+          <h2 class="text-base sm:text-lg font-extrabold text-slate-900">Interactive Kitchen &amp; Retention Analytics</h2>
+          <p class="text-xs text-slate-500">Click any badge, donut segment, revenue bar, category, or spice level below to inspect matching orders or customers.</p>
         </div>
-        <div id="chartsTopPills" class="flex flex-wrap items-center gap-2.5"></div>
+        <div id="chartsTopPills" class="flex flex-wrap items-center gap-2.5 pt-1"></div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Returning Customer Retention Donut -->
-        <div class="lg:col-span-5 bg-white rounded-2xl p-6 card-shadow border border-slate-200/80 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-1">
-              <h4 class="text-base font-extrabold text-slate-900">Returning Customer Retention</h4>
-              <span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 text-[11px] font-bold">Repeat Loyalty</span>
-            </div>
-            <p class="text-xs text-slate-500 mb-5">Share of customers placing 2+ orders</p>
-          </div>
-          <div id="chartRetentionContainer" class="flex flex-col sm:flex-row items-center justify-center gap-6 my-auto py-2"></div>
-          <div id="chartRetentionFooter" class="pt-4 mt-4 border-t border-slate-100 grid grid-cols-2 gap-3 text-center"></div>
-        </div>
+        <div id="chartRetentionCard" class="bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow"></div>
 
-        <!-- Monthly Revenue vs $500 CAD Target -->
-        <div class="lg:col-span-7 bg-white rounded-2xl p-6 card-shadow border border-slate-200/80 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-1">
-              <h4 class="text-base font-extrabold text-slate-900">Monthly Revenue vs. $500 CAD Target</h4>
-              <div class="flex items-center gap-3 text-[11px] font-semibold">
-                <span class="inline-flex items-center gap-1 text-emerald-700"><span class="w-2.5 h-2.5 rounded-xs bg-emerald-600 inline-block"></span> Collected</span>
-                <span class="inline-flex items-center gap-1 text-amber-700"><span class="w-2.5 h-2.5 rounded-xs bg-amber-400 inline-block"></span> Pending</span>
-              </div>
-            </div>
-            <p class="text-xs text-slate-500 mb-5">Click any month or bar segment to inspect those orders</p>
-          </div>
-          <div id="chartMonthlyBarsContainer" class="space-y-4 my-auto"></div>
-        </div>
+        <!-- Monthly Revenue vs $500 Target -->
+        <div id="chartMonthlyCard" class="bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow"></div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-200/80">
-          <h4 class="text-base font-extrabold text-slate-900 mb-1">Menu Category Demand</h4>
-          <p class="text-xs text-slate-500 mb-4">Click a category to filter Order Log</p>
-          <div id="chartCategoryMixContainer" class="space-y-2.5"></div>
-        </div>
-
-        <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-200/80">
-          <h4 class="text-base font-extrabold text-slate-900 mb-1">Payment Method Mix</h4>
-          <p class="text-xs text-slate-500 mb-4">Click Cash, Interac e-Transfer, Card, or COD</p>
-          <div id="chartPaymentMixContainer" class="space-y-2.5"></div>
-        </div>
-
-        <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-200/80">
-          <h4 class="text-base font-extrabold text-slate-900 mb-1">Household Spice Profiles</h4>
-          <p class="text-xs text-slate-500 mb-4">Click any spice preference level</p>
-          <div id="chartSpiceMixContainer" class="space-y-2.5"></div>
-        </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div id="chartCategoryCard" class="bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow"></div>
+        <div id="chartPaymentCard" class="bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow"></div>
+        <div id="chartSpiceCard" class="bg-white rounded-2xl p-5 border border-slate-200/80 card-shadow"></div>
       </div>
     </section>
+
   </main>
 
   <!-- ========================================================= -->
-      <!-- 1. Modal Header -->
+  <!-- MODAL 1: ADD / EDIT ORDER MODAL                           -->
+  <!-- ========================================================= -->
+  <div id="orderModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-slate-200 my-auto max-h-[92vh] overflow-y-auto">
       <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
         <div class="flex items-center gap-2.5 flex-wrap">
           <h3 id="modalTitle" class="text-lg font-extrabold text-slate-900">Add New Customer Order</h3>
@@ -658,13 +556,13 @@
             </div>
           </div>
 
-          <!-- Live Calculated Total Billed & Balance Due Bar -->
+          <!-- Live Calculated Total Billed & Prominent Balance Due Bar -->
           <div class="flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm pt-2.5 border-t border-slate-200/90">
             <span class="text-slate-700 font-medium">
               Total Order Billed: <strong id="mTotalBilledText" class="text-slate-900 font-extrabold text-base">$0.00</strong>
             </span>
             <span class="text-slate-700 font-medium">
-              Balance Due: <strong id="mBalanceDueText" class="text-rose-600 font-extrabold text-base">$0.00</strong>
+              Balance Due: <strong id="mBalanceDueText" class="text-rose-700 font-black text-base">$0.00</strong>
             </span>
           </div>
         </div>
@@ -829,7 +727,7 @@
                   <td class="py-1.5 px-3">AMOUNT PAID (CAD)</td>
                   <td id="recPaid" class="py-1.5 px-3 text-right">$0.00</td>
                 </tr>
-                <tr id="recBalRow" class="text-rose-600 font-bold">
+                <tr id="recBalRow" class="text-rose-700 font-extrabold">
                   <td class="py-1.5 px-3">BALANCE DUE (CAD)</td>
                   <td id="recBalance" class="py-1.5 px-3 text-right">$0.00</td>
                 </tr>
@@ -1207,194 +1105,156 @@
     }
 
     function isCleanOrderId(id) {
-      return /^GS-\d{4,}$/.test(String(id || '').trim());
+      const m = String(id || '').trim().match(/^GS-(\d+)$/);
+      if (!m) return false;
+      const num = parseInt(m[1], 10);
+      return num >= 1001 && num <= 99999;
     }
 
     function normalizeOrderRecord(o, idx, assignedCleanId = null) {
-      const food = parseFloat(o.foodSubtotal ?? o.subtotal) || 0;
-      const del = parseFloat(o.deliveryFee) || 0;
-      const tip = parseFloat(o.tip) || 0;
-      const paid = parseFloat(o.amountPaid) || 0;
+      const foodSubtotal = Number(o.foodSubtotal ?? o.subtotal ?? 0) || 0;
+      const deliveryFee = Number(o.deliveryFee ?? 0) || 0;
+      const tip = Number(o.tip ?? o.gratuity ?? 0) || 0;
+      const amountPaid = Number(o.amountPaid ?? 0) || 0;
       const lineItems = normalizeLineItems(o);
       const tasteMembers = normalizeTasteMembers(o);
-      let pm = o.paymentMethod || 'Interac e-Transfer';
-      if (pm === 'Cash on Delivery (COD)') pm = 'COD';
-      if (pm === 'Credit Card' || pm === 'Debit Card') pm = 'Card';
-
-      const cleanId = assignedCleanId || (isCleanOrderId(o.id) ? String(o.id).trim() : `GS-${1001 + idx}`);
-      if (o.id && String(o.id).trim() !== cleanId) {
-        legacyOrderIdMap[String(o.id).trim()] = cleanId;
+      const rawId = String(o.id || '').trim();
+      const finalId = assignedCleanId || (isCleanOrderId(rawId) ? rawId : (legacyOrderIdMap[rawId] || `GS-${1001 + idx}`));
+      if (rawId && rawId !== finalId) {
+        legacyOrderIdMap[rawId] = finalId;
       }
 
       return {
-        ...o,
-        id: cleanId,
-        legacyId: o.legacyId || (!isCleanOrderId(o.id) && o.id ? String(o.id).trim() : undefined),
-        customerName: String(o.customerName || 'Customer').trim(),
+        id: finalId,
+        customerName: String(o.customerName || 'Guest Customer').trim(),
         contact: String(o.contact || '').trim(),
         orderDate: o.orderDate || getTodayISO(),
-        deliveryDate: o.deliveryDate || getTodayISO(),
+        deliveryDate: o.deliveryDate || o.orderDate || getTodayISO(),
         deliveryTime: o.deliveryTime || '18:00',
         lineItems,
         category: lineItems[0].category,
         items: formatLineItemsSummary(lineItems),
         dishesServed: String(o.dishesServed || '').trim(),
-        paymentMethod: pm,
+        paymentMethod: PAYMENT_METHODS.includes(o.paymentMethod) ? o.paymentMethod : 'Interac e-Transfer',
         tasteMembers,
-        foodSubtotal: food,
-        deliveryFee: del,
-        tip: tip,
-        amountPaid: paid
+        foodSubtotal: Math.round(foodSubtotal * 100) / 100,
+        deliveryFee: Math.round(deliveryFee * 100) / 100,
+        tip: Math.round(tip * 100) / 100,
+        amountPaid: Math.round(amountPaid * 100) / 100
       };
     }
 
     function migrateAllOrderIdsToCleanSequence(rawList) {
       const usedNumbers = new Set();
       rawList.forEach(item => {
-        const m = String(item.id || '').trim().match(/^GS-(\d{4,})$/);
-        if (m) usedNumbers.add(parseInt(m[1], 10));
+        const rawId = String(item.id || '').trim();
+        if (isCleanOrderId(rawId)) {
+          usedNumbers.add(parseInt(rawId.slice(3), 10));
+        }
       });
 
       let nextNum = 1001;
-      const allocateNextCleanId = () => {
+      return rawList.map((item, idx) => {
+        const rawId = String(item.id || '').trim();
+        if (isCleanOrderId(rawId)) {
+          return normalizeOrderRecord(item, idx, rawId);
+        }
+        if (rawId && legacyOrderIdMap[rawId]) {
+          return normalizeOrderRecord(item, idx, legacyOrderIdMap[rawId]);
+        }
         while (usedNumbers.has(nextNum)) {
           nextNum++;
         }
-        const id = `GS-${nextNum}`;
+        const assigned = `GS-${nextNum}`;
         usedNumbers.add(nextNum);
         nextNum++;
-        return id;
-      };
-
-      // Sort chronologically so legacy ord_... IDs receive clean sequential GS-1001, GS-1002... order
-      const indexed = rawList.map((item, originalIdx) => ({ item, originalIdx }));
-      const chronological = [...indexed].sort((a, b) => {
-        const da = `${a.item.orderDate || a.item.deliveryDate || '9999-99-99'}_${String(a.originalIdx).padStart(4, '0')}`;
-        const db = `${b.item.orderDate || b.item.deliveryDate || '9999-99-99'}_${String(b.originalIdx).padStart(4, '0')}`;
-        return da.localeCompare(db);
+        return normalizeOrderRecord(item, idx, assigned);
       });
-
-      const assignedMap = new Map();
-      chronological.forEach(({ item, originalIdx }) => {
-        const rawId = String(item.id || '').trim();
-        if (isCleanOrderId(rawId)) {
-          assignedMap.set(originalIdx, rawId);
-        } else {
-          assignedMap.set(originalIdx, allocateNextCleanId());
-        }
-      });
-
-      return rawList.map((item, idx) => normalizeOrderRecord(item, idx, assignedMap.get(idx)));
     }
 
     function loadState() {
-      let foundRaw = null;
-      try {
-        foundRaw = localStorage.getItem(PRIMARY_STORAGE_KEY);
-        if (!foundRaw) {
-          for (const key of FALLBACK_STORAGE_KEYS) {
-            const candidate = localStorage.getItem(key);
-            if (candidate) {
-              foundRaw = candidate;
+      let foundOrders = null;
+      const allKeys = [PRIMARY_STORAGE_KEY, ...FALLBACK_STORAGE_KEYS];
+      for (const k of allKeys) {
+        try {
+          const raw = localStorage.getItem(k);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              foundOrders = parsed;
               break;
             }
           }
-        }
-      } catch (e) {
-        foundRaw = null;
+        } catch (e) {}
       }
 
-      if (foundRaw) {
-        try {
-          const parsed = JSON.parse(foundRaw);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            orders = migrateAllOrderIdsToCleanSequence(parsed);
-          } else {
-            orders = getDefaultSeedOrders();
-          }
-        } catch (e) {
-          orders = getDefaultSeedOrders();
-        }
-      } else {
-        orders = getDefaultSeedOrders();
-      }
+      const rawList = foundOrders || getDefaultSeedOrders();
+      orders = migrateAllOrderIdsToCleanSequence(rawList);
 
       try {
         const rawPrefs = localStorage.getItem(PREFS_STORAGE_KEY);
-        customerPrefs = rawPrefs ? JSON.parse(rawPrefs) : {};
+        if (rawPrefs) customerPrefs = JSON.parse(rawPrefs) || {};
       } catch (e) {
         customerPrefs = {};
       }
-
-      orders.forEach(o => {
-        const key = o.customerName.toLowerCase();
-        if (key && !customerPrefs[key] && o.tasteMembers.length > 0) {
-          customerPrefs[key] = { tasteMembers: o.tasteMembers };
-        }
-      });
-
-      saveState();
+      saveState(false);
     }
 
-    function saveState() {
+    function saveState(notify = true) {
       try {
-        const serialized = JSON.stringify(orders);
-        localStorage.setItem(PRIMARY_STORAGE_KEY, serialized);
-        localStorage.setItem('gs_orders_v1', serialized);
+        localStorage.setItem(PRIMARY_STORAGE_KEY, JSON.stringify(orders));
         localStorage.setItem(PREFS_STORAGE_KEY, JSON.stringify(customerPrefs));
-        document.getElementById('lastSyncedTime').textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      } catch (e) {
-        showToast('Storage warning: unable to save locally.');
-      }
+      } catch (e) {}
+      const nowStr = new Date().toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit' });
+      const el = document.getElementById('lastSavedText');
+      if (el) el.textContent = nowStr;
+      if (notify) showToast('Saved!');
     }
 
     function generateOrderId() {
       const maxNum = orders.reduce((max, o) => {
-        const m = String(o.id || '').match(/^GS-(\d{4,})$/);
-        return m ? Math.max(max, parseInt(m[1], 10)) : max;
+        const rawId = String(o.id || '').trim();
+        if (!isCleanOrderId(rawId)) return max;
+        return Math.max(max, parseInt(rawId.slice(3), 10));
       }, 1000);
       return `GS-${maxNum + 1}`;
     }
 
     function getEnrichedOrders() {
-      const nowMs = Date.now();
-      const next72hMs = nowMs + (72 * 60 * 60 * 1000);
       const todayStr = getTodayISO();
+      const nowMs = Date.now();
+      const next72hMs = nowMs + 72 * 3600 * 1000;
 
-      const customerCounts = {};
+      const countByCustomer = {};
       orders.forEach(o => {
         const key = (o.customerName || '').trim().toLowerCase();
-        if (key) customerCounts[key] = (customerCounts[key] || 0) + 1;
+        if (key) countByCustomer[key] = (countByCustomer[key] || 0) + 1;
       });
 
       return orders.map(o => {
-        const food = parseFloat(o.foodSubtotal) || 0;
-        const del = parseFloat(o.deliveryFee) || 0;
-        const tip = parseFloat(o.tip) || 0;
-        const total = parseFloat((food + del + tip).toFixed(2));
-        const paid = parseFloat(o.amountPaid) || 0;
-        const balance = Math.max(0, parseFloat((total - paid).toFixed(2)));
-        const isPaid = total > 0 ? balance <= 0.009 : paid > 0;
-
+        const lineItems = normalizeLineItems(o);
+        const totalBilled = Math.round((o.foodSubtotal + o.deliveryFee + (o.tip || 0)) * 100) / 100;
+        const balance = Math.max(0, Math.round((totalBilled - o.amountPaid) * 100) / 100);
+        const isPaid = balance <= 0.009;
         const delTs = parseDeliveryTimestamp(o.deliveryDate, o.deliveryTime);
         const isPastDelivery = delTs !== null ? delTs < nowMs : (o.deliveryDate && o.deliveryDate < todayStr);
         const isOverdue = !isPaid && isPastDelivery;
         const isPending = !isPaid;
-        const isUpcoming = (o.deliveryDate === todayStr) || (delTs !== null && delTs >= nowMs && delTs <= next72hMs);
+        const isWithinNext72h = delTs !== null
+          ? (delTs >= nowMs && delTs <= next72hMs)
+          : (o.deliveryDate >= todayStr && o.deliveryDate <= new Date(next72hMs).toISOString().split('T')[0]);
+        const isUpcoming = !isPaid && isWithinNext72h;
         const isFuture = (o.deliveryDate >= todayStr);
 
         const custKey = (o.customerName || '').trim().toLowerCase();
-        const isReturning = (customerCounts[custKey] || 0) > 1;
-        const lineItems = normalizeLineItems(o);
-        const categoriesInOrder = [...new Set(lineItems.map(li => li.category))];
+        const isReturning = (countByCustomer[custKey] || 0) >= 2;
+        const deliveryMonth = (o.deliveryDate || o.orderDate || '').slice(0, 7);
 
         return {
           ...o,
-          foodSubtotal: food,
-          deliveryFee: del,
-          tip,
-          totalBilled: total,
-          amountPaid: paid,
+          lineItems,
+          lineItemsSummary: formatLineItemsSummary(lineItems),
+          totalBilled,
           balance,
           isPaid,
           isOverdue,
@@ -1402,39 +1262,40 @@
           isUpcoming,
           isFuture,
           isReturning,
-          lineItems,
-          categoriesInOrder,
-          lineItemsSummary: formatLineItemsSummary(lineItems),
+          deliveryMonth,
           deliveryTimestamp: delTs || 0
         };
       });
     }
 
     // =========================================================
-    // SMART TIP & PAYMENT AUTO-CALCULATOR IN ADD/EDIT MODAL
+    // SMART TIP & FINANCIAL CALCULATOR IN MODAL
     // =========================================================
     function updateTipPresetButtonsUI() {
       [0, 10, 15, 20].forEach(pct => {
         const btn = document.getElementById(`tipPct-${pct}`);
         if (!btn) return;
-        btn.className = activeTipPreset === pct
+        btn.className = (activeTipPreset === pct)
           ? 'px-1.5 py-0.5 rounded bg-emerald-700 text-white text-[10px] font-bold transition'
           : 'px-1.5 py-0.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-700 text-[10px] font-bold transition';
       });
       const badge = document.getElementById('tipModeBadge');
       if (badge) {
-        badge.textContent = activeTipPreset !== null ? `${activeTipPreset}%` : 'Custom';
-        badge.className = activeTipPreset !== null
-          ? 'absolute right-2 px-1.5 py-0.5 rounded bg-emerald-50 border border-emerald-200 text-[10px] font-bold text-emerald-800'
-          : 'absolute right-2 px-1.5 py-0.5 rounded bg-amber-50 border border-amber-200 text-[10px] font-bold text-amber-800';
+        if (activeTipPreset === null) {
+          badge.textContent = 'Custom';
+          badge.className = 'absolute right-2 px-1.5 py-0.5 rounded bg-amber-100 border border-amber-300 text-[10px] font-bold text-amber-900';
+        } else {
+          badge.textContent = `${activeTipPreset}%`;
+          badge.className = 'absolute right-2 px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-[10px] font-bold text-slate-600';
+        }
       }
     }
 
     function setTipPreset(pct) {
       activeTipPreset = pct;
       const sub = parseFloat(document.getElementById('mSubtotal').value) || 0;
-      const calculatedTip = parseFloat(((sub * pct) / 100).toFixed(2));
-      document.getElementById('mTip').value = calculatedTip > 0 ? calculatedTip.toFixed(2) : '0';
+      const computedTip = Math.round(sub * (pct / 100) * 100) / 100;
+      document.getElementById('mTip').value = computedTip.toFixed(2);
       updateTipPresetButtonsUI();
       recalcModalTotals();
     }
@@ -1442,40 +1303,25 @@
     function onSubtotalChange() {
       if (activeTipPreset !== null) {
         const sub = parseFloat(document.getElementById('mSubtotal').value) || 0;
-        const calculatedTip = parseFloat(((sub * activeTipPreset) / 100).toFixed(2));
-        document.getElementById('mTip').value = calculatedTip > 0 ? calculatedTip.toFixed(2) : '0';
+        const computedTip = Math.round(sub * (activeTipPreset / 100) * 100) / 100;
+        document.getElementById('mTip').value = computedTip.toFixed(2);
       }
       recalcModalTotals();
     }
 
     function onManualTipInput() {
-      const sub = parseFloat(document.getElementById('mSubtotal').value) || 0;
-      const tipVal = parseFloat(document.getElementById('mTip').value) || 0;
-      if (tipVal === 0) {
-        activeTipPreset = 0;
-      } else if (sub > 0) {
-        const impliedPct = Math.round((tipVal / sub) * 100);
-        if ([10, 15, 20].includes(impliedPct) && Math.abs(((sub * impliedPct) / 100) - tipVal) < 0.02) {
-          activeTipPreset = impliedPct;
-        } else {
-          activeTipPreset = null;
-        }
-      } else {
-        activeTipPreset = null;
-      }
+      activeTipPreset = null;
       updateTipPresetButtonsUI();
       recalcModalTotals();
     }
 
     function setModalPayMode(mode) {
       modalPayMode = mode;
-      const styles = {
-        pending: document.getElementById('payModePending'),
-        full: document.getElementById('payModeFull'),
-        partial: document.getElementById('payModePartial')
-      };
-      Object.entries(styles).forEach(([k, btn]) => {
-        btn.className = k === mode
+      ['pending', 'full', 'partial'].forEach(m => {
+        const key = m === 'pending' ? 'payModePending' : m === 'full' ? 'payModeFull' : 'payModePartial';
+        const btn = document.getElementById(key);
+        if (!btn) return;
+        btn.className = (m === mode)
           ? 'flex-1 px-2 py-1 rounded-lg bg-white text-slate-900 shadow-2xs font-bold'
           : 'flex-1 px-2 py-1 rounded-lg text-slate-600';
       });
@@ -1483,114 +1329,124 @@
     }
 
     function onManualModalPaidInput() {
-      modalPayMode = 'partial';
-      const styles = {
-        pending: document.getElementById('payModePending'),
-        full: document.getElementById('payModeFull'),
-        partial: document.getElementById('payModePartial')
-      };
-      Object.entries(styles).forEach(([k, btn]) => {
-        btn.className = k === 'partial'
+      const total = getModalTotalBilled();
+      const paid = parseFloat(document.getElementById('mPaid').value) || 0;
+      if (paid <= 0) modalPayMode = 'pending';
+      else if (paid >= total - 0.01 && total > 0) modalPayMode = 'full';
+      else modalPayMode = 'partial';
+
+      ['pending', 'full', 'partial'].forEach(m => {
+        const key = m === 'pending' ? 'payModePending' : m === 'full' ? 'payModeFull' : 'payModePartial';
+        const btn = document.getElementById(key);
+        if (!btn) return;
+        btn.className = (m === modalPayMode)
           ? 'flex-1 px-2 py-1 rounded-lg bg-white text-slate-900 shadow-2xs font-bold'
           : 'flex-1 px-2 py-1 rounded-lg text-slate-600';
       });
-      recalcModalTotals();
+      updateModalSummaryLabels();
     }
 
-    function recalcModalTotals() {
+    function getModalTotalBilled() {
       const sub = parseFloat(document.getElementById('mSubtotal').value) || 0;
       const fee = parseFloat(document.getElementById('mDeliveryFee').value) || 0;
       const tip = parseFloat(document.getElementById('mTip').value) || 0;
-      const total = parseFloat((sub + fee + tip).toFixed(2));
+      return Math.round((sub + fee + tip) * 100) / 100;
+    }
 
-      if (modalPayMode === 'pending') {
-        document.getElementById('mPaid').value = '0';
-      } else if (modalPayMode === 'full') {
-        document.getElementById('mPaid').value = total.toFixed(2);
-      }
+    function recalcModalTotals() {
+      const total = getModalTotalBilled();
+      const paidInput = document.getElementById('mPaid');
+      if (modalPayMode === 'pending') paidInput.value = '0';
+      else if (modalPayMode === 'full') paidInput.value = total.toFixed(2);
+      updateModalSummaryLabels();
+    }
 
+    function updateModalSummaryLabels() {
+      const total = getModalTotalBilled();
       const paid = parseFloat(document.getElementById('mPaid').value) || 0;
-      const balance = Math.max(0, parseFloat((total - paid).toFixed(2)));
-      const paidPct = total > 0 ? Math.min(100, Math.round((paid / total) * 100)) : 0;
+      const due = Math.max(0, Math.round((total - paid) * 100) / 100);
+      const pct = total > 0 ? Math.min(100, Math.round((paid / total) * 100)) : 0;
 
-      document.getElementById('mPaidPctBadge').textContent = `${paidPct}%`;
       document.getElementById('mTotalBilledText').textContent = `$${total.toFixed(2)}`;
-      const balEl = document.getElementById('mBalanceDueText');
-      balEl.textContent = `$${balance.toFixed(2)}`;
-      balEl.className = balance > 0 ? 'text-rose-600 font-extrabold text-base' : 'text-emerald-700 font-extrabold text-base';
+      const dueEl = document.getElementById('mBalanceDueText');
+      dueEl.textContent = `$${due.toFixed(2)}`;
+      dueEl.className = due > 0.009 ? 'text-rose-700 font-black text-base' : 'text-emerald-700 font-extrabold text-base';
+      document.getElementById('mPaidPctBadge').textContent = `${pct}%`;
     }
 
-    function applySavedPreference() {
-      const key = document.getElementById('mName').value.trim().toLowerCase();
-      const saved = customerPrefs[key];
-      const banner = document.getElementById('mSavedPrefBanner');
-      if (saved && Array.isArray(saved.tasteMembers) && saved.tasteMembers.length > 0) {
-        setTasteMemberRows(saved.tasteMembers);
-        banner.classList.remove('hidden');
-      } else {
-        banner.classList.add('hidden');
-      }
-    }
-
-    function openAddModal(prefillCustomerName = '') {
-      const nextId = generateOrderId();
-      document.getElementById('modalTitle').textContent = 'Add New Customer Order';
-      const badgeEl = document.getElementById('modalOrderIdBadge');
-      badgeEl.textContent = nextId;
-      badgeEl.classList.remove('hidden');
+    // =========================================================
+    // MODAL OPEN / CLOSE / SUBMIT
+    // =========================================================
+    function openAddModal(prefillCustomer = '') {
+      document.getElementById('modalOrderForm').reset();
       document.getElementById('editOrderId').value = '';
-      document.getElementById('mName').value = prefillCustomerName;
-      document.getElementById('mContact').value = '';
+      document.getElementById('modalTitle').textContent = 'Add New Customer Order';
+      const idBadge = document.getElementById('modalOrderIdBadge');
+      idBadge.textContent = generateOrderId();
+      idBadge.classList.remove('hidden');
+
       const today = getTodayISO();
       document.getElementById('mOrderDate').value = today;
       document.getElementById('mDeliveryDate').value = today;
       document.getElementById('mDeliveryTime').value = '18:00';
-      document.getElementById('mPaymentMethod').value = 'Interac e-Transfer';
-      setModalItemRows([{ category: 'Meal Box', qty: 1, details: '' }]);
-      document.getElementById('mDishesServed').value = '';
-      setTasteMemberRows([{ member: '', spice: 'Medium (Standard)', note: '' }]);
-      document.getElementById('mSavedPrefBanner').classList.add('hidden');
-      document.getElementById('mSubtotal').value = '';
       document.getElementById('mDeliveryFee').value = '0';
+      document.getElementById('mTip').value = '0.00';
+      document.getElementById('mSavedPrefBanner').classList.add('hidden');
+
+      setModalItemRows([{ category: 'Meal Box', qty: 1, details: '' }]);
+      setTasteMemberRows([{ member: '', spice: 'Medium (Standard)', note: '' }]);
+
       activeTipPreset = 0;
-      document.getElementById('mTip').value = '0';
       updateTipPresetButtonsUI();
       setModalPayMode('pending');
-      if (prefillCustomerName) applySavedPreference();
+
+      if (prefillCustomer) {
+        document.getElementById('mName').value = prefillCustomer;
+        applySavedPreference();
+      }
       document.getElementById('orderModal').classList.remove('hidden');
     }
 
-    function openEditModal(id) {
-      const resolvedId = legacyOrderIdMap[id] || id;
-      const o = orders.find(item => item.id === resolvedId || item.legacyId === id);
+    function openEditModal(orderId) {
+      const o = orders.find(x => x.id === orderId);
       if (!o) return;
-      document.getElementById('modalTitle').textContent = `Edit Order — ${o.id}`;
-      const badgeEl = document.getElementById('modalOrderIdBadge');
-      badgeEl.textContent = o.id;
-      badgeEl.classList.remove('hidden');
       document.getElementById('editOrderId').value = o.id;
+      document.getElementById('modalTitle').textContent = 'Edit Order';
+      const idBadge = document.getElementById('modalOrderIdBadge');
+      idBadge.textContent = o.id;
+      idBadge.classList.remove('hidden');
+
       document.getElementById('mName').value = o.customerName;
       document.getElementById('mContact').value = o.contact || '';
-      document.getElementById('mOrderDate').value = o.orderDate || getTodayISO();
-      document.getElementById('mDeliveryDate').value = o.deliveryDate || getTodayISO();
+      document.getElementById('mOrderDate').value = o.orderDate;
+      document.getElementById('mDeliveryDate').value = o.deliveryDate;
       document.getElementById('mDeliveryTime').value = o.deliveryTime || '18:00';
-      document.getElementById('mPaymentMethod').value = o.paymentMethod || 'Interac e-Transfer';
-      setModalItemRows(normalizeLineItems(o));
       document.getElementById('mDishesServed').value = o.dishesServed || '';
-      setTasteMemberRows(normalizeTasteMembers(o));
-      document.getElementById('mSavedPrefBanner').classList.add('hidden');
-
+      document.getElementById('mPaymentMethod').value = o.paymentMethod || 'Interac e-Transfer';
       document.getElementById('mSubtotal').value = o.foodSubtotal;
       document.getElementById('mDeliveryFee').value = o.deliveryFee;
-      document.getElementById('mTip').value = o.tip || 0;
-      onManualTipInput();
 
-      document.getElementById('mPaid').value = o.amountPaid;
-      const total = (parseFloat(o.foodSubtotal) || 0) + (parseFloat(o.deliveryFee) || 0) + (parseFloat(o.tip) || 0);
-      if ((parseFloat(o.amountPaid) || 0) <= 0) setModalPayMode('pending');
-      else if ((parseFloat(o.amountPaid) || 0) >= total - 0.01) setModalPayMode('full');
-      else setModalPayMode('partial');
+      const tipVal = Number(o.tip || 0);
+      document.getElementById('mTip').value = tipVal.toFixed(2);
+      if (tipVal === 0) activeTipPreset = 0;
+      else if (o.foodSubtotal > 0 && Math.abs(tipVal - o.foodSubtotal * 0.10) < 0.02) activeTipPreset = 10;
+      else if (o.foodSubtotal > 0 && Math.abs(tipVal - o.foodSubtotal * 0.15) < 0.02) activeTipPreset = 15;
+      else if (o.foodSubtotal > 0 && Math.abs(tipVal - o.foodSubtotal * 0.20) < 0.02) activeTipPreset = 20;
+      else activeTipPreset = null;
+      updateTipPresetButtonsUI();
 
+      setModalItemRows(normalizeLineItems(o));
+      setTasteMemberRows(normalizeTasteMembers(o));
+
+      const total = o.foodSubtotal + o.deliveryFee + tipVal;
+      if (o.amountPaid <= 0) setModalPayMode('pending');
+      else if (o.amountPaid >= total - 0.01) setModalPayMode('full');
+      else {
+        setModalPayMode('partial');
+        document.getElementById('mPaid').value = o.amountPaid;
+        updateModalSummaryLabels();
+      }
+      document.getElementById('mSavedPrefBanner').classList.add('hidden');
       document.getElementById('orderModal').classList.remove('hidden');
     }
 
@@ -1598,224 +1454,541 @@
       document.getElementById('orderModal').classList.add('hidden');
     }
 
+    function applySavedPreference() {
+      const nameKey = document.getElementById('mName').value.trim().toLowerCase();
+      const banner = document.getElementById('mSavedPrefBanner');
+      if (!nameKey) {
+        banner.classList.add('hidden');
+        return;
+      }
+      const pref = customerPrefs[nameKey];
+      const pastOrder = [...orders].reverse().find(o => o.customerName.trim().toLowerCase() === nameKey);
+      const members = (pref && Array.isArray(pref.tasteMembers) && pref.tasteMembers.length > 0)
+        ? pref.tasteMembers
+        : (pastOrder ? normalizeTasteMembers(pastOrder) : []);
+
+      if (members.length > 0) {
+        setTasteMemberRows(members);
+        banner.classList.remove('hidden');
+      } else {
+        banner.classList.add('hidden');
+      }
+      if (pastOrder && pastOrder.contact && !document.getElementById('mContact').value) {
+        document.getElementById('mContact').value = pastOrder.contact;
+      }
+    }
+
     function handleModalSubmit(e) {
       e.preventDefault();
       const editId = document.getElementById('editOrderId').value;
+      const customerName = document.getElementById('mName').value.trim();
+      if (!customerName) return;
+
       const lineItems = collectModalItemRows();
       const tasteMembers = collectTasteMemberRows();
-      const name = document.getElementById('mName').value.trim();
+      const foodSubtotal = Math.max(0, parseFloat(document.getElementById('mSubtotal').value) || 0);
+      const deliveryFee = Math.max(0, parseFloat(document.getElementById('mDeliveryFee').value) || 0);
+      const tip = Math.max(0, parseFloat(document.getElementById('mTip').value) || 0);
+      const amountPaid = Math.max(0, parseFloat(document.getElementById('mPaid').value) || 0);
 
-      if (name) {
-        customerPrefs[name.toLowerCase()] = { tasteMembers };
-      }
-
-      const payload = {
-        customerName: name,
+      const record = normalizeOrderRecord({
+        id: editId || generateOrderId(),
+        customerName,
         contact: document.getElementById('mContact').value.trim(),
-        orderDate: document.getElementById('mOrderDate').value,
-        deliveryDate: document.getElementById('mDeliveryDate').value,
+        orderDate: document.getElementById('mOrderDate').value || getTodayISO(),
+        deliveryDate: document.getElementById('mDeliveryDate').value || getTodayISO(),
         deliveryTime: document.getElementById('mDeliveryTime').value || '18:00',
         lineItems,
-        category: lineItems[0].category,
-        items: formatLineItemsSummary(lineItems),
         dishesServed: document.getElementById('mDishesServed').value.trim(),
         paymentMethod: document.getElementById('mPaymentMethod').value,
         tasteMembers,
-        foodSubtotal: parseFloat(document.getElementById('mSubtotal').value) || 0,
-        deliveryFee: parseFloat(document.getElementById('mDeliveryFee').value) || 0,
-        tip: parseFloat(document.getElementById('mTip').value) || 0,
-        amountPaid: parseFloat(document.getElementById('mPaid').value) || 0
-      };
+        foodSubtotal,
+        deliveryFee,
+        tip,
+        amountPaid
+      }, orders.length);
+
+      if (tasteMembers.length > 0) {
+        customerPrefs[customerName.toLowerCase()] = { tasteMembers };
+      }
 
       if (editId) {
-        const idx = orders.findIndex(o => o.id === editId);
-        if (idx !== -1) orders[idx] = { ...orders[idx], ...payload };
-        showToast(`Updated order ${editId}.`);
+        const idx = orders.findIndex(x => x.id === editId);
+        if (idx >= 0) orders[idx] = record;
       } else {
-        orders.push({ id: generateOrderId(), ...payload });
-        showToast(`Added order for ${payload.customerName}!`);
+        orders.push(record);
       }
 
       saveState();
-      renderAll();
       closeAddModal();
+      renderAll();
+    }
+
+    function markOrderPaid(orderId) {
+      const idx = orders.findIndex(x => x.id === orderId);
+      if (idx < 0) return;
+      const o = orders[idx];
+      o.amountPaid = Math.round((o.foodSubtotal + o.deliveryFee + (o.tip || 0)) * 100) / 100;
+      saveState();
+      renderAll();
+    }
+
+    function deleteOrder(orderId) {
+      orders = orders.filter(x => x.id !== orderId);
+      saveState();
+      renderAll();
     }
 
     // =========================================================
-    // MASTER RENDERER ACROSS ALL 5 TABS
+    // BULK PASTE, CSV EXPORT & WHATSAPP GS_SYNC
+    // =========================================================
+    function openBulkModal() {
+      document.getElementById('bulkTextArea').value = '';
+      document.getElementById('bulkModal').classList.remove('hidden');
+    }
+
+    function closeBulkModal() {
+      document.getElementById('bulkModal').classList.add('hidden');
+    }
+
+    function processBulkPaste() {
+      const raw = document.getElementById('bulkTextArea').value.trim();
+      if (!raw) return;
+      const lines = raw.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      let added = 0;
+
+      lines.forEach(line => {
+        const parts = line.split(',').map(p => p.trim());
+        if (parts.length < 3) return;
+        const customerName = parts[0] || 'Customer';
+        const itemsText = parts[1] || '1× Meal Box';
+        const foodSubtotal = parseFloat(parts[2]) || 0;
+        const amountPaid = parts[3] !== undefined ? (parseFloat(parts[3]) || 0) : 0;
+        const deliveryDate = (parts[4] && /^\d{4}-\d{2}-\d{2}$/.test(parts[4])) ? parts[4] : getTodayISO();
+        const paymentMethod = PAYMENT_METHODS.includes(parts[5]) ? parts[5] : 'Interac e-Transfer';
+        const dishesServed = parts.slice(6).join(', ');
+
+        const cat = normalizeCategoryName(itemsText);
+        const rec = normalizeOrderRecord({
+          id: generateOrderId(),
+          customerName,
+          orderDate: getTodayISO(),
+          deliveryDate,
+          deliveryTime: '18:00',
+          lineItems: [{ category: cat, qty: 1, details: itemsText }],
+          dishesServed,
+          paymentMethod,
+          foodSubtotal,
+          deliveryFee: 0,
+          tip: 0,
+          amountPaid
+        }, orders.length);
+
+        orders.push(rec);
+        added++;
+      });
+
+      if (added > 0) {
+        saveState();
+        renderAll();
+        closeBulkModal();
+        showToast(`Imported ${added} order(s)!`);
+      }
+    }
+
+    function exportOrdersCSV() {
+      const enriched = getEnrichedOrders();
+      const headers = ['Order ID', 'Customer', 'Contact', 'Order Date', 'Delivery Date', 'Delivery Time', 'Items', 'Dishes Served', 'Food Subtotal', 'Delivery Fee', 'Tip', 'Total Billed', 'Amount Paid', 'Balance Due', 'Payment Method', 'Status'];
+      const rows = enriched.map(o => [
+        o.id,
+        o.customerName,
+        o.contact,
+        o.orderDate,
+        o.deliveryDate,
+        o.deliveryTime,
+        o.lineItemsSummary,
+        o.dishesServed,
+        o.foodSubtotal.toFixed(2),
+        o.deliveryFee.toFixed(2),
+        o.tip.toFixed(2),
+        o.totalBilled.toFixed(2),
+        o.amountPaid.toFixed(2),
+        o.balance.toFixed(2),
+        o.paymentMethod,
+        o.isPaid ? 'Paid' : 'Pending'
+      ].map(v => `"${String(v || '').replace(/"/g, '""')}"`).join(','));
+
+      const csv = [headers.join(','), ...rows].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `the_green_spicery_orders_${getTodayISO()}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function buildSyncPayloadString() {
+      const payload = {
+        v: 1,
+        exportedAt: new Date().toISOString(),
+        orders,
+        customerPrefs
+      };
+      return `GS_SYNC:${JSON.stringify(payload)}`;
+    }
+
+    function openSyncModal() {
+      document.getElementById('syncExportCountBadge').textContent = `${orders.length} Orders`;
+      document.getElementById('syncExportBox').value = buildSyncPayloadString();
+      document.getElementById('syncImportBox').value = '';
+      document.getElementById('syncModal').classList.remove('hidden');
+    }
+
+    function closeSyncModal() {
+      document.getElementById('syncModal').classList.add('hidden');
+    }
+
+    function copySyncCode() {
+      const box = document.getElementById('syncExportBox');
+      box.select();
+      box.setSelectionRange(0, 999999);
+      document.execCommand('copy');
+      showToast('Sync code copied!');
+    }
+
+    function shareSyncViaWhatsApp() {
+      const code = buildSyncPayloadString();
+      const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(code)}`;
+      window.open(url, '_blank');
+    }
+
+    function importSyncCode(mode) {
+      let raw = document.getElementById('syncImportBox').value.trim();
+      if (!raw) return;
+      const idx = raw.indexOf('GS_SYNC:');
+      if (idx >= 0) raw = raw.slice(idx + 8).trim();
+      try {
+        const parsed = JSON.parse(raw);
+        const incomingOrders = Array.isArray(parsed.orders) ? parsed.orders : (Array.isArray(parsed) ? parsed : []);
+        if (incomingOrders.length === 0) return;
+
+        if (parsed.customerPrefs && typeof parsed.customerPrefs === 'object') {
+          customerPrefs = { ...customerPrefs, ...parsed.customerPrefs };
+        }
+
+        if (mode === 'replace') {
+          orders = migrateAllOrderIdsToCleanSequence(incomingOrders);
+        } else {
+          const mapByKey = new Map();
+          orders.forEach(o => mapByKey.set(`${o.customerName.toLowerCase()}|${o.deliveryDate}|${o.foodSubtotal}`, o));
+          incomingOrders.forEach(inc => {
+            const key = `${String(inc.customerName || '').toLowerCase()}|${inc.deliveryDate || ''}|${Number(inc.foodSubtotal ?? inc.subtotal ?? 0)}`;
+            if (!mapByKey.has(key)) {
+              orders.push(normalizeOrderRecord(inc, orders.length, generateOrderId()));
+            }
+          });
+          orders = migrateAllOrderIdsToCleanSequence(orders);
+        }
+
+        saveState();
+        renderAll();
+        closeSyncModal();
+        showToast(`Loaded ${orders.length} orders!`);
+      } catch (err) {
+        showToast('Invalid GS_SYNC format');
+      }
+    }
+
+    // =========================================================
+    // RECEIPT & CUSTOMER HISTORY MODALS
+    // =========================================================
+    function openReceiptModal(orderId) {
+      const o = getEnrichedOrders().find(x => x.id === orderId);
+      if (!o) return;
+      document.getElementById('recOrderId').textContent = `Order #: ${o.id}`;
+      document.getElementById('recCustomerName').textContent = o.customerName;
+      document.getElementById('recDate').textContent = `${o.deliveryDate}${o.deliveryTime ? ` at ${formatTime12h(o.deliveryTime)}` : ''}`;
+      document.getElementById('recMethod').textContent = o.paymentMethod;
+      document.getElementById('recStatus').textContent = o.isPaid ? 'PAID' : 'BALANCE DUE';
+      document.getElementById('recStatus').className = o.isPaid ? 'text-emerald-700 font-extrabold' : 'text-rose-700 font-extrabold';
+
+      const desc = o.dishesServed ? `${o.lineItemsSummary} (${o.dishesServed})` : o.lineItemsSummary;
+      document.getElementById('recItemsDesc').textContent = desc;
+      document.getElementById('recFoodSub').textContent = `$${o.foodSubtotal.toFixed(2)}`;
+
+      const delRow = document.getElementById('recDelRow');
+      if (o.deliveryFee > 0) {
+        delRow.classList.remove('hidden');
+        document.getElementById('recDelFee').textContent = `$${o.deliveryFee.toFixed(2)}`;
+      } else {
+        delRow.classList.add('hidden');
+      }
+
+      const tipRow = document.getElementById('recTipRow');
+      if (o.tip > 0) {
+        tipRow.classList.remove('hidden');
+        document.getElementById('recTipAmt').textContent = `$${o.tip.toFixed(2)}`;
+      } else {
+        tipRow.classList.add('hidden');
+      }
+
+      document.getElementById('recTotal').textContent = `$${o.totalBilled.toFixed(2)}`;
+      document.getElementById('recPaid').textContent = `$${o.amountPaid.toFixed(2)}`;
+
+      const balRow = document.getElementById('recBalRow');
+      if (o.balance > 0.009) {
+        balRow.classList.remove('hidden');
+        document.getElementById('recBalance').textContent = `$${o.balance.toFixed(2)}`;
+      } else {
+        balRow.classList.add('hidden');
+      }
+
+      document.getElementById('receiptModal').classList.remove('hidden');
+    }
+
+    function closeReceiptModal() {
+      document.getElementById('receiptModal').classList.add('hidden');
+    }
+
+    function openCustomerHistoryModal(customerName) {
+      const enriched = getEnrichedOrders();
+      const key = customerName.trim().toLowerCase();
+      activeHistoryCustomerKey = key;
+      const custOrders = enriched.filter(o => o.customerName.trim().toLowerCase() === key)
+        .sort((a, b) => (b.deliveryTimestamp || 0) - (a.deliveryTimestamp || 0));
+      if (custOrders.length === 0) return;
+
+      const displayName = custOrders[0].customerName;
+      const isVIP = custOrders.length >= 2;
+      document.getElementById('chModalCustomerName').textContent = displayName;
+      document.getElementById('chModalTierBadge').textContent = isVIP ? '★ Returning VIP' : 'First-Time Customer';
+      document.getElementById('chModalTierBadge').className = isVIP
+        ? 'px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-bold'
+        : 'px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold';
+
+      const pref = customerPrefs[key];
+      const members = (pref && Array.isArray(pref.tasteMembers) && pref.tasteMembers.length > 0)
+        ? pref.tasteMembers
+        : normalizeTasteMembers(custOrders[0]);
+      document.getElementById('chModalTasteBadges').innerHTML = renderTasteMembersBadges(members);
+
+      const totalBilled = custOrders.reduce((s, o) => s + o.totalBilled, 0);
+      const totalPaid = custOrders.reduce((s, o) => s + o.amountPaid, 0);
+      const totalDue = custOrders.reduce((s, o) => s + o.balance, 0);
+
+      document.getElementById('chModalStatsStrip').innerHTML = `
+        <div class="bg-slate-50 rounded-xl p-3 border border-slate-200"><div class="text-[11px] text-slate-500 font-semibold">Total Orders</div><div class="text-lg font-black text-slate-900">${custOrders.length}</div></div>
+        <div class="bg-slate-50 rounded-xl p-3 border border-slate-200"><div class="text-[11px] text-slate-500 font-semibold">Total Billed</div><div class="text-lg font-black text-slate-900">$${totalBilled.toFixed(2)}</div></div>
+        <div class="bg-emerald-50/70 rounded-xl p-3 border border-emerald-200"><div class="text-[11px] text-emerald-700 font-semibold">Total Paid</div><div class="text-lg font-black text-emerald-700">$${totalPaid.toFixed(2)}</div></div>
+        <div class="${totalDue > 0.009 ? 'bg-rose-50 border-rose-200' : 'bg-slate-50 border-slate-200'} rounded-xl p-3 border"><div class="text-[11px] ${totalDue > 0.009 ? 'text-rose-700' : 'text-slate-500'} font-semibold">Balance Due</div><div class="text-lg font-black ${totalDue > 0.009 ? 'text-rose-700' : 'text-slate-400'}">$${totalDue.toFixed(2)}</div></div>
+      `;
+
+      document.getElementById('chModalOrdersList').innerHTML = custOrders.map(o => `
+        <div onclick="closeCustomerHistoryModal(); openEditModal('${o.id}')" class="cursor-pointer rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-emerald-50/60 hover:border-emerald-300 transition p-3.5 text-xs space-y-1.5">
+          <div class="flex items-center justify-between font-bold">
+            <span>${escapeHtml(o.id)} • Delivery: ${escapeHtml(o.deliveryDate)} <span class="text-emerald-700 font-semibold ml-1">(Click to Edit ↗)</span></span>
+            <span class="${o.isPaid ? 'text-emerald-700' : 'text-rose-700 font-extrabold'}">$${o.amountPaid.toFixed(2)} / $${o.totalBilled.toFixed(2)} (${escapeHtml(o.paymentMethod)})</span>
+          </div>
+          <div class="text-slate-700">${escapeHtml(o.lineItemsSummary)}</div>
+          ${o.dishesServed ? `<div class="text-emerald-800"><strong>Dishes:</strong> ${escapeHtml(o.dishesServed)}</div>` : ''}
+        </div>
+      `).join('');
+
+      document.getElementById('chModalNewOrderBtn').onclick = () => {
+        closeCustomerHistoryModal();
+        openAddModal(displayName);
+      };
+
+      document.getElementById('customerHistoryModal').classList.remove('hidden');
+    }
+
+    function closeCustomerHistoryModal() {
+      document.getElementById('customerHistoryModal').classList.add('hidden');
+    }
+
+    // =========================================================
+    // NAVIGATION, DRILL-DOWNS & FILTERING
+    // =========================================================
+    function switchTab(tab) {
+      currentTab = tab;
+      ['overview', 'orders', 'earnings', 'customers', 'charts'].forEach(t => {
+        const panel = document.getElementById(`tab-${t}`);
+        const btn = document.getElementById(`tabBtn-${t}`);
+        if (panel) panel.classList.toggle('hidden', t !== tab);
+        if (btn) {
+          btn.classList.toggle('tab-btn-active', t === tab);
+          btn.classList.toggle('tab-btn-inactive', t !== tab);
+        }
+      });
+      renderAll();
+    }
+
+    function setOrderFilter(filterKey) {
+      currentFilter = filterKey;
+      customDrilldown = null;
+      updateFilterPillsUI();
+      renderOrdersTable();
+    }
+
+    function drillToOrders(filterKey, label, predicateFn = null) {
+      currentFilter = filterKey;
+      customDrilldown = predicateFn ? { label, fn: predicateFn } : { label, fn: null };
+      switchTab('orders');
+      updateFilterPillsUI();
+      renderOrdersTable();
+    }
+
+    function drillToCustomers(tier) {
+      customerTierFilter = tier;
+      switchTab('customers');
+    }
+
+    function resetOrderFilters() {
+      currentFilter = 'all';
+      customDrilldown = null;
+      const searchEl = document.getElementById('orderSearchInput');
+      if (searchEl) searchEl.value = '';
+      updateFilterPillsUI();
+      renderOrdersTable();
+    }
+
+    function updateFilterPillsUI() {
+      ['all', 'mealbox', 'paid', 'collected', 'balance_due', 'pending', 'cash', 'overdue', 'upcoming'].forEach(key => {
+        const btn = document.getElementById(`fPill-${key}`);
+        if (!btn) return;
+        const active = !customDrilldown?.fn && currentFilter === key;
+        btn.className = active
+          ? 'px-3 py-1.5 rounded-xl bg-[#0B2E1E] text-white text-xs font-bold transition'
+          : 'px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition';
+      });
+    }
+
+    function setCustomerTierFilter(tier) {
+      customerTierFilter = tier;
+      ['all', 'vip', 'first'].forEach(k => {
+        const btn = document.getElementById(`custTier-${k}`);
+        if (!btn) return;
+        btn.className = (k === tier)
+          ? 'px-3 py-1.5 rounded-xl bg-[#0B2E1E] text-white text-xs font-bold'
+          : 'px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold';
+      });
+      renderCustomersTable(getEnrichedOrders());
+    }
+
+    // =========================================================
+    // RENDER FUNCTIONS ACROSS ALL 5 TABS
     // =========================================================
     function renderAll() {
       const enriched = getEnrichedOrders();
-      const totalOrders = enriched.length;
-      const totalBilled = enriched.reduce((s, o) => s + o.totalBilled, 0);
+      const uniqueCustomers = new Set(enriched.map(o => o.customerName.trim().toLowerCase()));
       const totalCollected = enriched.reduce((s, o) => s + o.amountPaid, 0);
-      const totalPendingAmt = enriched.reduce((s, o) => s + o.balance, 0);
-      const totalTips = enriched.reduce((s, o) => s + o.tip, 0);
 
-      const overdueCount = enriched.filter(o => o.isOverdue).length;
-      const pendingCount = enriched.filter(o => o.isPending).length;
-      const upcomingCount = enriched.filter(o => o.isUpcoming).length;
-      const futureCount = enriched.filter(o => o.isFuture).length;
+      document.getElementById('headerCountsBadge').textContent = `${enriched.length} Orders • ${uniqueCustomers.size} Customers`;
+      document.getElementById('navOrdersCount').textContent = enriched.length;
+      document.getElementById('navEarningsBadge').textContent = `$${Math.round(totalCollected)}`;
+      document.getElementById('navCustomersCount').textContent = uniqueCustomers.size;
 
-      // Aggregate Customers
-      const custMap = new Map();
-      enriched.forEach(o => {
-        const key = (o.customerName || 'Unknown').trim().toLowerCase();
-        if (!custMap.has(key)) {
-          custMap.set(key, {
-            key,
-            name: o.customerName,
-            contact: o.contact || '',
-            ordersCount: 0,
-            totalBilled: 0,
-            totalPaid: 0,
-            balance: 0,
-            tasteMembers: customerPrefs[key]?.tasteMembers || o.tasteMembers || [],
-            dishesHistory: [],
-            customerOrders: []
-          });
-        }
-        const entry = custMap.get(key);
-        entry.ordersCount += 1;
-        entry.totalBilled += o.totalBilled;
-        entry.totalPaid += o.amountPaid;
-        entry.balance += o.balance;
-        entry.customerOrders.push(o);
-        if (o.contact) entry.contact = o.contact;
-        if (o.tasteMembers && o.tasteMembers.length > 0) entry.tasteMembers = o.tasteMembers;
-        if (o.dishesServed) entry.dishesHistory.push({ date: o.deliveryDate || o.orderDate, dishes: o.dishesServed });
-      });
+      // Update autocomplete suggestions
+      const dl = document.getElementById('customerNameSuggestions');
+      if (dl) {
+        const names = [...new Set(enriched.map(o => o.customerName))];
+        dl.innerHTML = names.map(n => `<option value="${escapeHtml(n)}"></option>`).join('');
+      }
 
-      const custList = Array.from(custMap.values());
-      const uniqueCustCount = custList.length;
-      const vipCustCount = custList.filter(c => c.ordersCount > 1).length;
-      const returningPct = uniqueCustCount > 0 ? Math.round((vipCustCount / uniqueCustCount) * 100) : 0;
-
-      document.getElementById('customerNameSuggestions').innerHTML = custList.map(c => `<option value="${escapeHtml(c.name)}"></option>`).join('');
-      document.getElementById('headerCounterPill').textContent = `${totalOrders} Orders • ${uniqueCustCount} Customers`;
-      document.getElementById('orderTabBadge').textContent = totalOrders;
-      document.getElementById('earningsTabBadge').textContent = `$${totalCollected.toFixed(0)}`;
-      document.getElementById('custTabBadge').textContent = uniqueCustCount;
-
-      // Alert Cards
-      document.getElementById('kpiOverdueCount').textContent = overdueCount;
-      document.getElementById('kpiPendingCount').textContent = pendingCount;
-      document.getElementById('kpiPendingAmtSub').textContent = `$${totalPendingAmt.toFixed(2)} awaiting Cash / e-Transfer →`;
-      document.getElementById('kpiUpcomingCount').textContent = upcomingCount;
-      document.getElementById('kpiUpcomingSub').textContent = `${futureCount} total scheduled deliveries →`;
-
-      // 6 KPI Boxes
-      document.getElementById('boxVerifiedCollected').textContent = `$${totalCollected.toFixed(2)}`;
-      document.getElementById('boxTipsCollectedSub').textContent = `Incl. $${totalTips.toFixed(2)} tips`;
-      document.getElementById('boxPendingBalance').textContent = `$${totalPendingAmt.toFixed(2)}`;
-      document.getElementById('boxPendingOrdersSub').textContent = `${pendingCount} order(s) due`;
-
-      const goalPct = Math.min(100, Math.round((totalCollected / MONTHLY_GOAL) * 100));
-      const remGoal = Math.max(0, MONTHLY_GOAL - totalCollected);
-      document.getElementById('boxGoalPercent').textContent = `${goalPct}%`;
-      document.getElementById('boxGoalRemainingSub').textContent = remGoal > 0 ? `$${remGoal.toFixed(0)} to $500` : 'Goal reached!';
-
-      document.getElementById('boxTotalOrders').textContent = totalOrders;
-      document.getElementById('boxTotalBilledSub').textContent = `$${totalBilled.toFixed(2)} billed`;
-      document.getElementById('boxReturningVips').textContent = vipCustCount;
-      document.getElementById('boxReturningRateSub').textContent = `${returningPct}% repeat loyalty`;
-      document.getElementById('boxUpcomingOrders').textContent = upcomingCount;
-      document.getElementById('boxFutureSub').textContent = `${futureCount} total scheduled`;
-
-      document.getElementById('pillOverdue').textContent = `Overdue (${overdueCount})`;
-      document.getElementById('pillPending').textContent = `Pending (${pendingCount})`;
-      document.getElementById('pillUpcoming').textContent = `< 72h Window (${upcomingCount})`;
-
-      // Category Cards
-      document.getElementById('categoryCardsGrid').innerHTML = CATEGORIES.map(cat => {
-        const catOrders = enriched.filter(o => o.categoriesInOrder.includes(cat.name));
-        const units = catOrders.reduce((s, o) => s + o.lineItems.filter(li => li.category === cat.name).reduce((x, li) => x + li.qty, 0), 0);
-        const cPaid = catOrders.filter(o => o.isPaid).length;
-        const cOverdue = catOrders.filter(o => o.isOverdue).length;
-        const cPending = catOrders.filter(o => o.isPending).length;
-        const cUpcoming = catOrders.filter(o => o.isUpcoming).length;
-        const rate = catOrders.length > 0 ? Math.round((cPaid / catOrders.length) * 100) : 0;
-        const safeCat = escapeHtml(cat.name).replace(/'/g, "\\'");
-
-        return `
-          <div class="rounded-xl border border-slate-200 bg-slate-50/50 p-4 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between gap-2 mb-3">
-                <button type="button" onclick="drillDownTo({ category: '${safeCat}' }, '${safeCat} — All Orders')" class="px-2.5 py-1 rounded-lg ${cat.badgeBg} hover:opacity-90 text-white text-xs font-bold transition">${cat.name}</button>
-                <button type="button" onclick="drillDownTo({ category: '${safeCat}' }, '${safeCat} — All Orders')" class="text-xs font-semibold text-slate-600 hover:text-emerald-800 hover:underline">${catOrders.length} ord (${units} qty) ↗</button>
-              </div>
-              <div class="flex items-center justify-between text-xs mb-1.5">
-                <span class="text-slate-500">Pre-Paid Rate</span>
-                <span class="font-bold text-emerald-700">${rate}% (${cPaid}/${catOrders.length})</span>
-              </div>
-              <div class="w-full h-2 rounded-full bg-slate-200 overflow-hidden mb-3">
-                <div class="h-full bg-emerald-600 rounded-full" style="width: ${rate}%"></div>
-              </div>
-            </div>
-            <div class="grid grid-cols-3 text-center pt-2 border-t border-slate-200/80 text-xs">
-              <button type="button" onclick="drillDownTo({ category: '${safeCat}', status: 'overdue' }, '${safeCat} — Overdue')" class="hover:bg-rose-50 rounded py-1">
-                <div class="font-extrabold ${cOverdue > 0 ? 'text-rose-600' : 'text-slate-400'}">${cOverdue}</div>
-                <div class="text-[10px] text-slate-500">Overdue</div>
-              </button>
-              <button type="button" onclick="drillDownTo({ category: '${safeCat}', status: 'pending' }, '${safeCat} — Pending')" class="hover:bg-amber-50 rounded py-1">
-                <div class="font-extrabold ${cPending > 0 ? 'text-amber-600' : 'text-slate-400'}">${cPending}</div>
-                <div class="text-[10px] text-slate-500">Pending</div>
-              </button>
-              <button type="button" onclick="drillDownTo({ category: '${safeCat}', status: 'upcoming' }, '${safeCat} — < 72h')" class="hover:bg-orange-50 rounded py-1">
-                <div class="font-extrabold ${cUpcoming > 0 ? 'text-orange-600' : 'text-slate-400'}">${cUpcoming}</div>
-                <div class="text-[10px] text-slate-500">&lt; 72h</div>
-              </button>
-            </div>
-          </div>
-        `;
-      }).join('');
-
+      renderOverview(enriched);
+      updateFilterPillsUI();
       renderOrdersTable(enriched);
       renderMonthlyEarnings(enriched);
-      renderCustomersTable(custList);
-      renderChartsView(enriched, custList);
+      renderCustomersTable(enriched);
+      renderChartsTab(enriched);
     }
 
-    function matchesCustomDrilldown(o, spec) {
-      if (!spec) return true;
-      if (spec.month && spec.month !== 'all') {
-        const ym = (o.deliveryDate || o.orderDate || '').slice(0, 7) || 'Unknown';
-        if (ym !== spec.month) return false;
+    function renderOverview(enriched) {
+      const gross = enriched.reduce((s, o) => s + o.totalBilled, 0);
+      const collected = enriched.reduce((s, o) => s + o.amountPaid, 0);
+      const tips = enriched.reduce((s, o) => s + o.tip, 0);
+      const dueOrders = enriched.filter(o => !o.isPaid);
+      const dueTotal = dueOrders.reduce((s, o) => s + o.balance, 0);
+      const upcomingOrders = enriched.filter(o => o.isUpcoming);
+      const pct = gross > 0 ? Math.round((collected / gross) * 100) : 0;
+
+      document.getElementById('kpiGrossBilled').textContent = `$${gross.toFixed(2)}`;
+      document.getElementById('kpiGrossSub').textContent = `Food + Delivery + Tips across ${enriched.length} orders`;
+      document.getElementById('kpiCollected').textContent = `$${collected.toFixed(2)}`;
+      document.getElementById('kpiCollectionPct').textContent = `${pct}% Collected`;
+      document.getElementById('kpiCollectedSub').textContent = `Includes $${tips.toFixed(2)} in tips collected`;
+      document.getElementById('kpiBalanceDue').textContent = `$${dueTotal.toFixed(2)}`;
+      document.getElementById('kpiDueCountBadge').textContent = `${dueOrders.length} Due`;
+      document.getElementById('kpiUpcomingCount').textContent = upcomingOrders.length;
+
+      const unpaidListEl = document.getElementById('overviewUnpaidList');
+      if (dueOrders.length === 0) {
+        unpaidListEl.innerHTML = `<div class="py-6 text-center text-xs text-emerald-700 font-semibold bg-emerald-50/50 rounded-xl border border-emerald-200">✓ All orders are 100% paid! Zero unpaid balances.</div>`;
+      } else {
+        unpaidListEl.innerHTML = dueOrders.map(o => `
+          <div onclick="openEditModal('${o.id}')" class="cursor-pointer flex items-center justify-between gap-3 p-3 rounded-xl border border-rose-200/80 bg-rose-50/40 hover:bg-rose-50 transition">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-extrabold text-emerald-900 bg-white px-2 py-0.5 rounded border border-slate-200">${escapeHtml(o.id)}</span>
+                <strong class="text-sm font-bold text-slate-900">${escapeHtml(o.customerName)}</strong>
+              </div>
+              <div class="text-xs text-slate-600 mt-0.5">${escapeHtml(o.lineItemsSummary)} • Delivery: ${escapeHtml(o.deliveryDate)} ${formatTime12h(o.deliveryTime)}</div>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-800 border border-rose-300 text-xs font-black">Due $${o.balance.toFixed(2)}</span>
+              <button type="button" onclick="event.stopPropagation(); markOrderPaid('${o.id}')" class="px-2.5 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold">Paid</button>
+            </div>
+          </div>
+        `).join('');
       }
-      if (spec.category && !o.categoriesInOrder.includes(spec.category)) return false;
-      if (spec.paymentMethod && o.paymentMethod !== spec.paymentMethod) return false;
-      if (spec.loyalty === 'vip' && !o.isReturning) return false;
-      if (spec.loyalty === 'first' && o.isReturning) return false;
-      if (spec.spice) {
-        const members = o.tasteMembers && o.tasteMembers.length > 0 ? o.tasteMembers : [{ spice: 'Medium (Standard)' }];
-        if (!members.some(m => normalizeSpiceValue(m.spice) === spec.spice)) return false;
-      }
-      if (spec.status === 'paid' && !o.isPaid) return false;
-      if (spec.status === 'collected' && o.amountPaid <= 0) return false;
-      if (spec.status === 'unpaid' && o.balance <= 0.009) return false;
-      if (spec.status === 'pending' && !o.isPending) return false;
-      if (spec.status === 'overdue' && !o.isOverdue) return false;
-      if (spec.status === 'upcoming' && !o.isUpcoming) return false;
-      return true;
+
+      const schedEl = document.getElementById('overviewScheduleList');
+      const recent = [...enriched].sort((a, b) => (b.deliveryTimestamp || 0) - (a.deliveryTimestamp || 0)).slice(0, 5);
+      schedEl.innerHTML = recent.map(o => `
+        <div onclick="openEditModal('${o.id}')" class="cursor-pointer flex items-start justify-between gap-3 p-3 rounded-xl border border-slate-200/80 hover:bg-emerald-50/50 transition">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="font-mono text-xs font-extrabold text-emerald-900 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">${escapeHtml(o.id)}</span>
+              <strong class="text-sm font-bold text-slate-900">${escapeHtml(o.customerName)}</strong>
+              <span class="text-xs text-slate-500">${escapeHtml(o.deliveryDate)} ${formatTime12h(o.deliveryTime)}</span>
+            </div>
+            <div class="text-xs text-slate-700">${escapeHtml(o.lineItemsSummary)}</div>
+            ${renderTasteMembersBadges(o.tasteMembers)}
+          </div>
+          <div class="text-right shrink-0">
+            <div class="text-sm font-extrabold text-slate-900">$${o.totalBilled.toFixed(2)}</div>
+            ${o.isPaid
+              ? `<span class="inline-block mt-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold">Paid</span>`
+              : `<span class="inline-block mt-1 px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-300 text-[10px] font-extrabold">Due $${o.balance.toFixed(2)}</span>`}
+          </div>
+        </div>
+      `).join('');
     }
 
-    function renderOrdersTable(enriched) {
-      const search = (document.getElementById('searchOrdersInput')?.value || '').toLowerCase().trim();
+    function renderOrdersTable(preEnriched = null) {
+      const enriched = preEnriched || getEnrichedOrders();
+      const search = (document.getElementById('orderSearchInput')?.value || '').trim().toLowerCase();
+
       const filtered = enriched.filter(o => {
-        if (customDrilldown) {
-          if (!matchesCustomDrilldown(o, customDrilldown)) return false;
+        if (customDrilldown && typeof customDrilldown.fn === 'function') {
+          if (!customDrilldown.fn(o)) return false;
         } else {
-          if (currentFilter === 'mealbox' && !o.categoriesInOrder.includes('Meal Box')) return false;
+          if (currentFilter === 'mealbox' && !o.lineItems.some(li => li.category === 'Meal Box')) return false;
           if (currentFilter === 'paid' && !o.isPaid) return false;
           if (currentFilter === 'collected' && o.amountPaid <= 0) return false;
-          if (currentFilter === 'balance_due' && o.balance <= 0.009) return false;
+          if (currentFilter === 'balance_due' && o.isPaid) return false;
           if (currentFilter === 'pending' && !o.isPending) return false;
-          if (currentFilter === 'cash' && !['Cash', 'COD'].includes(o.paymentMethod)) return false;
+          if (currentFilter === 'cash' && o.paymentMethod !== 'Cash' && o.paymentMethod !== 'COD') return false;
           if (currentFilter === 'overdue' && !o.isOverdue) return false;
           if (currentFilter === 'upcoming' && !o.isUpcoming) return false;
         }
+
         if (search) {
-          const hay = `${o.id} ${o.customerName} ${o.lineItemsSummary} ${o.dishesServed} ${o.paymentMethod}`.toLowerCase();
+          const spiceHay = o.tasteMembers.map(m => `${m.member} ${m.spice} ${m.note}`).join(' ');
+          const hay = `${o.id} ${o.customerName} ${o.contact} ${o.lineItemsSummary} ${o.dishesServed} ${o.paymentMethod} ${spiceHay}`.toLowerCase();
           if (!hay.includes(search)) return false;
         }
         return true;
@@ -1827,7 +2000,10 @@
         const fCollected = filtered.reduce((s, o) => s + o.amountPaid, 0);
         const fBalance = filtered.reduce((s, o) => s + o.balance, 0);
         document.getElementById('drilldownLabel').textContent = customDrilldown?.label || `Filter: ${currentFilter.toUpperCase()}`;
-        document.getElementById('drilldownStats').textContent = `• ${filtered.length} order(s) | Billed: $${fBilled.toFixed(2)} | Collected: $${fCollected.toFixed(2)} | Due: $${fBalance.toFixed(2)}`;
+        const dueBadgeHTML = fBalance > 0.009
+          ? `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-300 font-extrabold text-xs sm:text-sm shadow-2xs">Due: $${fBalance.toFixed(2)}</span>`
+          : `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 font-extrabold text-xs sm:text-sm">Due: $0.00</span>`;
+        document.getElementById('drilldownStats').innerHTML = `• ${filtered.length} order(s) | Billed: <strong class="text-slate-800">$${fBilled.toFixed(2)}</strong> | Collected: <strong class="text-emerald-700">$${fCollected.toFixed(2)}</strong> | ${dueBadgeHTML}`;
         banner.classList.remove('hidden');
         banner.classList.add('flex');
       } else {
@@ -1864,20 +2040,24 @@
           <div class="text-[11px] text-slate-500 whitespace-nowrap">Fee: $${o.deliveryFee.toFixed(2)} • Tip: <span class="${o.tip > 0 ? 'text-emerald-700 font-bold' : ''}">$${o.tip.toFixed(2)}</span></div>
         `;
 
+        const balanceCellHTML = o.balance > 0.009
+          ? `<span class="inline-flex items-center px-2.5 py-1 rounded-lg bg-rose-50 text-rose-700 border border-rose-200 text-sm font-extrabold whitespace-nowrap">Due $${o.balance.toFixed(2)}</span>`
+          : `<span class="text-xs font-bold text-slate-400 whitespace-nowrap">$0.00</span>`;
+
         return `
-          <tr class="hover:bg-slate-50/90 align-top">
+          <tr onclick="openEditModal('${o.id}')" title="Click anywhere on row to edit order ${escapeHtml(o.id)}" class="group cursor-pointer hover:bg-emerald-50/60 transition align-top">
             <td class="py-3.5 px-3 whitespace-nowrap">
-              <span class="inline-flex items-center px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-900 border border-emerald-200 font-mono text-xs font-extrabold tracking-tight">${escapeHtml(o.id)}</span>
+              <span class="inline-flex items-center px-2.5 py-1 rounded-lg bg-emerald-50 group-hover:bg-emerald-100 text-emerald-900 border border-emerald-200 font-mono text-xs font-extrabold tracking-tight transition">${escapeHtml(o.id)}</span>
             </td>
             <td class="py-3.5 px-3">
-              <button type="button" onclick="openCustomerHistoryModal('${escapeHtml(o.customerName).replace(/'/g, "\\'")}')" class="font-bold text-slate-900 hover:text-emerald-700 hover:underline text-left">
+              <button type="button" onclick="event.stopPropagation(); openCustomerHistoryModal('${escapeHtml(o.customerName).replace(/'/g, "\\'")}')" class="font-bold text-slate-900 hover:text-emerald-700 hover:underline text-left">
                 ${escapeHtml(o.customerName)}
               </button>
               ${o.isReturning ? '<span class="ml-1 px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 text-[10px] font-bold">VIP</span>' : ''}
               ${o.contact ? `<div class="text-[11px] text-slate-400">${escapeHtml(o.contact)}</div>` : ''}
             </td>
             <td class="py-3.5 px-3 text-xs whitespace-nowrap">
-              <div class="font-bold text-slate-900">${escapeHtml(o.deliveryDate)} ${o.isUpcoming ? '<span class="px-1 py-0.5 rounded bg-orange-100 text-orange-800 text-[10px]">⚡&lt;72h</span>' : ''}</div>
+              <div class="font-bold text-slate-900">${escapeHtml(o.deliveryDate)} ${o.isUpcoming ? '<span class="px-1.5 py-0.5 rounded bg-orange-100 text-orange-800 border border-orange-200 text-[10px] font-bold">⚡&lt;72h Due</span>' : ''}</div>
               <div class="text-slate-600">${formatTime12h(o.deliveryTime)}</div>
             </td>
             <td class="py-3.5 px-3 space-y-1 max-w-xs">${itemsHTML}${dishesHTML}</td>
@@ -1888,11 +2068,11 @@
               <div class="font-bold text-emerald-700 text-xs">$${o.amountPaid.toFixed(2)}</div>
               <div class="text-[11px] text-slate-500">${escapeHtml(o.paymentMethod)}</div>
             </td>
-            <td class="py-3.5 px-3 text-right font-bold whitespace-nowrap ${o.balance > 0 ? 'text-rose-600' : 'text-slate-400'}">$${o.balance.toFixed(2)}</td>
+            <td class="py-3.5 px-3 text-right whitespace-nowrap">${balanceCellHTML}</td>
             <td class="py-3.5 px-3">${statusBadge}</td>
-            <td class="py-3.5 px-3 text-right whitespace-nowrap space-x-1">
+            <td onclick="event.stopPropagation()" class="py-3.5 px-3 text-right whitespace-nowrap space-x-1 sticky right-0 bg-white/95 group-hover:bg-emerald-50/95 backdrop-blur-xs shadow-[-6px_0_10px_-6px_rgba(15,23,42,0.12)]">
               ${!o.isPaid ? `<button type="button" onclick="markOrderPaid('${o.id}')" class="px-2 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-semibold">Paid</button>` : ''}
-              <button type="button" onclick="openEditModal('${o.id}')" class="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold">Edit</button>
+              <button type="button" onclick="openEditModal('${o.id}')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold">Edit</button>
               <button type="button" onclick="openReceiptModal('${o.id}')" class="px-2 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-semibold">Receipt</button>
               <button type="button" onclick="deleteOrder('${o.id}')" class="px-1.5 py-1 rounded-lg text-rose-600 hover:bg-rose-50 text-xs font-semibold">✕</button>
             </td>
@@ -1902,99 +2082,55 @@
     }
 
     function renderMonthlyEarnings(enriched) {
-      const monthMap = new Map();
+      const totalCollected = enriched.reduce((s, o) => s + o.amountPaid, 0);
+      const totalFood = enriched.reduce((s, o) => s + o.foodSubtotal, 0);
+      const totalDelivery = enriched.reduce((s, o) => s + o.deliveryFee, 0);
+      const totalTips = enriched.reduce((s, o) => s + o.tip, 0);
+
+      document.getElementById('earnAllCollected').textContent = `$${totalCollected.toFixed(2)}`;
+      document.getElementById('earnAllFood').textContent = `$${totalFood.toFixed(2)}`;
+      document.getElementById('earnAllDelivery').textContent = `$${totalDelivery.toFixed(2)}`;
+      document.getElementById('earnAllTips').textContent = `$${totalTips.toFixed(2)}`;
+
+      const byMonth = {};
       enriched.forEach(o => {
-        const ym = (o.deliveryDate || o.orderDate || '').slice(0, 7) || 'Unknown';
-        if (!monthMap.has(ym)) monthMap.set(ym, { ym, orders: 0, food: 0, fees: 0, tips: 0, billed: 0, collected: 0, pending: 0 });
-        const m = monthMap.get(ym);
-        m.orders += 1;
-        m.food += o.foodSubtotal;
-        m.fees += o.deliveryFee;
-        m.tips += o.tip;
-        m.billed += o.totalBilled;
-        m.collected += o.amountPaid;
-        m.pending += o.balance;
+        const m = o.deliveryMonth || 'Unscheduled';
+        if (!byMonth[m]) byMonth[m] = { ym: m, orders: 0, food: 0, delivery: 0, tips: 0, billed: 0, collected: 0, due: 0 };
+        byMonth[m].orders++;
+        byMonth[m].food += o.foodSubtotal;
+        byMonth[m].delivery += o.deliveryFee;
+        byMonth[m].tips += o.tip;
+        byMonth[m].billed += o.totalBilled;
+        byMonth[m].collected += o.amountPaid;
+        byMonth[m].due += o.balance;
       });
 
-      const monthsSorted = Array.from(monthMap.values()).sort((a, b) => b.ym.localeCompare(a.ym));
-      const selectEl = document.getElementById('earningsMonthFilter');
-      const prevVal = selectEl.value;
-      selectEl.innerHTML = `<option value="all">All Months (${monthsSorted.length})</option>` +
-        monthsSorted.map(m => `<option value="${m.ym}">${formatMonthLabel(m.ym)}</option>`).join('');
-      if (Array.from(selectEl.options).some(opt => opt.value === prevVal)) selectEl.value = prevVal;
-
-      const visibleMonths = selectEl.value === 'all' ? monthsSorted : monthsSorted.filter(m => m.ym === selectEl.value);
-      const filteredOrders = selectEl.value === 'all' ? enriched : enriched.filter(o => ((o.deliveryDate || o.orderDate || '').slice(0, 7) || 'Unknown') === selectEl.value);
-
-      const sumBilled = visibleMonths.reduce((s, m) => s + m.billed, 0);
-      const sumCollected = visibleMonths.reduce((s, m) => s + m.collected, 0);
-      const sumPending = visibleMonths.reduce((s, m) => s + m.pending, 0);
-      const sumTips = visibleMonths.reduce((s, m) => s + m.tips, 0);
-      const activeMonth = selectEl.value;
-      const monthTag = activeMonth === 'all' ? 'All Months' : formatMonthLabel(activeMonth);
-
-      document.getElementById('earningsSummaryCards').innerHTML = `
-        <button type="button" onclick="drillDownTo({ month: '${activeMonth}' }, 'Total Billed (${monthTag})')" class="text-left rounded-xl bg-[#0B2E1E] hover:bg-[#13442E] text-white p-4 transition">
-          <div class="text-xs text-emerald-200 font-medium">Total Billed ↗</div>
-          <div class="text-2xl font-extrabold text-[#FACC15] mt-1">$${sumBilled.toFixed(2)}</div>
-          <div class="text-[11px] text-emerald-300/80 mt-1">Food + Fees + Tips</div>
-        </button>
-        <button type="button" onclick="drillDownTo({ month: '${activeMonth}', status: 'collected' }, 'Collected Revenue (${monthTag})')" class="text-left rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 p-4 transition">
-          <div class="text-xs text-emerald-900 font-semibold">Collected Revenue ↗</div>
-          <div class="text-2xl font-extrabold text-emerald-700 mt-1">$${sumCollected.toFixed(2)}</div>
-          <div class="text-[11px] text-emerald-800/80 mt-1">Verified funds received</div>
-        </button>
-        <button type="button" onclick="drillDownTo({ month: '${activeMonth}', status: 'unpaid' }, 'Pending Balances (${monthTag})')" class="text-left rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 p-4 transition">
-          <div class="text-xs text-amber-900 font-semibold">Pending Collection ↗</div>
-          <div class="text-2xl font-extrabold text-amber-700 mt-1">$${sumPending.toFixed(2)}</div>
-          <div class="text-[11px] text-amber-800/80 mt-1">Awaiting payment</div>
-        </button>
-        <div class="rounded-xl bg-indigo-50 border border-indigo-200 p-4">
-          <div class="text-xs text-indigo-900 font-semibold">Tips Collected</div>
-          <div class="text-2xl font-extrabold text-indigo-700 mt-1">$${sumTips.toFixed(2)}</div>
-          <div class="text-[11px] text-indigo-800/80 mt-1">Customer gratuities</div>
-        </div>
-      `;
-
-      const pmTotals = new Map();
-      PAYMENT_METHODS.forEach(pm => pmTotals.set(pm, 0));
-      filteredOrders.forEach(o => {
-        const pm = o.paymentMethod || 'Interac e-Transfer';
-        pmTotals.set(pm, (pmTotals.get(pm) || 0) + o.amountPaid);
-      });
-      document.getElementById('paymentMethodBreakdown').innerHTML =
-        `<span class="text-xs font-extrabold text-slate-700 mr-1">Collected by Method:</span>` +
-        Array.from(pmTotals.entries()).map(([pm, amt]) => {
-          const safePm = escapeHtml(pm).replace(/'/g, "\\'");
-          return `<button type="button" onclick="drillDownTo({ month: '${activeMonth}', paymentMethod: '${safePm}', status: 'collected' }, 'Collected via ${safePm}')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-xs font-semibold text-slate-700 transition">${escapeHtml(pm)}: <strong class="text-emerald-700">$${amt.toFixed(2)}</strong></button>`;
-        }).join('');
-
-      const tbody = document.getElementById('earningsTableBody');
-      if (visibleMonths.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="9" class="py-10 text-center text-slate-400 text-sm">No monthly earnings recorded yet.</td></tr>`;
+      const months = Object.values(byMonth).sort((a, b) => b.ym.localeCompare(a.ym));
+      const tbody = document.getElementById('monthlyEarningsBody');
+      if (months.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" class="py-8 text-center text-slate-400">No orders recorded yet.</td></tr>`;
         return;
       }
 
-      tbody.innerHTML = visibleMonths.map(m => {
+      tbody.innerHTML = months.map(m => {
         const pct = Math.min(100, Math.round((m.collected / MONTHLY_GOAL) * 100));
-        const mLabel = formatMonthLabel(m.ym);
         return `
-          <tr onclick="drillDownTo({ month: '${m.ym}' }, '${mLabel} — All Orders')" class="cursor-pointer hover:bg-emerald-50/50 transition">
-            <td class="py-3.5 px-3 font-bold text-slate-900 whitespace-nowrap">${mLabel} ↗</td>
-            <td class="py-3.5 px-3 text-center font-semibold text-slate-700">${m.orders}</td>
-            <td class="py-3.5 px-3 text-right text-slate-700 whitespace-nowrap">$${m.food.toFixed(2)}</td>
-            <td class="py-3.5 px-3 text-right text-slate-600 whitespace-nowrap">$${m.fees.toFixed(2)}</td>
-            <td class="py-3.5 px-3 text-right font-semibold text-indigo-700 whitespace-nowrap">$${m.tips.toFixed(2)}</td>
-            <td class="py-3.5 px-3 text-right font-bold text-slate-900 whitespace-nowrap">$${m.billed.toFixed(2)}</td>
-            <td class="py-3.5 px-3 text-right font-extrabold text-emerald-700 whitespace-nowrap">$${m.collected.toFixed(2)}</td>
-            <td class="py-3.5 px-3 text-right font-semibold whitespace-nowrap ${m.pending > 0 ? 'text-amber-700' : 'text-slate-400'}">$${m.pending.toFixed(2)}</td>
-            <td class="py-3.5 px-3">
-              <div class="flex items-center justify-between text-xs mb-1">
-                <span class="font-bold text-emerald-700">${pct}%</span>
-                <span class="text-slate-400">$${m.collected.toFixed(0)} / $500</span>
+          <tr onclick="drillToOrders('custom', '${formatMonthLabel(m.ym)} Orders', o => o.deliveryMonth === '${m.ym}')" class="cursor-pointer hover:bg-emerald-50/50 transition">
+            <td class="py-3.5 px-3 font-extrabold text-slate-900 whitespace-nowrap">${formatMonthLabel(m.ym)}</td>
+            <td class="py-3.5 px-3 text-center font-bold text-slate-700">${m.orders}</td>
+            <td class="py-3.5 px-3 text-right font-semibold text-slate-800">$${m.food.toFixed(2)}</td>
+            <td class="py-3.5 px-3 text-right text-slate-600">$${m.delivery.toFixed(2)}</td>
+            <td class="py-3.5 px-3 text-right font-bold text-emerald-700">$${m.tips.toFixed(2)}</td>
+            <td class="py-3.5 px-3 text-right font-extrabold text-slate-900">$${m.billed.toFixed(2)}</td>
+            <td class="py-3.5 px-3 text-right font-extrabold text-emerald-700">$${m.collected.toFixed(2)}</td>
+            <td class="py-3.5 px-3 text-right font-extrabold ${m.due > 0.009 ? 'text-rose-700' : 'text-slate-400'}">$${m.due.toFixed(2)}</td>
+            <td class="py-3.5 px-3 w-48">
+              <div class="flex items-center justify-between text-[11px] font-bold mb-1">
+                <span class="text-emerald-700">${pct}%</span>
+                <span class="text-slate-500">$${m.collected.toFixed(0)} / $${MONTHLY_GOAL}</span>
               </div>
               <div class="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
-                <div class="h-full bg-emerald-600 rounded-full" style="width: ${pct}%"></div>
+                <div class="h-full bg-emerald-600 rounded-full" style="width:${pct}%"></div>
               </div>
             </td>
           </tr>
@@ -2002,552 +2138,310 @@
       }).join('');
     }
 
-    function renderCustomersTable(custList) {
-      ['all', 'vip', 'first'].forEach(t => {
-        const btn = document.getElementById(`ctier-${t}`);
-        if (!btn) return;
-        btn.className = customerTierFilter === t
-          ? 'px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0B2E1E] text-white'
-          : 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200';
+    function renderCustomersTable(enriched) {
+      const map = {};
+      enriched.forEach(o => {
+        const key = o.customerName.trim().toLowerCase();
+        if (!map[key]) {
+          map[key] = {
+            key,
+            name: o.customerName,
+            orders: [],
+            dishes: new Set(),
+            paid: 0,
+            due: 0
+          };
+        }
+        map[key].orders.push(o);
+        map[key].paid += o.amountPaid;
+        map[key].due += o.balance;
+        if (o.dishesServed) {
+          o.dishesServed.split(',').map(d => d.trim()).filter(Boolean).forEach(d => map[key].dishes.add(d));
+        }
       });
 
-      const filtered = custList.filter(c => {
-        if (customerTierFilter === 'vip') return c.ordersCount > 1;
-        if (customerTierFilter === 'first') return c.ordersCount === 1;
-        return true;
-      });
-      const sorted = [...filtered].sort((a, b) => b.ordersCount - a.ordersCount);
+      let list = Object.values(map).sort((a, b) => b.orders.length - a.orders.length || b.paid - a.paid);
+      if (customerTierFilter === 'vip') list = list.filter(c => c.orders.length >= 2);
+      if (customerTierFilter === 'first') list = list.filter(c => c.orders.length === 1);
+
       const tbody = document.getElementById('customersTableBody');
-
-      if (sorted.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" class="py-10 text-center text-slate-400 text-sm">No customers in this tier yet.</td></tr>`;
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-slate-400">No customers match this tier filter.</td></tr>`;
         return;
       }
 
-      tbody.innerHTML = sorted.map(c => {
-        const tier = c.ordersCount > 1
-          ? `<span class="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-bold whitespace-nowrap">Returning VIP</span>`
-          : `<span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold whitespace-nowrap">First-Time</span>`;
-
-        const dishesHTML = c.dishesHistory.length > 0
-          ? `<div class="space-y-1 max-w-xs">` + [...c.dishesHistory].reverse().map(d =>
-              `<div class="text-xs text-slate-700"><span class="font-mono text-[10px] text-slate-400">${escapeHtml(d.date)}:</span> <span class="font-medium text-emerald-900">${escapeHtml(d.dishes)}</span></div>`
-            ).join('') + `</div>`
-          : `<span class="text-xs text-slate-400 italic">None logged</span>`;
-
-        const safeName = escapeHtml(c.name).replace(/'/g, "\\'");
+      tbody.innerHTML = list.map(c => {
+        const isVIP = c.orders.length >= 2;
+        const pref = customerPrefs[c.key];
+        const members = (pref && Array.isArray(pref.tasteMembers) && pref.tasteMembers.length > 0)
+          ? pref.tasteMembers
+          : normalizeTasteMembers(c.orders[c.orders.length - 1]);
+        const dishesList = [...c.dishes].join(', ') || '—';
 
         return `
-          <tr class="hover:bg-slate-50 align-top">
-            <td class="py-3.5 px-3.5 font-bold text-slate-900">
-              <button type="button" onclick="openCustomerHistoryModal('${safeName}')" class="hover:text-emerald-700 hover:underline text-left">${escapeHtml(c.name)}</button>
-              ${c.contact ? `<div class="text-[11px] font-normal text-slate-400">${escapeHtml(c.contact)}</div>` : ''}
-            </td>
-            <td class="py-3.5 px-3.5">${tier}</td>
-            <td class="py-3.5 px-3.5">${renderTasteMembersBadges(c.tasteMembers)}</td>
-            <td class="py-3.5 px-3.5">${dishesHTML}</td>
-            <td class="py-3.5 px-3.5 text-center whitespace-nowrap">
-              <button type="button" onclick="openCustomerHistoryModal('${safeName}')" class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-indigo-50 hover:bg-indigo-600 text-indigo-700 hover:text-white border border-indigo-200 font-extrabold text-xs transition">
-                <span>${c.ordersCount}</span><span class="text-[10px]">View ↗</span>
+          <tr class="hover:bg-slate-50/90 transition align-top">
+            <td class="py-3.5 px-3 font-bold text-slate-900">
+              <button type="button" onclick="openCustomerHistoryModal('${escapeHtml(c.name).replace(/'/g, "\\'")}')" class="hover:text-emerald-700 hover:underline text-left">
+                ${escapeHtml(c.name)}
               </button>
             </td>
-            <td class="py-3.5 px-3.5 text-right font-semibold text-emerald-700 whitespace-nowrap">$${c.totalPaid.toFixed(2)}</td>
-            <td class="py-3.5 px-3.5 text-right font-bold whitespace-nowrap ${c.balance > 0 ? 'text-rose-600' : 'text-slate-400'}">$${c.balance.toFixed(2)}</td>
-            <td class="py-3.5 px-3.5 text-right whitespace-nowrap">
-              <button type="button" onclick="openAddModal('${safeName}')" class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-bold transition">+ Quick Re-Order</button>
+            <td class="py-3.5 px-3 whitespace-nowrap">
+              ${isVIP
+                ? `<span class="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-bold">★ Returning VIP</span>`
+                : `<span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold">First-Time</span>`}
+            </td>
+            <td class="py-3.5 px-3">${renderTasteMembersBadges(members)}</td>
+            <td class="py-3.5 px-3 text-xs text-slate-700 max-w-xs">${escapeHtml(dishesList)}</td>
+            <td class="py-3.5 px-3 text-center">
+              <button type="button" onclick="openCustomerHistoryModal('${escapeHtml(c.name).replace(/'/g, "\\'")}')" class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-extrabold">
+                ${c.orders.length} order(s)
+              </button>
+            </td>
+            <td class="py-3.5 px-3 text-right font-extrabold text-emerald-700 whitespace-nowrap">$${c.paid.toFixed(2)}</td>
+            <td class="py-3.5 px-3 text-right whitespace-nowrap">
+              ${c.due > 0.009
+                ? `<span class="px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 text-xs font-extrabold">Due $${c.due.toFixed(2)}</span>`
+                : `<span class="text-xs font-bold text-slate-400">$0.00</span>`}
+            </td>
+            <td class="py-3.5 px-3 text-right whitespace-nowrap">
+              <button type="button" onclick="openAddModal('${escapeHtml(c.name).replace(/'/g, "\\'")}')" class="px-3 py-1.5 rounded-xl bg-[#0B2E1E] hover:bg-[#13442E] text-white text-xs font-bold">
+                + Re-Order
+              </button>
             </td>
           </tr>
         `;
       }).join('');
     }
 
-    function renderChartsView(enriched, custList) {
-      const totalCust = custList.length;
-      const vipCustList = custList.filter(c => c.ordersCount > 1);
-      const firstTimeList = custList.filter(c => c.ordersCount === 1);
-      const vipCount = vipCustList.length;
-      const firstCount = firstTimeList.length;
-      const vipPct = totalCust > 0 ? Math.round((vipCount / totalCust) * 100) : 0;
-      const firstPct = totalCust > 0 ? (100 - vipPct) : 0;
-
-      const repeatOrdersTotal = vipCustList.reduce((s, c) => s + c.ordersCount, 0);
-      const repeatOrdersPct = enriched.length > 0 ? Math.round((repeatOrdersTotal / enriched.length) * 100) : 0;
-      const totalPaidAll = enriched.reduce((s, o) => s + o.amountPaid, 0);
-      const totalBilledAll = enriched.reduce((s, o) => s + o.totalBilled, 0);
-      const collectionRate = totalBilledAll > 0 ? Math.round((totalPaidAll / totalBilledAll) * 100) : 0;
-
-      document.getElementById('chartsTopPills').innerHTML = `
-        <button type="button" onclick="jumpToCustomerTier('vip', 'Returning VIP Customers (${vipCount}/${totalCust})')" class="px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-xs transition cursor-pointer">
-          <span class="text-emerald-800 font-medium">Returning Rate:</span>
-          <strong class="text-emerald-950 font-extrabold ml-1">${vipPct}% (${vipCount}/${totalCust}) ↗</strong>
-        </button>
-        <button type="button" onclick="drillDownTo({ loyalty: 'vip' }, 'Repeat Orders from Returning VIPs')" class="px-3.5 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-xs transition cursor-pointer">
-          <span class="text-indigo-800 font-medium">Repeat Order Share:</span>
-          <strong class="text-indigo-950 font-extrabold ml-1">${repeatOrdersPct}% of Orders ↗</strong>
-        </button>
-        <button type="button" onclick="drillDownTo({ status: 'collected' }, 'Collected Payments (${collectionRate}%)')" class="px-3.5 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-xs transition cursor-pointer">
-          <span class="text-amber-800 font-medium">Collection Rate:</span>
-          <strong class="text-amber-950 font-extrabold ml-1">${collectionRate}% ↗</strong>
-        </button>
-      `;
-
-      const radius = 54;
-      const circumference = 2 * Math.PI * radius;
-      const vipArc = totalCust > 0 ? (vipCount / totalCust) * circumference : 0;
-      const firstArc = totalCust > 0 ? (firstCount / totalCust) * circumference : 0;
-
-      document.getElementById('chartRetentionContainer').innerHTML = `
-        <div class="relative w-40 h-40 shrink-0 flex items-center justify-center">
-          <svg class="w-40 h-40 -rotate-90" viewBox="0 0 140 140">
-            <circle cx="70" cy="70" r="${radius}" fill="none" stroke="#e2e8f0" stroke-width="18" />
-            ${totalCust > 0 ? `
-              <circle onclick="jumpToCustomerTier('vip', 'Returning VIPs')" class="cursor-pointer hover:opacity-85 transition" cx="70" cy="70" r="${radius}" fill="none" stroke="#059669" stroke-width="18" stroke-dasharray="${vipArc} ${circumference}" />
-              <circle onclick="jumpToCustomerTier('first', 'First-Time Customers')" class="cursor-pointer hover:opacity-85 transition" cx="70" cy="70" r="${radius}" fill="none" stroke="#94a3b8" stroke-width="18" stroke-dasharray="${firstArc} ${circumference}" stroke-dashoffset="-${vipArc}" />
-            ` : ''}
-          </svg>
-          <button type="button" onclick="jumpToCustomerTier('vip', 'Returning VIPs')" class="absolute inset-0 flex flex-col items-center justify-center text-center rounded-full hover:bg-emerald-50/40 transition cursor-pointer">
-            <span class="text-2xl font-black text-slate-900">${vipPct}%</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-700">Returning ↗</span>
-          </button>
-        </div>
-        <div class="space-y-3 text-xs w-full sm:w-auto">
-          <button type="button" onclick="jumpToCustomerTier('vip', 'Returning VIPs')" class="w-full text-left flex items-center justify-between gap-4 p-2.5 rounded-xl bg-emerald-50/80 hover:bg-emerald-100 border border-emerald-200 transition cursor-pointer">
-            <div class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full bg-emerald-600 inline-block"></span>
-              <div><div class="font-bold text-slate-900">Returning VIPs ↗</div><div class="text-[11px] text-slate-500">2+ orders</div></div>
-            </div>
-            <div class="text-right"><div class="font-extrabold text-emerald-800 text-sm">${vipCount}</div><div class="text-[10px] text-emerald-700">${vipPct}%</div></div>
-          </button>
-          <button type="button" onclick="jumpToCustomerTier('first', 'First-Time Customers')" class="w-full text-left flex items-center justify-between gap-4 p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 transition cursor-pointer">
-            <div class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full bg-slate-400 inline-block"></span>
-              <div><div class="font-bold text-slate-900">First-Time ↗</div><div class="text-[11px] text-slate-500">1 order</div></div>
-            </div>
-            <div class="text-right"><div class="font-extrabold text-slate-800 text-sm">${firstCount}</div><div class="text-[10px] text-slate-500">${firstPct}%</div></div>
-          </button>
-        </div>
-      `;
-
-      document.getElementById('chartRetentionFooter').innerHTML = `
-        <button type="button" onclick="drillDownTo({ loyalty: 'vip' }, 'VIP Repeat Orders')" class="rounded-xl bg-slate-50 hover:bg-emerald-50 p-2.5 transition cursor-pointer">
-          <div class="text-[11px] text-slate-500">VIP Repeat Orders</div>
-          <div class="text-base font-extrabold text-slate-900">${repeatOrdersTotal} of ${enriched.length} ↗</div>
-        </button>
-        <button type="button" onclick="jumpToCustomerTier('vip', 'Returning VIPs')" class="rounded-xl bg-slate-50 hover:bg-emerald-50 p-2.5 transition cursor-pointer">
-          <div class="text-[11px] text-slate-500">Avg Orders / VIP</div>
-          <div class="text-base font-extrabold text-emerald-700">${vipCount > 0 ? (repeatOrdersTotal / vipCount).toFixed(1) : '0.0'}x ↗</div>
-        </button>
-      `;
-
-      const monthMap = new Map();
+    function renderChartsTab(enriched) {
+      const custCounts = {};
       enriched.forEach(o => {
-        const ym = (o.deliveryDate || o.orderDate || '').slice(0, 7) || 'Unknown';
-        if (!monthMap.has(ym)) monthMap.set(ym, { ym, collected: 0, pending: 0, billed: 0, count: 0 });
-        const m = monthMap.get(ym);
-        m.collected += o.amountPaid;
-        m.pending += o.balance;
-        m.billed += o.totalBilled;
-        m.count += 1;
+        const k = o.customerName.trim().toLowerCase();
+        custCounts[k] = (custCounts[k] || 0) + 1;
       });
-      const monthsArr = Array.from(monthMap.values()).sort((a, b) => b.ym.localeCompare(a.ym));
-      document.getElementById('chartMonthlyBarsContainer').innerHTML = monthsArr.map(m => {
-        const maxScale = Math.max(MONTHLY_GOAL, m.billed);
-        const colWidth = Math.min(100, Math.round((m.collected / maxScale) * 100));
-        const penWidth = Math.min(100 - colWidth, Math.round((m.pending / maxScale) * 100));
-        const goalPct = Math.round((m.collected / MONTHLY_GOAL) * 100);
-        const mLabel = formatMonthLabel(m.ym);
-        return `
-          <div class="space-y-1.5">
-            <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
-              <button type="button" onclick="drillDownTo({ month: '${m.ym}' }, '${mLabel} — All Orders')" class="font-bold text-slate-900 hover:text-emerald-700 hover:underline cursor-pointer">
-                ${mLabel} (${m.count} orders) ↗
-              </button>
-              <div class="flex items-center gap-2">
-                <button type="button" onclick="drillDownTo({ month: '${m.ym}', status: 'collected' }, '${mLabel} — Collected')" class="font-bold text-emerald-700 hover:underline cursor-pointer">$${m.collected.toFixed(2)} collected</button>
-                ${m.pending > 0 ? `<button type="button" onclick="drillDownTo({ month: '${m.ym}', status: 'unpaid' }, '${mLabel} — Pending')" class="font-semibold text-amber-700 hover:underline cursor-pointer">+ $${m.pending.toFixed(2)} pending</button>` : ''}
-                <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 font-extrabold text-[11px]">${goalPct}% of $500</span>
+      const totalCust = Object.keys(custCounts).length;
+      const vipCust = Object.values(custCounts).filter(c => c >= 2).length;
+      const firstCust = Math.max(0, totalCust - vipCust);
+      const vipPct = totalCust > 0 ? Math.round((vipCust / totalCust) * 100) : 0;
+
+      const vipOrdersCount = enriched.filter(o => o.isReturning).length;
+      const repeatOrderShare = enriched.length > 0 ? Math.round((vipOrdersCount / enriched.length) * 100) : 0;
+      const avgOrdersPerVip = vipCust > 0 ? (vipOrdersCount / vipCust).toFixed(1) : '0.0';
+
+      const totalBilled = enriched.reduce((s, o) => s + o.totalBilled, 0);
+      const totalCollected = enriched.reduce((s, o) => s + o.amountPaid, 0);
+      const collectionRate = totalBilled > 0 ? Math.round((totalCollected / totalBilled) * 100) : 0;
+
+      // Top Summary Pills
+      document.getElementById('chartsTopPills').innerHTML = `
+        <button type="button" onclick="drillToCustomers('vip')" class="px-3.5 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 text-xs font-bold transition">
+          Returning Rate: <strong>${vipPct}% (${vipCust}/${totalCust})</strong> ↗
+        </button>
+        <button type="button" onclick="drillToOrders('custom', 'VIP Repeat Orders (${vipOrdersCount})', o => o.isReturning)" class="px-3.5 py-1.5 rounded-full bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-200 text-xs font-bold transition">
+          Repeat Order Share: <strong>${repeatOrderShare}% of Orders</strong> ↗
+        </button>
+        <button type="button" onclick="drillToOrders('collected', 'Collected Payments')" class="px-3.5 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold transition">
+          Payment Collection Rate: <strong>${collectionRate}%</strong> ↗
+        </button>
+      `;
+
+      // Donut SVG
+      const r = 46;
+      const circ = 2 * Math.PI * r;
+      const vipDash = (vipPct / 100) * circ;
+      document.getElementById('chartRetentionCard').innerHTML = `
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h3 class="text-base font-extrabold text-slate-900">Returning Customer Retention</h3>
+            <p class="text-xs text-slate-500">Click any segment or card to filter customers &amp; orders</p>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">Repeat Loyalty</span>
+        </div>
+        <div class="flex flex-col sm:flex-row items-center gap-6 my-4">
+          <div onclick="drillToCustomers('vip')" class="cursor-pointer relative w-36 h-36 flex items-center justify-center shrink-0">
+            <svg viewBox="0 0 120 120" class="w-full h-full -rotate-90">
+              <circle cx="60" cy="60" r="${r}" fill="none" stroke="#94a3b8" stroke-width="16" />
+              <circle cx="60" cy="60" r="${r}" fill="none" stroke="#059669" stroke-width="16" stroke-dasharray="${vipDash} ${circ}" />
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span class="text-2xl font-black text-slate-900">${vipPct}%</span>
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-700">Returning</span>
+            </div>
+          </div>
+          <div class="flex-1 w-full space-y-2.5">
+            <div onclick="drillToCustomers('vip')" class="cursor-pointer flex items-center justify-between p-3 rounded-xl border border-emerald-200 bg-emerald-50/60 hover:bg-emerald-100/70 transition">
+              <div class="flex items-center gap-2.5">
+                <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
+                <div>
+                  <div class="text-xs font-extrabold text-slate-900">Returning VIPs</div>
+                  <div class="text-[11px] text-slate-500">2+ orders placed</div>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-sm font-black text-slate-900">${vipCust}</div>
+                <div class="text-[11px] font-bold text-emerald-700">${vipPct}%</div>
               </div>
             </div>
-            <div class="w-full h-5 rounded-lg bg-slate-100 border border-slate-200 overflow-hidden flex">
-              <button type="button" onclick="drillDownTo({ month: '${m.ym}', status: 'collected' }, '${mLabel} — Collected')" class="h-full bg-emerald-600 hover:bg-emerald-500 transition cursor-pointer" style="width: ${colWidth}%"></button>
-              <button type="button" onclick="drillDownTo({ month: '${m.ym}', status: 'unpaid' }, '${mLabel} — Pending')" class="h-full bg-amber-400 hover:bg-amber-300 transition cursor-pointer" style="width: ${penWidth}%"></button>
+            <div onclick="drillToCustomers('first')" class="cursor-pointer flex items-center justify-between p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 transition">
+              <div class="flex items-center gap-2.5">
+                <span class="w-3 h-3 rounded-full bg-slate-400"></span>
+                <div>
+                  <div class="text-xs font-extrabold text-slate-900">First-Time</div>
+                  <div class="text-[11px] text-slate-500">1 order placed</div>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-sm font-black text-slate-900">${firstCust}</div>
+                <div class="text-[11px] font-bold text-slate-500">${totalCust > 0 ? 100 - vipPct : 0}%</div>
+              </div>
             </div>
           </div>
-        `;
-      }).join('');
-
-      const catCounts = CATEGORIES.map(cat => {
-        const catOrds = enriched.filter(o => o.categoriesInOrder.includes(cat.name));
-        const units = catOrds.reduce((s, o) => s + o.lineItems.filter(li => li.category === cat.name).reduce((x, li) => x + li.qty, 0), 0);
-        return { ...cat, units, orderCount: catOrds.length };
-      });
-      const totalUnitsAll = catCounts.reduce((s, c) => s + c.units, 0);
-      document.getElementById('chartCategoryMixContainer').innerHTML = catCounts.map(c => {
-        const pct = totalUnitsAll > 0 ? Math.round((c.units / totalUnitsAll) * 100) : 0;
-        const safeCat = escapeHtml(c.name).replace(/'/g, "\\'");
-        return `
-          <button type="button" onclick="drillDownTo({ category: '${safeCat}' }, '${safeCat} Orders')" class="w-full text-left p-2 -mx-2 rounded-xl hover:bg-slate-50 transition cursor-pointer block">
-            <div class="flex items-center justify-between text-xs mb-1">
-              <span class="font-semibold text-slate-800">${escapeHtml(c.name)}</span>
-              <span class="font-bold text-slate-600">${c.units} qty (${pct}%) ↗</span>
-            </div>
-            <div class="w-full h-2.5 rounded-full bg-slate-100 overflow-hidden">
-              <div class="h-full ${c.badgeBg} rounded-full" style="width: ${pct}%"></div>
-            </div>
-          </button>
-        `;
-      }).join('');
-
-      const pmMap = new Map();
-      PAYMENT_METHODS.forEach(pm => pmMap.set(pm, { count: 0, amount: 0 }));
-      enriched.forEach(o => {
-        const pm = o.paymentMethod || 'Interac e-Transfer';
-        const cur = pmMap.get(pm) || { count: 0, amount: 0 };
-        cur.count += 1;
-        cur.amount += o.totalBilled;
-        pmMap.set(pm, cur);
-      });
-      document.getElementById('chartPaymentMixContainer').innerHTML = Array.from(pmMap.entries()).map(([pm, val]) => {
-        const pct = enriched.length > 0 ? Math.round((val.count / enriched.length) * 100) : 0;
-        const barColor = (pm === 'Cash' || pm === 'COD') ? 'bg-emerald-600' : 'bg-blue-600';
-        const safePm = escapeHtml(pm).replace(/'/g, "\\'");
-        return `
-          <button type="button" onclick="drillDownTo({ paymentMethod: '${safePm}' }, 'Payment Method: ${safePm}')" class="w-full text-left p-2 -mx-2 rounded-xl hover:bg-slate-50 transition cursor-pointer block">
-            <div class="flex items-center justify-between text-xs mb-1">
-              <span class="font-semibold text-slate-800">${escapeHtml(pm)}</span>
-              <span class="font-bold text-slate-600">${val.count} ord • $${val.amount.toFixed(0)} (${pct}%) ↗</span>
-            </div>
-            <div class="w-full h-2.5 rounded-full bg-slate-100 overflow-hidden">
-              <div class="h-full ${barColor} rounded-full" style="width: ${pct}%"></div>
-            </div>
-          </button>
-        `;
-      }).join('');
-
-      const spiceCounts = {};
-      SPICE_OPTIONS.forEach(s => { spiceCounts[s] = 0; });
-      let totalProfiles = 0;
-      custList.forEach(c => {
-        const list = c.tasteMembers && c.tasteMembers.length > 0 ? c.tasteMembers : [{ spice: 'Medium (Standard)' }];
-        list.forEach(m => {
-          const sp = normalizeSpiceValue(m.spice);
-          spiceCounts[sp] = (spiceCounts[sp] || 0) + 1;
-          totalProfiles += 1;
-        });
-      });
-      const spiceColors = {
-        'Extra Mild': 'bg-teal-500',
-        'Mild': 'bg-sky-500',
-        'Medium (Standard)': 'bg-amber-500',
-        'Spicy': 'bg-orange-500',
-        'Mexican Hot': 'bg-red-600',
-        'Extra Spicy': 'bg-rose-700'
-      };
-      document.getElementById('chartSpiceMixContainer').innerHTML = SPICE_OPTIONS.map(sp => {
-        const cnt = spiceCounts[sp] || 0;
-        const pct = totalProfiles > 0 ? Math.round((cnt / totalProfiles) * 100) : 0;
-        const safeSpice = escapeHtml(sp).replace(/'/g, "\\'");
-        return `
-          <button type="button" onclick="drillDownTo({ spice: '${safeSpice}' }, 'Spice Level: ${safeSpice}')" class="w-full text-left p-2 -mx-2 rounded-xl hover:bg-slate-50 transition cursor-pointer block">
-            <div class="flex items-center justify-between text-xs mb-1">
-              <span class="font-semibold text-slate-800">🌶️ ${escapeHtml(sp.replace(' (Standard)', ''))}</span>
-              <span class="font-bold text-slate-600">${cnt} (${pct}%) ↗</span>
-            </div>
-            <div class="w-full h-2.5 rounded-full bg-slate-100 overflow-hidden">
-              <div class="h-full ${spiceColors[sp] || 'bg-amber-500'} rounded-full" style="width: ${pct}%"></div>
-            </div>
-          </button>
-        `;
-      }).join('');
-    }
-
-    // =========================================================
-    // NAVIGATION, ACTIONS, RECEIPTS & WHATSAPP SYNC
-    // =========================================================
-    function switchTab(tab) {
-      currentTab = tab;
-      ['overview', 'orders', 'earnings', 'customers', 'charts'].forEach(t => {
-        document.getElementById(`view-${t}`).classList.toggle('hidden', t !== tab);
-        const btn = document.getElementById(`tab-${t}`);
-        if (!btn) return;
-        btn.className = t === tab
-          ? 'tab-btn-active px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition flex items-center gap-1.5'
-          : 'tab-btn-inactive px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center gap-1.5';
-      });
-    }
-
-    function setOrderFilter(flt) {
-      customDrilldown = null;
-      currentFilter = flt;
-      ['all', 'mealbox', 'paid', 'collected', 'balance_due', 'pending', 'cash', 'overdue', 'upcoming'].forEach(f => {
-        const el = document.getElementById(`flt-${f}`);
-        if (!el) return;
-        el.className = f === flt
-          ? 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#0B2E1E] text-white'
-          : 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200';
-      });
-      renderAll();
-    }
-
-    function filterAndJump(flt, label) {
-      switchTab('orders');
-      setOrderFilter(flt);
-      if (label) {
-        customDrilldown = { status: flt === 'all' ? null : flt, label };
-        renderAll();
-      }
-    }
-
-    function drillDownTo(spec, label) {
-      customDrilldown = { ...spec, label };
-      currentFilter = 'all';
-      switchTab('orders');
-      renderAll();
-    }
-
-    function resetDrilldown() {
-      customDrilldown = null;
-      document.getElementById('searchOrdersInput').value = '';
-      setOrderFilter('all');
-    }
-
-    function jumpToCustomerTier(tier, label) {
-      customerTierFilter = tier || 'all';
-      switchTab('customers');
-      renderAll();
-      if (label) showToast(`Showing: ${label}`);
-    }
-
-    function markOrderPaid(id) {
-      const idx = orders.findIndex(o => o.id === id);
-      if (idx === -1) return;
-      const total = (parseFloat(orders[idx].foodSubtotal) || 0) + (parseFloat(orders[idx].deliveryFee) || 0) + (parseFloat(orders[idx].tip) || 0);
-      orders[idx].amountPaid = parseFloat(total.toFixed(2));
-      saveState();
-      renderAll();
-      showToast(`Order ${id} marked 100% Paid!`);
-    }
-
-    function deleteOrder(id) {
-      orders = orders.filter(o => o.id !== id);
-      saveState();
-      renderAll();
-      showToast(`Deleted order ${id}.`);
-    }
-
-    function openCustomerHistoryModal(customerName) {
-      const enriched = getEnrichedOrders();
-      const key = (customerName || '').trim().toLowerCase();
-      activeHistoryCustomerKey = key;
-      const custOrders = enriched.filter(o => o.customerName.trim().toLowerCase() === key);
-      if (custOrders.length === 0) return;
-
-      const displayName = custOrders[0].customerName;
-      const totalBilled = custOrders.reduce((s, o) => s + o.totalBilled, 0);
-      const totalPaid = custOrders.reduce((s, o) => s + o.amountPaid, 0);
-      const totalBal = custOrders.reduce((s, o) => s + o.balance, 0);
-
-      document.getElementById('chModalCustomerName').textContent = displayName;
-      document.getElementById('chModalTierBadge').textContent = custOrders.length > 1 ? `Returning VIP • ${custOrders.length} Orders` : 'First-Time Customer';
-      document.getElementById('chModalTasteBadges').innerHTML = renderTasteMembersBadges(custOrders[0].tasteMembers);
-
-      document.getElementById('chModalStatsStrip').innerHTML = `
-        <div class="rounded-xl bg-[#0B2E1E] text-white p-3"><div class="text-[11px] text-emerald-200">Orders</div><div class="text-xl font-extrabold">${custOrders.length}</div></div>
-        <div class="rounded-xl bg-slate-50 border border-slate-200 p-3"><div class="text-[11px] text-slate-500">Total Billed</div><div class="text-xl font-extrabold">$${totalBilled.toFixed(2)}</div></div>
-        <div class="rounded-xl bg-emerald-50 border border-emerald-200 p-3"><div class="text-[11px] text-emerald-800">Total Paid</div><div class="text-xl font-extrabold text-emerald-700">$${totalPaid.toFixed(2)}</div></div>
-        <div class="rounded-xl bg-rose-50 border border-rose-200 p-3"><div class="text-[11px] text-rose-800">Balance Due</div><div class="text-xl font-extrabold text-rose-600">$${totalBal.toFixed(2)}</div></div>
+        </div>
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <div onclick="drillToOrders('custom', 'VIP Repeat Orders', o => o.isReturning)" class="cursor-pointer bg-slate-50 hover:bg-emerald-50 border border-slate-200 rounded-xl p-3 text-center transition">
+            <div class="text-[11px] text-slate-500 font-semibold">VIP Repeat Orders</div>
+            <div class="text-sm font-black text-slate-900 mt-0.5">${vipOrdersCount} of ${enriched.length} orders</div>
+          </div>
+          <div onclick="drillToCustomers('vip')" class="cursor-pointer bg-slate-50 hover:bg-emerald-50 border border-slate-200 rounded-xl p-3 text-center transition">
+            <div class="text-[11px] text-slate-500 font-semibold">Avg Orders / VIP</div>
+            <div class="text-sm font-black text-emerald-700 mt-0.5">${avgOrdersPerVip}x</div>
+          </div>
+        </div>
       `;
 
-      document.getElementById('chModalOrdersList').innerHTML = custOrders.map(o => `
-        <div class="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5 text-xs space-y-1.5">
-          <div class="flex items-center justify-between font-bold">
-            <span>${escapeHtml(o.id)} • Delivery: ${escapeHtml(o.deliveryDate)}</span>
-            <span class="${o.isPaid ? 'text-emerald-700' : 'text-amber-700'}">$${o.amountPaid.toFixed(2)} / $${o.totalBilled.toFixed(2)} (${escapeHtml(o.paymentMethod)})</span>
-          </div>
-          <div class="text-slate-700">${escapeHtml(o.lineItemsSummary)}</div>
-          ${o.dishesServed ? `<div class="text-emerald-800"><strong>Dishes:</strong> ${escapeHtml(o.dishesServed)}</div>` : ''}
-        </div>
-      `).join('');
-
-      document.getElementById('chModalNewOrderBtn').onclick = () => {
-        closeCustomerHistoryModal();
-        openAddModal(displayName);
-      };
-      document.getElementById('customerHistoryModal').classList.remove('hidden');
-    }
-
-    function closeCustomerHistoryModal() {
-      document.getElementById('customerHistoryModal').classList.add('hidden');
-    }
-
-    function openReceiptModal(id) {
-      const enriched = getEnrichedOrders();
-      const resolvedId = legacyOrderIdMap[id] || id;
-      const o = enriched.find(item => item.id === resolvedId || item.legacyId === id);
-      if (!o) return;
-      document.getElementById('recOrderId').textContent = `Order #: ${o.id}`;
-      document.getElementById('recCustomerName').textContent = o.customerName;
-      document.getElementById('recDate').textContent = `${o.deliveryDate} ${formatTime12h(o.deliveryTime)}`;
-      document.getElementById('recMethod').textContent = o.paymentMethod;
-      document.getElementById('recStatus').textContent = o.isPaid ? 'PAID IN FULL' : 'BALANCE DUE';
-      document.getElementById('recStatus').className = o.isPaid ? 'text-emerald-700 font-extrabold' : 'text-rose-600 font-extrabold';
-      document.getElementById('recItemsDesc').textContent = o.dishesServed ? `${o.lineItemsSummary} — (${o.dishesServed})` : o.lineItemsSummary;
-      document.getElementById('recFoodSub').textContent = `$${o.foodSubtotal.toFixed(2)}`;
-      document.getElementById('recDelFee').textContent = `$${o.deliveryFee.toFixed(2)}`;
-      document.getElementById('recTipAmt').textContent = `$${o.tip.toFixed(2)}`;
-      document.getElementById('recTotal').textContent = `$${o.totalBilled.toFixed(2)}`;
-      document.getElementById('recPaid').textContent = `$${o.amountPaid.toFixed(2)}`;
-      document.getElementById('recBalance').textContent = `$${o.balance.toFixed(2)}`;
-      document.getElementById('receiptModal').classList.remove('hidden');
-    }
-
-    function closeReceiptModal() {
-      document.getElementById('receiptModal').classList.add('hidden');
-    }
-
-    function openBulkModal() {
-      document.getElementById('bulkTextArea').value = '';
-      document.getElementById('bulkModal').classList.remove('hidden');
-    }
-
-    function closeBulkModal() {
-      document.getElementById('bulkModal').classList.add('hidden');
-    }
-
-    function processBulkPaste() {
-      const text = document.getElementById('bulkTextArea').value.trim();
-      if (!text) return;
-      const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
-      const today = getTodayISO();
-      let count = 0;
-      lines.forEach(line => {
-        const parts = line.split(',').map(p => p.trim());
-        if (parts.length >= 2) {
-          const name = parts[0];
-          const itemsDesc = parts[1] || 'Meal Box';
-          const food = parseFloat(parts[2]) || 0;
-          const paid = parseFloat(parts[3]) || 0;
-          const delDate = (parts[4] && /^\d{4}-\d{2}-\d{2}$/.test(parts[4])) ? parts[4] : today;
-          const pm = parts[5] || 'Interac e-Transfer';
-          const dishes = parts[6] || '';
-          const cat = normalizeCategoryName(itemsDesc);
-          orders.push({
-            id: generateOrderId(),
-            customerName: name,
-            contact: '',
-            orderDate: today,
-            deliveryDate: delDate,
-            deliveryTime: '18:00',
-            lineItems: [{ category: cat, qty: 1, details: itemsDesc }],
-            category: cat,
-            items: itemsDesc,
-            dishesServed: dishes,
-            paymentMethod: pm,
-            tasteMembers: customerPrefs[name.toLowerCase()]?.tasteMembers || [],
-            foodSubtotal: food,
-            deliveryFee: 0,
-            tip: 0,
-            amountPaid: paid
-          });
-          count++;
-        }
+      // Monthly Revenue Card
+      const byMonth = {};
+      enriched.forEach(o => {
+        const m = o.deliveryMonth || 'Unscheduled';
+        if (!byMonth[m]) byMonth[m] = { ym: m, count: 0, collected: 0, pending: 0 };
+        byMonth[m].count++;
+        byMonth[m].collected += o.amountPaid;
+        byMonth[m].pending += o.balance;
       });
-      saveState();
-      renderAll();
-      closeBulkModal();
-      showToast(`Imported ${count} order(s)!`);
+      const mList = Object.values(byMonth).sort((a, b) => b.ym.localeCompare(a.ym));
+      document.getElementById('chartMonthlyCard').innerHTML = `
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-base font-extrabold text-slate-900">Monthly Revenue vs. $${MONTHLY_GOAL} CAD Target</h3>
+            <p class="text-xs text-slate-500">Click any month or bar segment to inspect orders</p>
+          </div>
+          <div class="flex items-center gap-3 text-[11px] font-bold">
+            <span class="inline-flex items-center gap-1 text-emerald-700"><span class="w-2.5 h-2.5 rounded-xs bg-emerald-600"></span>Collected</span>
+            <span class="inline-flex items-center gap-1 text-amber-700"><span class="w-2.5 h-2.5 rounded-xs bg-amber-400"></span>Pending</span>
+          </div>
+        </div>
+        <div class="space-y-4">
+          ${mList.map(m => {
+            const colPct = Math.min(100, Math.round((m.collected / MONTHLY_GOAL) * 100));
+            const penPct = Math.min(100 - colPct, Math.round((m.pending / MONTHLY_GOAL) * 100));
+            return `
+              <div class="space-y-1.5">
+                <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+                  <button type="button" onclick="drillToOrders('custom', '${formatMonthLabel(m.ym)} Orders', o => o.deliveryMonth === '${m.ym}')" class="font-extrabold text-slate-900 hover:text-emerald-700 hover:underline">
+                    ${formatMonthLabel(m.ym)} <span class="font-normal text-slate-500">(${m.count} orders)</span>
+                  </button>
+                  <div class="flex items-center gap-2">
+                    <button type="button" onclick="drillToOrders('custom', '${formatMonthLabel(m.ym)} Collected', o => o.deliveryMonth === '${m.ym}' && o.amountPaid > 0)" class="font-bold text-emerald-700 hover:underline">$${m.collected.toFixed(2)} collected</button>
+                    ${m.pending > 0.009 ? `<button type="button" onclick="drillToOrders('custom', '${formatMonthLabel(m.ym)} Pending Due', o => o.deliveryMonth === '${m.ym}' && !o.isPaid)" class="font-extrabold text-rose-700 hover:underline">+ $${m.pending.toFixed(2)} due</button>` : ''}
+                    <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 font-bold text-[11px]">${colPct}% of $${MONTHLY_GOAL}</span>
+                  </div>
+                </div>
+                <div class="w-full h-3.5 rounded-full bg-slate-100 overflow-hidden flex">
+                  <div onclick="drillToOrders('custom', '${formatMonthLabel(m.ym)} Collected', o => o.deliveryMonth === '${m.ym}' && o.amountPaid > 0)" title="Collected" class="cursor-pointer bg-emerald-600 hover:bg-emerald-500 h-full transition" style="width:${colPct}%"></div>
+                  <div onclick="drillToOrders('custom', '${formatMonthLabel(m.ym)} Pending Due', o => o.deliveryMonth === '${m.ym}' && !o.isPaid)" title="Pending Due" class="cursor-pointer bg-amber-400 hover:bg-amber-300 h-full transition" style="width:${penPct}%"></div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+
+      // Menu Category Demand
+      const catUnits = {};
+      CATEGORIES.forEach(c => catUnits[c.name] = 0);
+      enriched.forEach(o => o.lineItems.forEach(li => catUnits[li.category] = (catUnits[li.category] || 0) + li.qty));
+      const totalUnits = Object.values(catUnits).reduce((s, v) => s + v, 0) || 1;
+      document.getElementById('chartCategoryCard').innerHTML = `
+        <h3 class="text-sm font-extrabold text-slate-900">Menu Category Demand</h3>
+        <p class="text-[11px] text-slate-500 mb-3">Click any category to filter orders</p>
+        <div class="space-y-2.5">
+          ${CATEGORIES.map(c => {
+            const units = catUnits[c.name] || 0;
+            const pct = Math.round((units / totalUnits) * 100);
+            return `
+              <div onclick="drillToOrders('custom', 'Category: ${c.name}', o => o.lineItems.some(li => li.category === '${c.name}'))" class="cursor-pointer group space-y-1">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="font-bold text-slate-800 group-hover:text-emerald-700">${escapeHtml(c.name)}</span>
+                  <span class="text-slate-600 font-semibold">${units} units (${pct}%)</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                  <div class="${c.badgeBg} h-full rounded-full" style="width:${pct}%"></div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+
+      // Payment Method Mix
+      const payCounts = {};
+      PAYMENT_METHODS.forEach(m => payCounts[m] = 0);
+      enriched.forEach(o => payCounts[o.paymentMethod] = (payCounts[o.paymentMethod] || 0) + 1);
+      const totalOrd = enriched.length || 1;
+      document.getElementById('chartPaymentCard').innerHTML = `
+        <h3 class="text-sm font-extrabold text-slate-900">Payment Method Mix</h3>
+        <p class="text-[11px] text-slate-500 mb-3">Click any payment method to filter orders</p>
+        <div class="space-y-2.5">
+          ${PAYMENT_METHODS.map(m => {
+            const cnt = payCounts[m] || 0;
+            const pct = Math.round((cnt / totalOrd) * 100);
+            return `
+              <div onclick="drillToOrders('custom', 'Payment: ${m}', o => o.paymentMethod === '${m}')" class="cursor-pointer group space-y-1">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="font-bold text-slate-800 group-hover:text-emerald-700">${escapeHtml(m)}</span>
+                  <span class="text-slate-600 font-semibold">${cnt} orders (${pct}%)</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                  <div class="bg-[#0B2E1E] h-full rounded-full" style="width:${pct}%"></div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+
+      // Household Spice Profiles
+      const spiceCounts = {};
+      SPICE_OPTIONS.forEach(s => spiceCounts[s] = 0);
+      enriched.forEach(o => {
+        const list = o.tasteMembers.length > 0 ? o.tasteMembers : [{ spice: 'Medium (Standard)' }];
+        list.forEach(tm => spiceCounts[tm.spice] = (spiceCounts[tm.spice] || 0) + 1);
+      });
+      const totalSpice = Object.values(spiceCounts).reduce((s, v) => s + v, 0) || 1;
+      document.getElementById('chartSpiceCard').innerHTML = `
+        <h3 class="text-sm font-extrabold text-slate-900">Household Spice Profiles</h3>
+        <p class="text-[11px] text-slate-500 mb-3">Click any spice level to view matching orders</p>
+        <div class="space-y-2.5">
+          ${SPICE_OPTIONS.map(sp => {
+            const cnt = spiceCounts[sp] || 0;
+            const pct = Math.round((cnt / totalSpice) * 100);
+            return `
+              <div onclick="drillToOrders('custom', 'Spice: ${sp}', o => (o.tasteMembers.length ? o.tasteMembers : [{spice:'Medium (Standard)'}]).some(m => m.spice === '${sp}'))" class="cursor-pointer group space-y-1">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="font-bold text-slate-800 group-hover:text-emerald-700">${escapeHtml(sp.replace(' (Standard)', ''))}</span>
+                  <span class="text-slate-600 font-semibold">${cnt} (${pct}%)</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                  <div class="bg-orange-500 h-full rounded-full" style="width:${pct}%"></div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
     }
 
-    function openSyncModal() {
-      const payload = { v: 1, exportedAt: new Date().toISOString(), orders, customerPrefs };
-      document.getElementById('syncExportCountBadge').textContent = `${orders.length} Orders`;
-      document.getElementById('syncExportBox').value = 'GS_SYNC:' + JSON.stringify(payload);
-      document.getElementById('syncImportBox').value = '';
-      document.getElementById('syncModal').classList.remove('hidden');
-    }
-
-    function closeSyncModal() {
-      document.getElementById('syncModal').classList.add('hidden');
-    }
-
-    function copySyncCode() {
-      const box = document.getElementById('syncExportBox');
-      box.select();
-      box.setSelectionRange(0, 999999);
-      document.execCommand('copy');
-      showToast('Sync Code copied! Paste in WhatsApp.');
-    }
-
-    function shareSyncViaWhatsApp() {
-      const code = document.getElementById('syncExportBox').value;
-      window.open(`https://wa.me/?text=${encodeURIComponent(code)}`, '_blank', 'noopener,noreferrer');
-    }
-
-    function importSyncCode(mode = 'merge') {
-      const raw = document.getElementById('syncImportBox').value.trim();
-      if (!raw) return;
-      try {
-        const jsonStr = raw.startsWith('GS_SYNC:') ? raw.slice('GS_SYNC:'.length).trim() : raw;
-        const parsed = JSON.parse(jsonStr);
-        const incoming = Array.isArray(parsed) ? parsed : (Array.isArray(parsed.orders) ? parsed.orders : null);
-        if (!incoming) throw new Error('Invalid sync');
-        const normalized = migrateAllOrderIdsToCleanSequence(incoming);
-
-        if (mode === 'replace') {
-          orders = normalized;
-        } else {
-          const map = new Map(orders.map(o => [o.legacyId || o.id, o]));
-          normalized.forEach(o => {
-            const key = o.legacyId || o.id;
-            if (!map.has(key)) {
-              o.id = generateOrderId();
-              orders.push(o);
-              map.set(key, o);
-            }
-          });
-        }
-        if (parsed.customerPrefs) customerPrefs = { ...customerPrefs, ...parsed.customerPrefs };
-        saveState();
-        renderAll();
-        closeSyncModal();
-        showToast(`Synced ${normalized.length} order(s) with clean GS-1000+ IDs!`);
-      } catch (e) {
-        showToast('Invalid GS_SYNC code — please copy the complete message.');
-      }
-    }
-
-    function exportCSV() {
-      const enriched = getEnrichedOrders();
-      const headers = ['Order ID', 'Customer', 'Delivery Date', 'Time', 'Items', 'Dishes', 'Food ($)', 'Delivery ($)', 'Tip ($)', 'Total ($)', 'Paid ($)', 'Balance ($)', 'Method', 'Status'];
-      const rows = enriched.map(o => [
-        o.id,
-        `"${o.customerName.replace(/"/g, '""')}"`,
-        o.deliveryDate,
-        o.deliveryTime,
-        `"${o.lineItemsSummary.replace(/"/g, '""')}"`,
-        `"${o.dishesServed.replace(/"/g, '""')}"`,
-        o.foodSubtotal.toFixed(2),
-        o.deliveryFee.toFixed(2),
-        o.tip.toFixed(2),
-        o.totalBilled.toFixed(2),
-        o.amountPaid.toFixed(2),
-        o.balance.toFixed(2),
-        o.paymentMethod,
-        o.isPaid ? 'Paid' : 'Pending'
-      ]);
-      const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `the_green_spicery_${getTodayISO()}.csv`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      showToast('CSV exported!');
-    }
-
+    // Boot Application
     window.addEventListener('DOMContentLoaded', () => {
       loadState();
       renderAll();
